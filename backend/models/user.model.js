@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
     minLength: [8, "Password must be at least 8 characters"]
   },
 
+  role: {
+    type: String,
+    enum: ['admin', 'user'],
+    default: 'user',
+  },
+
   folders: [{
     type: Schema.Types.ObjectId,
     ref: 'folder'
