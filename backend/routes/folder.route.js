@@ -1,6 +1,6 @@
 import express from "express";
-import { authMiddleware } from "../middlewares";
-import { folderController } from "../controllers";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { folderController } from "../controllers/folder.controller.js";
 const folderRouter = express.Router();
 
 folderRouter.get("/", authMiddleware.verifyToken, folderController.getAll);
