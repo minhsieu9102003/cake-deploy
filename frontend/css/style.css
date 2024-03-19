@@ -1,0 +1,133 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+.all {
+  padding: 0 2.5rem; }
+
+.navigation {
+  display: flex;
+  padding: 1rem 0;
+  background-color: white;
+  justify-content: flex-start;
+  align-items: center; }
+  .navigation__logo {
+    margin-left: -3rem; }
+  .navigation__logo-img {
+    scale: .8; }
+  .navigation__brand {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #7a4a4a;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    margin-right: 2rem;
+    margin-left: -2.3rem; }
+  .navigation__link {
+    display: flex;
+    list-style: none;
+    margin-left: 5rem;
+    margin-top: 1rem; }
+    .navigation__link-btn {
+      margin-left: 2rem;
+      padding: .5rem 1rem; }
+      .navigation__link-btn.sign-up {
+        background-color: #7a4a4a;
+        border-radius: 10rem;
+        border: solid 1px white; }
+      .navigation__link-btn.sign-up:hover, .navigation__link-btn.sign-up:active {
+        border: solid 1px #7a4a4a;
+        background-color: white; }
+      .navigation__link-btn-a:link, .navigation__link-btn-a:visited {
+        text-decoration: none;
+        color: #7a4a4a;
+        font-family: "Mogra", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        transition: all .2s; }
+      .navigation__link-btn-a.sign-up {
+        color: white; }
+      .navigation__link-btn-a:hover, .navigation__link-btn-a:active {
+        border-bottom: solid 1px #7a4a4a; }
+      .navigation__link-btn-a.sign-up:hover, .navigation__link-btn-a.sign-up.active {
+        color: #7a4a4a; }
+  .navigation__search-box {
+    border: solid 1.5px #7a4a4a;
+    padding: .5rem 1rem;
+    border-radius: 10rem;
+    display: flex;
+    height: 2.4rem;
+    margin-top: 1.4rem;
+    justify-self: center; }
+    .navigation__search-box-bar, .navigation__search-box-bar:focus {
+      border: none;
+      outline-width: 0;
+      font-size: 1rem;
+      color: #7a4a4a;
+      font-family: "Mogra", system-ui;
+      font-weight: 400;
+      font-style: normal;
+      height: 1.4rem; }
+    .navigation__search-box-icon {
+      scale: 1.5;
+      margin-right: .5rem; }
+
+.section {
+  display: flex; }
+
+.header {
+  margin-top: 6rem;
+  width: 40%; }
+  .header__primary {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #7a4a4a;
+    font-size: 3rem; }
+  .header__secondary {
+    margin-top: 2rem;
+    font-family: "Nerko One", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: #7a4a4a; }
+  .header__button {
+    text-decoration: none;
+    color: white;
+    background-color: #7a4a4a;
+    padding: 1rem 5rem;
+    font-family: "Mogra", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 50rem;
+    display: inline-block;
+    margin-top: 2rem;
+    margin-left: 26%;
+    text-align: center;
+    border: solid 1px #7a4a4a; }
+    .header__button:hover, .header__button:active {
+      background-color: white;
+      color: #7a4a4a;
+      transition: .2s; }
+
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent scrollbar */ }
+
+.img-1 {
+  position: absolute;
+  scale: .4;
+  top: -40%;
+  left: 37%;
+  rotate: -15deg; }
+
+.img-2 {
+  position: absolute;
+  scale: .4;
+  top: -10%;
+  left: 20%;
+  z-index: -1;
+  rotate: -30deg; }
