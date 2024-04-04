@@ -1,12 +1,12 @@
 import express from "express";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
-import { userController } from "../controllers/user.controller.js";
+import userController from "../controllers/user.controller.js";
 const userRouter = express.Router();
 
 userRouter.get("/", authMiddleware.verifyToken, userController.getOne);
 userRouter.get("/:id", authMiddleware.verifyToken, userController.getOne);
 userRouter.post("/", authMiddleware.verifyToken, userController.create);
 userRouter.put("/:id", authMiddleware.verifyToken, userController.update);
-userRouter.delete("/:id", authMiddleware.verifyToken, userController.delete);
+userRouter.delete("/:id", authMiddleware.verifyToken, userController.deleteUser);
 
 export default userRouter;

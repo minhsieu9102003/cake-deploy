@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT } from "./config-env.js";
+import { PORT } from "./helpers/config-env.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { connectDB } from "./helpers/database.js";
