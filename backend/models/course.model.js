@@ -10,16 +10,11 @@ const courseSchema = new mongoose.Schema({
     type: String,
   },
 
-  createdAt: {
-    type: Date,
-    required: true,
-  },
-
   cards: [{
     type: Schema.Types.ObjectId,
     ref: 'card'
   }],
-});
+}, { timestamps: true });
 
 const Course = mongoose.model("course", courseSchema);
 export default Course;
