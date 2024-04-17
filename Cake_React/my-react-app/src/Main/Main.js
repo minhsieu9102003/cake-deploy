@@ -266,6 +266,28 @@ const Main = () => {
           </div>
         </div>
       </section>
+      <footer className="footer">
+        <div className="footer__img-container">
+          <img src="img/cake-logo-big.png" alt="Large Cake Logo" className="footer__logo" />
+          <h1 className="footer__brand">CAKE</h1>
+        </div>
+        <div className="footer__text-container">
+          <h3 className="footer__h3-author">Author</h3>
+          <h4 className="footer__h4-author-1">minh</h4>
+          <h4 className="footer__h4-author-2">minh</h4>
+          <h4 className="footer__h4-author-3">minh</h4>
+          <h4 className="footer__h4-author-4">nam</h4>
+          <h3 className="footer__h3-about">About CAKE</h3>
+          <h4 className="footer__h4-about-1">How CAKE works</h4>
+          <h4 className="footer__h4-about-2">Q&A</h4>
+          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
+          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
+        </div>
+        <div className="footer__text-container-1">
+          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
+          <h4 className="footer__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
+        </div>
+      </footer>
     </div>
   );
 };
