@@ -10,11 +10,16 @@ const folderSchema = new mongoose.Schema({
     type: String,
   },
 
+  createdAt: {
+    type: Date,
+    required: true
+  },
+
   courses: [{
     type: Schema.Types.ObjectId,
     ref: 'course'
   }]
-}, { timestamps: true });
+});
 
 const Folder = mongoose.model("folder", folderSchema);
 export default Folder;

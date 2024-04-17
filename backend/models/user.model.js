@@ -13,12 +13,6 @@ const userSchema = new mongoose.Schema({
     required: true
   },
 
-  token: {
-    type: String,
-    unique: true,
-    required: false
-  },
-
   password: {
     type: String,
     required: true,
@@ -40,7 +34,7 @@ const userSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'course',
   }],
-}, { timestamps: true });
+});
 
 const User = mongoose.model("user", userSchema);
 export default User;
