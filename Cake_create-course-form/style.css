@@ -1,0 +1,550 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navigation {
+    width: 98vw;
+    display: flex;
+    padding: 1rem 1rem;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation__logo {
+    margin-left: -3rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navigation__logo-img {
+    scale: .7;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+.navigation__brand {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #7a4a4a;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-right: 2rem;
+    margin-left: -2.3rem;
+}
+
+.navigation__dropdown {
+    position: relative;
+}
+
+.navigation__dropdown button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.navigation__dropdown button span {
+    font-family: "Mogra", system-ui;
+    color: #7a4a4a;
+    font-size: 1rem;
+}
+
+.navigation__dropdown-list {
+    font-family: "Mogra", system-ui;
+    box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+    position: absolute;
+    height: 20rem;
+    background-color: white;
+    border-radius: 20px;
+    width: 20rem;
+    z-index: 100000;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transform-origin: top;
+    display: flex;
+    flex-direction: column;
+    top: 3rem;
+}
+
+.navigation__dropdown-button-container {
+    margin-bottom: auto;
+    padding: 0 1rem;
+    display: flex;
+    font-family: "Mogra", system-ui;
+    gap: 1.5rem;
+}
+
+.navigation__dropdown-button {
+    font-family: "Mogra", system-ui;
+    font-size: 1rem;
+}
+
+.navigation__dropdown-button-1 {
+    color: white;
+    background-color: #7a4a4a !important;
+    padding: .5rem .5rem;
+    border-radius: 50px;
+}
+
+.navigation__dropdown-button-2 {
+    color: #7a4a4a;
+}
+
+.navigation__dropdown-item-container {
+    background-color: white;
+    height: 15rem;
+    overflow-y: scroll;
+}
+
+.navigation__dropdown-item-container::-webkit-scrollbar-thumb {
+    background-color: #7a4a4a;
+    border-radius: 100vh;
+}
+
+.navigation__dropdown-item-container::-webkit-scrollbar {
+    width: .7vw;
+    border-radius: 100vh;
+}
+
+.navigation__dropdown-item-container::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 100vh;
+}
+
+.navigation__dropdown-item {
+    text-decoration: none;
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 1rem;
+    transition: all .2s ease-in-out;
+}
+
+.navigation__dropdown-item h6 {
+    font-size: 1rem;
+    color: #7a4a4a;
+}
+
+.navigation__dropdown-item img {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    justify-self: start;
+}
+
+.navigation__dropdown-item:hover {
+    background-color: #d6d6d6;
+}
+
+.navigation__dropdown-all {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    justify-self: end;
+    align-self: flex-start;
+    background-color: #7a4a4a;
+    width: 100%;
+    height: 3rem;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.navigation__link {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation__link-btn {
+    margin-left: 2rem;
+    padding: .5rem 1rem;
+    height: 100%;
+}
+
+.navigation__link-btn.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation__link-btn-a:link,
+.navigation__link-btn-a:visited {
+    text-decoration: none;
+    color: #7a4a4a;
+    font-family: "Mogra", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    transition: all .2s;
+}
+
+.navigation__link-btn-a.sign-up {
+    color: white;
+    background-color: #7a4a4a;
+    border-radius: 100px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: .5rem 1rem;
+    border: solid 1px transparent;
+}
+
+.navigation__link-btn-a:hover,
+.navigation__link-btn-a:active {
+    border-bottom: solid 1px #7a4a4a;
+}
+
+.navigation__link-btn-a.sign-up:hover,
+.navigation__link-btn-a.sign-up.active {
+    color: #7a4a4a;
+    background-color: white;
+    border: solid 1px #7a4a4a;
+}
+
+.navigation__search-box {
+    border: solid 1.5px #7a4a4a;
+    padding: .5rem 1rem;
+    border-radius: 10rem;
+    display: flex;
+    height: 2.4rem;
+    width: 30%;
+}
+
+.navigation__search-box-bar,
+.navigation__search-box-bar:focus {
+    caret-color: #7a4a4a;
+    border: none;
+    outline-width: 0;
+    font-size: 1rem;
+    color: #7a4a4a;
+    font-family: "Mogra", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    height: 100%;
+    width: 90%;
+}
+
+.navigation__search-box-bar::-webkit-input-placeholder {
+    color: #e3c5c5;
+}
+
+.navigation__search-box-icon {
+    scale: 1.2;
+    fill: #7a4a4a;
+    margin-right: .5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.navigation__avatar {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 20rem 1fr;
+    color: #7a4a4a;
+    font-family: "Mogra", system-ui;
+    justify-content: space-between;
+    column-gap: 3rem;
+}
+
+.footer__img-container {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(min-content, 15rem));
+}
+
+.footer__brand {
+    font-family: "Mochiy Pop One", sans-serif;
+    justify-self: center;
+    font-size: 3rem;
+    text-align: center;
+    grid-row: 2/3;
+}
+
+.footer__logo {
+    height: 20rem;
+    width: 20rem;
+    margin-bottom: -5rem;
+    grid-row: 1/2;
+}
+
+.footer__text-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(10rem, 1fr));
+    grid-template-rows: repeat(7, min-content);
+    height: 5rem;
+    align-self: start;
+    row-gap: 1rem;
+    margin-top: 4rem;
+}
+
+.footer__h3-author {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.footer__h4-author-1 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.footer__h4-author-2 {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.footer__h4-author-3 {
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+
+.footer__h4-author-4 {
+    grid-column: 1/2;
+    grid-row: 5/6;
+}
+
+.footer__h3-about {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.footer__h4-about-1 {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.footer__h4-about-2 {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.footer__h3-term-of-use {
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
+
+.footer__h4-term-of-use {
+    grid-column: 3/4;
+    grid-row: 2/3;
+}
+
+.footer__h3-ackowledge {
+    grid-column: 1/2;
+    grid-row: 6/7;
+}
+
+.footer__4-acknowledge {
+    grid-column: 1/2;
+    grid-row: 5/6;
+}
+
+.footer__text-container-1 {
+    display: grid;
+    grid-column: 2/3;
+    row-gap: 1rem;
+    transform: translateY(-4.7rem);
+}
+
+.first {
+    padding: 1rem 2rem;
+    background-color: #FFEA7C;
+}
+
+.first__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    position: relative;
+}
+
+.first__title h1 {
+    font-family: 'Nerko One';
+    font-size: 5rem;
+    color: #7a4a4a;
+
+}
+
+.first__title {
+    display: flex;
+    margin: auto;
+}
+
+.first__paw {
+    width: 5rem;
+    height: 5rem;
+    opacity: .2;
+    justify-self: center;
+
+}
+
+.first__back {
+    width: 4rem;
+    height: 4rem;
+    fill: #7a4a4a;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    right: 0;
+    cursor: pointer;
+}
+
+.first__description {
+    font-family: 'Mogra';
+    color: rgb(163, 163, 163);
+    font-size: 1.3rem;
+}
+
+.first__form {
+    width: 100%;
+
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.first__title-input {
+    border: none;
+    background-color: white;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-family: 'Mogra';
+    margin-bottom: 2rem;
+}
+
+.first__title-input::placeholder {
+    color: rgb(184, 184, 184);
+}
+
+input:focus {
+    outline: none;
+}
+
+.first__card-input {
+    background-color: white;
+    padding: 1rem;
+    font-family: 'Mogra';
+    color: rgb(184, 184, 184);
+    font-size: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+
+.first__card-input-top {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.first__card-input-top-number {
+    display: inline-block;
+    font-size: 2rem;
+
+}
+
+.first__card-input-top svg {
+    height: 2rem;
+    width: 2rem;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+
+
+
+.first__card-input-bot {
+    display: flex;
+}
+
+.first__word-input,
+.first__meaning-input {
+    width: 50%;
+}
+
+.first__word-input input,
+.first__meaning-input input {
+    width: 90%;
+    padding: .5rem 0;
+    font-size: 1.3rem;
+    font-family: 'Mogra';
+    border: none;
+    border-bottom: 2px solid rgb(225, 225, 225);
+    margin: 1rem 0;
+    transition: all .2s ease-in-out;
+}
+
+.first__word-input input:focus,
+.first__meaning-input input:focus {
+    border-bottom: 2px solid black;
+}
+
+.first__plus {
+    background-color: white;
+    border-radius: 50%;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.first__plus svg {
+    width: 3rem;
+    height: 3rem;
+
+}
+
+.first__submit {
+
+    padding: 1rem 3rem;
+    font-family: 'Mogra';
+    background-color: #7a4a4a;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 20px;
+    width: 20%;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all .2s ease-in-out;
+    border: 1px solid #7a4a4a;
+}
+
+.first__submit:hover {
+    background-color: white;
+    color: #7a4a4a;
+
+}
+
+.first__submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+
+/* 
+$true-brown: #7a4a4a;
+$color-cream: #EFE8D8;
+$color-cream-light: #FAEAD6;
+
+$font-heading: "Mochiy Pop One", sans-serif;
+$font-primary: "Mogra", system-ui;
+$font-secondary: "Nerko One", cursive; */
