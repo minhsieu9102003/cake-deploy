@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
 import generateToken from "../helpers/generateToken.js";
 
@@ -7,17 +6,21 @@ const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // check whether the current user have existed
+    const existedUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existedUser) return res.status(400).json({ error: { message: "User has been existed" } });
 
     const newUser = await new User({
       username,
       email,
-      password: hashedPassword
+      password
     });
 
     const user = await newUser.save();
-    return res.status(201).json(user);
+    const token = generateToken.generateAccessToken(user);
+    res.setHeader("Authorization", token);
+
+    return res.status(201).json({ success: true });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
@@ -25,30 +28,19 @@ const register = async (req, res) => {
 
 // login
 const login = async (req, res) => {
-  const { username, password } = req.body;
-
   try {
-    const user = await User.find({ username });
+    const token = generateToken.generateAccessToken(user);
+    // const refreshToken = generateToken.generateRefreshToken(user);
 
-    if (!user) return res.status(404).json({ message: "username not found" });
+    // res.cookie("refreshToken", refreshToken, {
+    //   httpOnly: true,
+    //   secure: false,
+    //   path: "/",
+    //   sameSite: "strict",
+    // });
 
-    const matchedPassword = await bcrypt.compare(password, user.password);
-
-    if (!matchedPassword) return res.status(404).json({ message: "wrong password" });
-
-    const accessToken = generateToken.generateAccessToken;
-    const refreshToken = generateToken.generateRefreshToken;
-
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: false,
-      path: "/",
-      sameSite: "strict",
-    });
-
-    const { password, ...others } = user._doc;
-
-    return res.status(200).json({ ...others, accessToken });
+    res.setHeader("Authorization", token);
+    return res.status(200).json({ success: true });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
@@ -56,11 +48,21 @@ const login = async (req, res) => {
 
 // log out
 const logout = async (req, res) => {
-  res.status(200).json({message: "Logged out!"});
+  res.status(200).json({ message: "Logged out!" });
 };
+
+// login with google
+const authGoogle = async (req, res, next) => {
+  const token = generateToken.generateAccessToken(req.user);
+
+  res.setHeader("Authorization", token);
+
+  return res.status(200).json({ success: true });
+}
 
 export default {
   register,
   login,
   logout,
+  authGoogle
 }

@@ -14,20 +14,20 @@ const generateAccessToken = (user) => {
   );
 };
 
-const generateRefreshToken = (user) => {
-  return jwt.sign(
-    {
-      id: user._id,
-      role: user.role,
-    },
-    JWT_REFRESH_KEY,
-    {
-      expiresIn: JWT_REFRESH_KEY_EXPIRE_TIME,
-    }
-  );
-};
+// const generateRefreshToken = (user) => {
+//   return jwt.sign(
+//     {
+//       id: user._id,
+//       role: user.role,
+//     },
+//     JWT_REFRESH_KEY,
+//     {
+//       expiresIn: JWT_REFRESH_KEY_EXPIRE_TIME,
+//     }
+//   );
+// };
 
 export default {
   generateAccessToken,
-  generateRefreshToken,
+  // generateRefreshToken,
 }
