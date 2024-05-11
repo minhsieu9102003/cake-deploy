@@ -48,7 +48,7 @@ export const passportGoogle = passport.use(new GooglePlusTokenStrategy({
     done(error, false);
   }
 }));
-
+ 
 // passport local
 export const passportLocal = passport.use(new LocalStrategy({
   usernameField: "email",

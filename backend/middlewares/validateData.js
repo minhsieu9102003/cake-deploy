@@ -18,13 +18,13 @@ export const validateBody = (schema) => {
 
 export const schemas = {
   registerSchema: joi.object().keys({
-    username: joi.string().min(6).required(),
+    username: joi.string().min(5).required(),
     email: joi.string().email().required(),
     password: joi.string().min(6).required(),
   }),
 
   loginSchema: joi.object().keys({
-    email: joi.string().email().required,
+    email: joi.string().email().required(),
     password: joi.string().min(6).required(),
   })
 }

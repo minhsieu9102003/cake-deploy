@@ -27,9 +27,9 @@ const register = async (req, res) => {
 };
 
 // login
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
-    const token = generateToken.generateAccessToken(user);
+    const token = generateToken.generateAccessToken(req.user);
     // const refreshToken = generateToken.generateRefreshToken(user);
 
     // res.cookie("refreshToken", refreshToken, {
