@@ -46,11 +46,11 @@ const userSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'course',
   }],
-});
+}, { timestamps: true });
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   try {
-    if(this.authType !== "local") next();
+    if (this.authType !== "local") next();
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(this.password, salt);
@@ -60,7 +60,7 @@ userSchema.pre("save", async function(next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function(newPassword) {
+userSchema.methods.isValidPassword = async function (newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);
   } catch (error) {
