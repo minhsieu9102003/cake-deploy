@@ -4,6 +4,8 @@ import courseController from "../controllers/course.controller.js";
 const courseRouter = express.Router();
 
 courseRouter.get("/", authMiddleware.verifyToken, courseController.getAll);
+courseRouter.get("/my/:userId", authMiddleware.verifyToken, courseController.getMyCourses);
+courseRouter.get("/folder/:folderId", authMiddleware.verifyToken, courseController.getCoursesInFolder)
 courseRouter.get("/:id", authMiddleware.verifyToken, courseController.getOne);
 courseRouter.post("/", authMiddleware.verifyToken, courseController.create);
 courseRouter.put("/:id", authMiddleware.verifyToken, courseController.update);

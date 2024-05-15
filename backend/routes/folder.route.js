@@ -4,6 +4,7 @@ import folderController from "../controllers/folder.controller.js";
 const folderRouter = express.Router();
 
 folderRouter.get("/", authMiddleware.verifyToken, folderController.getAll);
+folderRouter.get("/my/:userId", authMiddleware.verifyToken, folderController.getMyFolders);
 folderRouter.get("/:id", authMiddleware.verifyToken, folderController.getOne);
 folderRouter.post("/", authMiddleware.verifyToken, folderController.create);
 folderRouter.put("/:id", authMiddleware.verifyToken, folderController.update);

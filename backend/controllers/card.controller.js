@@ -9,6 +9,17 @@ const getAll = async (req, res) => {
   }
 };
 
+// get all card in one course
+const getCardsInCourse = async(req, res) => {
+  try {
+    const {courseId} = req.params;
+    const cards = await Card.find({courseId});
+    return res.status(200).json(cards);
+  } catch (error) {
+    return res.status(500).json({message: error});
+  }
+}
+
 const getOne = async (req, res) => {
   const { id } = req.params;
 
@@ -61,6 +72,7 @@ const  deleteCard = async (req, res) => {
 
 export default {
   getAll,
+  getCardsInCourse,
   getOne,
   create,
   update,

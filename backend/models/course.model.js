@@ -10,10 +10,12 @@ const courseSchema = new mongoose.Schema({
     type: String,
   },
 
-  cards: [{
+  folderId: {
     type: Schema.Types.ObjectId,
-    ref: 'card'
-  }],
+    ref: 'folder',
+    required: true,
+  }
+
 }, { timestamps: true });
 
 const Course = mongoose.model("course", courseSchema);

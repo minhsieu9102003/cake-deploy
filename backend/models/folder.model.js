@@ -10,10 +10,11 @@ const folderSchema = new mongoose.Schema({
     type: String,
   },
 
-  courses: [{
+  userId: {
     type: Schema.Types.ObjectId,
-    ref: 'course'
-  }]
+    ref: 'user',
+    required: true,
+  }
 }, { timestamps: true });
 
 const Folder = mongoose.model("folder", folderSchema);
