@@ -1,0 +1,912 @@
+$true-brown: #7a4a4a;
+$color-cream: #EFE8D8;
+$color-cream-light: #FAEAD6;
+
+$font-heading: "Mochiy Pop One", sans-serif;
+$font-primary: "Mogra", system-ui;
+$font-secondary: "Nerko One", cursive;
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+
+
+.navigation {
+    width: 98vw;
+    display: flex;
+    padding: 1rem 1rem;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+        margin-left: -3rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__logo-img {
+        scale: .7;
+        margin-top: -10px;
+        cursor: pointer;
+    }
+
+    &__brand {
+        font-family: "Mochiy Pop One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: $true-brown;
+        text-transform: uppercase;
+        font-size: 2rem;
+        // margin-top: 1.5rem;
+        margin-right: 2rem;
+        margin-left: -2.3rem
+    }
+
+    &__dropdown {
+        position: relative;
+
+
+        button {
+            background: transparent;
+
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            span {
+                font-family: $font-primary;
+                color: $true-brown;
+                font-size: 1rem;
+            }
+
+
+        }
+
+        &-list {
+            // <ul class="navigation__dropdown-list">
+            // <div class="navigation__dropdown-button-container">
+            //     <button class="navigation__dropdown-button">Flash-slices </button>
+            //     <button class="navigation__dropdown-button"> Quick-bites</button>
+            //      <div>navigation__dropdown-item-container
+            //     class="navigation__dropdown-item">
+            //         <h6>Animals</h6>
+            //         <img src="img/avatar1.png" alt="">
+            //     </div>
+
+            //     <div class="navigation__dropdown-all">All</div>
+            // </div>
+            // </ul>
+            font-family: $font-primary;
+            box-shadow: 0.2rem .2rem .2rem rgba(0, 0, 0, 0.2);
+            position: absolute;
+            height: 20rem;
+            background-color: white;
+            border-radius: 20px;
+            width: 20rem;
+            z-index: 100000;
+            transform: scaleY(0);
+            transform-origin: top;
+            display: flex;
+            flex-direction: column;
+            top: 3rem;
+
+
+        }
+
+        &-button-container {
+            margin-bottom: auto;
+            padding: 0 1rem;
+            display: flex;
+            font-family: $font-primary;
+            gap: 1.5rem;
+        }
+
+
+        &-button {
+            font-family: $font-primary;
+            font-size: 1rem;
+
+            &-1 {
+                color: white;
+                background-color: $true-brown !important;
+                padding: .5rem .5rem;
+                border-radius: 50px;
+            }
+
+            &-2 {
+                color: $true-brown;
+            }
+        }
+
+        &-item-container {
+            background-color: white;
+            height: 15rem;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $true-brown;
+                border-radius: 100vh;
+
+            }
+
+            &::-webkit-scrollbar {
+
+                width: .7vw;
+                border-radius: 100vh;
+
+            }
+
+
+
+            &::-webkit-scrollbar-track {
+
+                background-color: white;
+                border-radius: 100vh;
+
+            }
+        }
+
+        &-item {
+            text-decoration: none;
+            height: 4rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 1rem;
+            transition: all .2s ease-in-out;
+
+            h6 {
+                font-size: 1rem;
+                color: $true-brown;
+            }
+
+            img {
+                height: 2.5rem;
+                width: 2.5rem;
+                border-radius: 50%;
+                justify-self: start;
+            }
+
+            &:hover {
+                background-color: rgb(214, 214, 214);
+            }
+
+
+        }
+
+        &-all {
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            justify-self: end;
+            align-self: flex-start;
+            background-color: $true-brown;
+            width: 100%;
+            height: 3rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    }
+
+    &__link {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        align-items: center;
+
+        // align-self: stretch;
+        // width: 100%;
+        // height: 100%;
+
+
+
+
+
+
+        &-btn {
+            margin-left: 2rem;
+
+            padding: .5rem 1rem;
+            height: 100%;
+
+            &.sign-up {
+                // background-color: $true-brown;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+
+
+            &-a:link,
+            &-a:visited {
+                text-decoration: none;
+                color: $true-brown;
+                font-family: "Mogra", system-ui;
+                font-weight: 400;
+                font-style: normal;
+                transition: all .2s;
+
+            }
+
+            &-a.sign-up {
+                color: white;
+                background-color: $true-brown;
+                border-radius: 100px;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                padding: .5rem 1rem;
+                border: solid 1px transparent;
+            }
+
+            &-a:hover,
+            &-a:active {
+                border-bottom: solid 1px $true-brown;
+
+            }
+
+            &-a.sign-up:hover,
+            &-a.sign-up.active {
+                color: $true-brown;
+                background-color: white;
+                border: solid 1px $true-brown;
+            }
+        }
+    }
+
+    &__search-box {
+        border: solid 1.5px $true-brown;
+        padding: .5rem 1rem;
+        border-radius: 10rem;
+        display: flex;
+        height: 2.4rem;
+        width: 30%;
+        // margin-top: 1.4rem;
+        // justify-self: center;
+
+
+        &-bar,
+        &-bar:focus {
+            caret-color: $true-brown;
+            border: none;
+            outline-width: 0;
+            font-size: 1rem;
+            color: $true-brown;
+            font-family: "Mogra", system-ui;
+            font-weight: 400;
+            font-style: normal;
+            height: 100%;
+            width: 90%;
+        }
+
+        &-bar::-webkit-input-placeholder {
+            color: #e3c5c5
+        }
+
+        &-icon {
+            scale: 1.2;
+            fill: $true-brown;
+            margin-right: .5rem;
+            width: 10%;
+        }
+    }
+
+    &__avatar {
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+}
+
+
+.main {
+    // width: 100%;
+    background-color: #7a4a4a;
+    margin-top: 3rem;
+}
+
+.yellow {
+    margin-bottom: -10px;
+    width: 100%;
+    position: relative;
+
+    &__bg {
+        object-fit: contain;
+        width: 100%;
+    }
+
+    &__bg-brown {
+        object-fit: contain;
+        width: 100%;
+    }
+
+    &__header {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: $font-secondary;
+        color: $true-brown;
+        font-size: 3rem;
+    }
+
+    &__add {
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        background-color: white;
+        border: 1px solid $true-brown;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1rem;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+
+        & svg {
+            fill: black;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &:hover {
+            background-color: rgb(212, 212, 212);
+        }
+    }
+
+    &__card-container {
+        padding: 2rem 2rem;
+        overflow-x: scroll;
+        width: 100%;
+        position: absolute;
+        top: 35%;
+
+        white-space: nowrap;
+        height: 27rem;
+
+        // scrollbar-width: thin;
+        // scrollbar-color: $true-brown white;
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $true-brown;
+            border-radius: 100vh;
+
+        }
+
+        &::-webkit-scrollbar {
+
+            // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            // background-color: $true-brown;
+            height: .7vw;
+            border-radius: 100vh;
+
+        }
+
+
+
+        &::-webkit-scrollbar-track {
+            margin: 0 15rem;
+            background-color: white;
+            border-radius: 100vh;
+            margin-block: 2rem;
+        }
+
+    }
+
+
+
+}
+
+.brown {
+    width: 100%;
+    position: relative;
+
+    &__bg {
+        object-fit: contain;
+        width: 100%;
+    }
+
+    &__bg-brown {
+        object-fit: contain;
+        width: 100%;
+    }
+
+    &__header {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: $font-secondary;
+        color: white;
+        font-size: 3rem;
+    }
+
+    &__add {
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        background-color: white;
+        border: 1px solid $true-brown;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1rem;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+
+        & svg {
+            fill: black;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &:hover {
+            background-color: rgb(212, 212, 212);
+        }
+    }
+
+    &__card-container {
+        padding: 2rem 2rem;
+        overflow-x: scroll;
+        width: 100%;
+        position: absolute;
+        top: 35%;
+
+        white-space: nowrap;
+        height: 27rem;
+
+        // scrollbar-width: thin;
+        // scrollbar-color: $true-brown white;
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #FFEA7C;
+            border-radius: 100vh;
+
+        }
+
+        &::-webkit-scrollbar {
+
+            // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            // background-color: $true-brown;
+            height: .7vw;
+            border-radius: 100vh;
+
+        }
+
+
+
+        &::-webkit-scrollbar-track {
+            margin: 0 15rem;
+            background-color: white;
+            border-radius: 100vh;
+            margin-block: 2rem;
+        }
+
+    }
+
+
+
+}
+
+
+
+.card {
+
+
+    display: inline-block;
+    margin: 0 2rem;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    height: 20rem;
+    width: 20rem;
+    position: relative;
+    border-radius: 100px;
+    background-color: transparent;
+    cursor: pointer;
+
+    &__side {
+        cursor: pointer;
+        height: 20rem;
+        width: 100%;
+        border-radius: 100px;
+        background-color: transparent;
+
+        &--front {
+            background-color: transparent;
+
+            border-radius: 30px;
+            overflow: hidden;
+            position: absolute;
+            height: 20rem;
+            width: 100%;
+            top: 0;
+            left: 0;
+            transition: all .8s ease;
+            border-radius: 70px;
+            -webkit-backface-visibility: hidden;
+            -webkit-transform: translate3d(0, 0, 0);
+            z-index: 1;
+            cursor: pointer;
+
+            img {
+                object-fit: cover;
+                height: 21rem;
+                width: 20rem;
+            }
+
+        }
+
+        &--back {
+
+
+            transform: rotateY(180deg);
+            border-radius: 4px;
+            overflow: hidden;
+            position: absolute;
+            height: 20rem;
+            width: 100%;
+            top: 0;
+            left: 0;
+            transition: all .8s ease;
+
+            background-color: white;
+            border-radius: 70px;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 2rem;
+            cursor: pointer;
+
+            h4 {
+                color: $true-brown;
+                font-family: $font-primary;
+                font-size: 1.5rem;
+            }
+
+            h5 {
+                color: white;
+                background-color: $true-brown;
+                border-radius: 50px;
+                padding: 0rem .7rem;
+                font-family: $font-primary;
+                font-size: 1rem;
+                align-self: start;
+            }
+
+            div {
+                margin-top: auto;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                h6 {
+                    color: $true-brown;
+                    font-family: $font-primary;
+                    font-size: 1rem;
+                }
+
+                img {
+                    height: 3rem;
+                    width: 3rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+    }
+
+    &__side:hover &__side--front {
+        transform: rotateY(180deg);
+    }
+
+    &__side:hover &__side--back {
+        transform: rotateY(0);
+    }
+
+
+
+
+
+
+
+
+}
+
+
+
+.form__month,
+.form__month-brown {
+
+
+    position: absolute;
+    top: 20.5%;
+    left: 5%;
+    width: 10rem;
+    font-size: 1.15rem;
+    font-family: $font-primary;
+    justify-content: center;
+
+    background-color: white;
+
+    border-radius: 0.25rem;
+}
+
+
+
+.form__month--button,
+.form__month--button-brown {
+    color: $true-brown;
+    width: 100%;
+    font-size: 1.15rem;
+    background-color: transparent;
+    padding: 0.675em 1em;
+    border: 1px solid $true-brown;
+    box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__month--selected-value,
+.form__month--selected-value-brown {
+    color: $true-brown;
+    display: flex;
+    justify-self: center;
+    text-align: center;
+
+    font-family: $font-primary;
+}
+
+.form__month--arrow,
+.form__month--arrow-brown {
+    scale: .5;
+    transition: transform ease-in-out 0.3s;
+}
+
+.form__month--dropdown,
+.form__month--dropdown-brown {
+    color: $true-brown;
+    list-style: none;
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border: 1px solid $true-brown;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: 0.5s ease;
+    z-index: 1000;
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+.form__month--dropdown li,
+.form__month--dropdown-brown li {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form__month--dropdown li span,
+.form__month--dropdown-brown li span {
+    width: 100%;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form__month--dropdown::-webkit-scrollbar,
+.form__month--dropdown-brown::-webkit-scrollbar {
+    width: 7px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-track,
+.form__month--dropdown-brown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-thumb,
+.form__month--dropdown-brown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 25px;
+}
+
+.form__month--dropdown li:hover,
+.form__month--dropdown input:checked~label,
+.form__month--dropdown-brown li:hover,
+.form__month--dropdown-brown input:checked~label {
+    background-color: #f2f2f2;
+}
+
+.form__month--dropdown input:focus~label,
+.form__month--dropdown-brown input:focus~label {
+    background-color: #dfdfdf;
+}
+
+.form__month--dropdown input[type="radio"],
+.form__month--dropdown-brown input[type="radio"] {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+}
+
+/* interactivity */
+
+.form__month.active .form__month--arrow,
+.form__month-brown.active .form__month--arrow-brown {
+    transform: rotate(180deg);
+}
+
+.form__month.active .form__month--dropdown,
+.form__month-brown.active .form__month--dropdown-brown {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+/*=============
+  Aesthetics 
+  =========================*/
+
+
+
+.footer {
+    display: grid;
+
+    // grid-template-columns: repeat(8, minmax(11rem, 1fr));
+    // grid-template-rows: repeat(7, minmax(5rem, min-content));
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 20rem 1fr;
+
+    color: $true-brown;
+    font-family: $font-primary;
+    justify-content: space-between;
+    column-gap: 3rem;
+    // row-gap: 1rem;
+
+
+    &__img-container {
+        display: grid;
+        grid-template-rows: repeat(2, minmax(min-content, 15rem));
+    }
+
+    &__brand {
+        font-family: $font-heading;
+        justify-self: center;
+        font-size: 3rem;
+        text-align: center;
+        grid-row: 2/3;
+        // grid-column: 1/3;
+    }
+
+    &__logo {
+        height: 20rem;
+        width: 20rem;
+        margin-bottom: -5rem;
+        // grid-row: 1/-1;
+        grid-row: 1/2;
+        // grid-column: 1/3;
+        // margin-right: 10rem;
+    }
+
+    &__text-container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(10rem, 1fr));
+        grid-template-rows: repeat(7, min-content);
+        height: 5rem;
+        align-self: start;
+        row-gap: 1rem;
+        margin-top: 4rem;
+    }
+
+    &__h3-author {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        // justify-self: start;
+    }
+
+    &__h4-author {
+        &-1 {
+            grid-column: 1/2;
+            grid-row: 2/3
+        }
+
+        &-2 {
+            grid-column: 1/2;
+            grid-row: 3/4
+        }
+
+        &-3 {
+            grid-column: 1/2;
+            grid-row: 4/5
+        }
+
+        &-4 {
+            grid-column: 1/2;
+            grid-row: 5/6
+        }
+    }
+
+    &__h3-about {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        // justify-self: end;
+    }
+
+    &__h4-about {
+        &-1 {
+            grid-column: 2/3;
+            grid-row: 2/3
+        }
+
+        &-2 {
+            grid-column: 2/3;
+            grid-row: 3/4
+        }
+    }
+
+    &__h3-term-of-use {
+        grid-column: 3/4;
+        grid-row: 1/2;
+        // justify-content: end;
+    }
+
+    &__h4-term-of-use {
+        grid-column: 3/4;
+        grid-row: 2/3;
+        // justify-content: end;
+    }
+
+    &__h3-ackowledge {
+        grid-column: 1/2;
+        grid-row: 6/7
+    }
+
+    &__4-acknowledge {
+        grid-column: 1/2;
+        grid-row: 5/6
+    }
+
+    &__text-container-1 {
+        display: grid;
+        grid-column: 2/3;
+        row-gap: 1rem;
+        // margin-bottom: 10rem;
+        transform: translateY(-4.7rem);
+    }
+
+    // &__h3-acknowledge {}
+}

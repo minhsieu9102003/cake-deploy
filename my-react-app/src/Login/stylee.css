@@ -1,0 +1,483 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: #7a4a4a;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  position: relative;
+  overflow: scroll;
+}
+
+body {
+  overflow: scroll;
+}
+
+.illu {
+  grid-column: 1/2;
+  background-color: #FFEA7C;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  text-align: center;
+}
+
+.illu__img {
+  width: 100%;
+  transform: translateY(5rem);
+}
+
+.illu__header {
+  font-family: "Mochiy Pop One", sans-serif;
+  transform: translateY(2.5rem);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(4, 23%);
+  grid-template-rows: repeat(14, min-content);
+  padding: 2rem 3rem;
+  row-gap: 1.5rem;
+  column-gap: 1rem;
+}
+
+.form__signup {
+  outline: none;
+  background-color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+  color: white;
+  border-radius: 100px;
+  border: 1px solid #7a4a4a;
+  font-size: 1rem;
+  padding: .8rem 0;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.form__signup:hover {
+  background-color: #946464;
+}
+
+.form__login {
+  outline: none;
+  background-color: transparent;
+  font-family: "Mogra", system-ui;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all .2;
+}
+
+.form__login:hover {
+  background-color: #e7dbdb;
+}
+
+.form__facebook {
+  display: flex;
+  text-align: center;
+  grid-column: 1/-1;
+  text-decoration: none;
+  font-family: "Mogra", system-ui;
+  font-size: 1rem;
+  padding: 1.1rem 1rem;
+  border: 1px solid #7a4a4a;
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form__facebook span {
+  margin: auto;
+  display: flex;
+}
+
+.form__facebook img {
+  height: 1.7rem;
+  transform: translateY(-0.15rem);
+  justify-self: start;
+  display: flex;
+  justify-items: start;
+}
+
+.form__google {
+  display: flex;
+  text-align: center;
+  grid-column: 1/-1;
+  text-decoration: none;
+  font-family: "Mogra", system-ui;
+  font-size: 1rem;
+  padding: 1.1rem 1rem;
+  border: 1px solid #7a4a4a;
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form__google span {
+  margin: auto;
+}
+
+.form__google img {
+  height: 1.7rem;
+  justify-self: start;
+  display: flex;
+}
+
+.form__birthday {
+  font-size: 1rem;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+}
+
+.form__email {
+  grid-column: 1/2;
+  font-size: 1rem;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+}
+
+.form__password {
+  grid-column: 1/2;
+  font-size: 1rem;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+}
+
+.form__user {
+  grid-column: 1/2;
+  font-size: 1rem;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+}
+
+.form__email-input,
+.form__user-input,
+.form__password-input {
+  grid-column: 1/-1;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  font-family: "Mogra", system-ui;
+  outline: none;
+  border: 1px solid #7a4a4a;
+  border-radius: 5px;
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+}
+
+.form__month {
+  grid-column: 1/2;
+  position: relative;
+  max-width: 100%;
+  font-size: 1.15rem;
+  font-family: "Mogra", system-ui;
+  justify-content: center;
+}
+
+.form__date {
+  grid-column: 2/3;
+  position: relative;
+  max-width: 100%;
+  font-size: 1.15rem;
+  font-family: "Mogra", system-ui;
+  justify-content: center;
+}
+
+.form__year {
+  grid-column: 3/4;
+  position: relative;
+  max-width: 100%;
+  font-size: 1.15rem;
+  font-family: "Mogra", system-ui;
+  justify-content: center;
+}
+
+.form__month--button,
+.form__date--button,
+.form__year--button {
+  width: 100%;
+  font-size: 1.15rem;
+  background-color: transparent;
+  padding: 0.675em 1em;
+  border: 1px solid #7a4a4a;
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__month--selected-value,
+.form__date--selected-value,
+.form__year--selected-value {
+  display: flex;
+  justify-self: center;
+  text-align: center;
+  font-family: "Mogra", system-ui;
+}
+
+.form__month--arrow,
+.form__date--arrow,
+.form__year--arrow {
+  scale: .5;
+  transition: transform ease-in-out 0.3s;
+}
+
+.form__month--dropdown,
+.form__date--dropdown,
+.form__year--dropdown {
+  list-style: none;
+  position: absolute;
+  list-style: none;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border: 1px solid #7a4a4a;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  transition: 0.5s ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.form__month--dropdown:focus-within,
+.form__date--dropdown:focus-within,
+.form__year--dropdown:focus-within {
+  box-shadow: 0 10px 25px rgba(94, 108, 233, 0.6);
+}
+
+.form__month--dropdown li,
+.form__date--dropdown li,
+.form__year--dropdown li {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form__month--dropdown li span,
+.form__date--dropdown li span,
+.form__year--dropdown li span {
+  width: 100%;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form__month--dropdown::-webkit-scrollbar,
+.form__date--dropdown::-webkit-scrollbar,
+.form__year--dropdown::-webkit-scrollbar {
+  width: 7px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-track,
+.form__date--dropdown::-webkit-scrollbar-track,
+.form__year--dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-thumb,
+.form__date--dropdown::-webkit-scrollbar-thumb,
+.form__year--dropdown::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+
+.form__month--dropdown li:hover,
+.form__month--dropdown input:checked~label,
+.form__date--dropdown li:hover,
+.form__date--dropdown input:checked~label,
+.form__year--dropdown li:hover,
+.form__year--dropdown input:checked~label {
+  background-color: #f2f2f2;
+}
+
+.form__month--dropdown input:focus~label,
+.form__date--dropdown input:focus~label,
+.form__year--dropdown input:focus~label {
+  background-color: #dfdfdf;
+}
+
+.form__month--dropdown input[type="radio"],
+.form__date--dropdown input[type="radio"],
+.form__year--dropdown input[type="radio"] {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
+
+/* interactivity */
+.form__month.active .form__month--arrow,
+.form__date.active .form__date--arrow,
+.form__year.active .form__year--arrow {
+  transform: rotate(180deg);
+}
+
+.form__month.active .form__month--dropdown,
+.form__date.active .form__date--dropdown,
+.form__year.active .form__year--dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+/*=============
+  Aesthetics 
+  =========================*/
+.form__control {
+  font-family: "Mogra", system-ui;
+  font-size: 1rem;
+  font-weight: light;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  cursor: pointer;
+  grid-column: 1/-1;
+}
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: transparent;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+.form-control {
+  margin-top: 1em;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  background-color: brown;
+  color: brown;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* background-color: CanvasText; */
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.signup-btn {
+  grid-column: 1/-1;
+  background-color: #7a4a4a;
+  border-radius: 5px;
+  border: 1px solid #7a4a4a;
+  font-family: "Mogra", system-ui;
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem 1rem;
+  transition: all .2s;
+}
+
+.signup-btn:hover {
+  background-color: transparent;
+  color: #7a4a4a;
+}
+
+.login-btn {
+  grid-column: 1/-1;
+  grid-column: 1/-1;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #7a4a4a;
+  font-family: "Mogra", system-ui;
+  font-size: 1rem;
+  color: #7a4a4a;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem 1rem;
+  transition: all .2s;
+}
+
+.login-btn:hover {
+  background-color: #e6dddd;
+  color: #7a4a4a;
+}
+
+.form__select,
+.form__select-1,
+.form__select-2 {
+  width: 100%;
+  font-size: 1.15rem;
+  background-color: transparent;
+  padding: 0.675em 1em;
+  border: 1px solid #734A4A;
+  /* Assuming $true-brown color */
+  box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-family: "Mogra", system-ui;
+  /* Replace 'YourFontFamily' with your actual font family */
+  appearance: none;
+  /* Removes default system styling */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="15" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="%23734A4A" /></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  color: #7a4a4a;
+  /* Font color */
+}
+
+/* Style for the option elements */
+.form__select option,
+.form__select-1 option,
+.form__select-2 option {
+  padding: 0.5em 0.75em;
+  background-color: #FFF;
+  /* Background of options */
+}
+
+/* You might need additional styles if you want to style focus or hover states */
+.form__select:focus,
+.form__select-1:focus,
+.form__select-2:focus {
+  outline: none;
+  border-color: #999;
+}
+
+/* Handling the disabled option styling */
+.form__select option:disabled,
+.form__select-1 option:disabled,
+.form__select-2 option:disabled {
+  color: #ccc;
+}

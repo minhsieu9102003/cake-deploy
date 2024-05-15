@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Mogra&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Mogra&family=Nerko+One&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <form class="main__popup" action="">
+
+        <div class="main__popup-inner">
+            <button class="main__cross" type="button">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="m4.12 6.137 1.521-1.52 7 7-1.52 1.52z" />
+                    <path d="m4.12 11.61 7.001-7 1.52 1.52-7 7z" />
+                </svg>
+            </button>
+            <h1>Creating new folder</h1>
+            <input type="text" placeholder="Folder title">
+            <div class="main__popup-submit-container">
+                <button class="main__popup-submit">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="navigation">
+        <div class="navigation__logo">
+            <img src="img/cake-logo-small.png" alt="" class="navigation__logo-img">
+            <div class="navigation__brand">Cake</div>
+        </div>
+
+        <div class="navigation__search-box">
+            <svg class='navigation__search-box-icon' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100"
+                height="100" viewBox="0 0 32 32">
+                <path
+                    d="M 19 3 C 13.488281 3 9 7.488281 9 13 C 9 15.394531 9.839844 17.589844 11.25 19.3125 L 3.28125 27.28125 L 4.71875 28.71875 L 12.6875 20.75 C 14.410156 22.160156 16.605469 23 19 23 C 24.511719 23 29 18.511719 29 13 C 29 7.488281 24.511719 3 19 3 Z M 19 5 C 23.429688 5 27 8.570313 27 13 C 27 17.429688 23.429688 21 19 21 C 14.570313 21 11 17.429688 11 13 C 11 8.570313 14.570313 5 19 5 Z">
+                </path>
+            </svg>
+            <input class="navigation__search-box-bar" type="text" placeholder="Search for folders, tutor,..">
+
+        </div>
+        <ul class="navigation__link">
+            <div class="navigation__dropdown">
+                <button>
+                    <span>Your library</span>
+                    <svg width="15" class='form__month--arrow-brown' height="15" viewBox="0 0 28 25" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
+                            fill="#734A4A" />
+                    </svg>
+                </button>
+                <ul class="navigation__dropdown-list">
+                    <div class="navigation__dropdown-button-container">
+                        <button class="navigation__dropdown-button navigation__dropdown-button-1">Flash-slices </button>
+                        <button class="navigation__dropdown-button navigation__dropdown-button-2"> Quick-bites</button>
+
+
+                    </div>
+                    <div class="navigation__dropdown-item-container">
+                        <a href='#' class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </a>
+                        <div class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </div>
+                        <div class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </div>
+                        <div class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </div>
+                        <div class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </div>
+                        <div class="navigation__dropdown-item">
+                            <h6>Animals</h6>
+                            <img src="img/avatar1.png" alt="">
+                        </div>
+                    </div>
+
+                    <a class="navigation__dropdown-all" href="#">All</a>
+                </ul>
+            </div>
+
+            <li class="navigation__link-btn"><a class='navigation__link-btn-a' href='#'>Help Center</a></li>
+            <li class="navigation__link-btn"><a class='navigation__link-btn-a' href='#'>Language: VN</a></li>
+            <img class='navigation__avatar' src="img/avatar2.png" alt="">
+
+        </ul>
+    </div>
+
+
+    <div class="first">
+        <div class="first__heading">
+            <div class="first__title">
+                <h1>My Folder</h1>
+                <svg class="first__paw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" xml:space="preserve">
+                    <path fill="#FBCF26"
+                        d="M66.335 28.138v7.4h7.4l-7.4-7.4zM92.232 35.456a1.92 1.92 0 0 1 .039 2.668l-2.709-2.707c.37-.349.83-.523 1.309-.525a1.92 1.92 0 0 1 1.361.564zM74.078 93.039H36.09a9.746 9.746 0 0 1-7.67-3.75h53.328a9.746 9.746 0 0 1-7.67 3.75zM41.002 33.539h16.499c.827 0 1.501-.671 1.501-1.499 0-.829-.674-1.5-1.501-1.5H41.002a1.5 1.5 0 1 0 0 2.999zm16.499 2.001H41.002a1.5 1.5 0 1 0 0 3h16.499c.827 0 1.501-.672 1.501-1.501 0-.827-.674-1.499-1.501-1.499zm0 5h-4.032a1.5 1.5 0 0 0 0 3.001h4.032a1.501 1.501 0 0 0 0-3.001z" />
+                    <path fill="#1A2559"
+                        d="M95.792 36.816a4.919 4.919 0 0 0-4.92-4.921 4.89 4.89 0 0 0-3.482 1.444l-8.555 8.555v-5.501L65.479 23.04H31.833v18.216c-4.948 1.755-8.498 6.462-8.5 12.013l.002 30.015c0 7.045 5.71 12.755 12.755 12.757h37.988c7.045-.002 12.755-5.712 12.758-12.757V61.376a10.538 10.538 0 0 0-4.756-8.808l12.272-12.273a4.917 4.917 0 0 0 1.44-3.479zm-3.56-1.36a1.92 1.92 0 0 1 .039 2.668l-2.709-2.707c.37-.349.83-.523 1.309-.525a1.92 1.92 0 0 1 1.361.564zm-25.897-7.318 7.4 7.4h-7.4v-7.4zm-31.5-2.1h28.499v12.5h12.498l.002 6.355-5.937 5.937h-17.22a302.26 302.26 0 0 1-2.826-5.13c-.708-1.299-1.373-2.633-2.725-3.672-1.36-1.037-3.195-1.521-5.759-1.517H36.09c-.424 0-.842.024-1.255.063V26.038zm39.243 67.001H36.09a9.746 9.746 0 0 1-7.67-3.75h53.328a9.746 9.746 0 0 1-7.67 3.75zm9.755-31.663v21.907a9.802 9.802 0 0 1-.481 3.008H26.834l-.018.002a9.72 9.72 0 0 1-.482-3.01V53.269c.01-5.387 4.369-9.748 9.756-9.756h5.277c2.242.004 3.279.401 3.942.904.676.498 1.187 1.361 1.896 2.703a342.837 342.837 0 0 0 3.29 5.948l.429.763h25.364a7.553 7.553 0 0 1 7.545 7.545zM76.289 50.83h-2.146l13.295-13.297 2.717 2.718-10.989 10.988a10.542 10.542 0 0 0-2.877-.409z" />
+                </svg>
+            </div>
+
+
+            <svg class="first__back" version="1.1" id="ios7_x5F_arrows_1_" xmlns="http://www.w3.org/2000/svg" x="0"
+                y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve">
+                <style>
+                    .st0 {
+                        display: none
+                    }
+
+                    .st1 {
+                        display: inline
+                    }
+                </style>
+                <g id="_x34__1_">
+                    <path
+                        d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z"
+                        id="icon_35_" />
+                </g>
+            </svg>
+        </div>
+        <div class="first__filter">
+            <div class="form__month">
+                <button class="form__month--button" role="combobox" aria-labelledby="select button"
+                    aria-haspopup="listbox" aria-expanded="false" aria-controls="select-dropdown">
+                    <span class="form__month--selected-value">latest</span>
+                    <svg width="28" class='form__month--arrow' height="25" viewBox="0 0 28 25" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
+                            fill="#734A4A" />
+                    </svg>
+                </button>
+                <ul class="form__month--dropdown" role="listbox" id="select-dropdown">
+                    <li role="option">
+                        <input type="radio" id="jan" name="social-account" />
+                        <label for="jan">lastest</label>
+
+                    </li>
+                    <li role="option">
+                        <input type="radio" id="feb" name="social-account" />
+                        <label for="feb">most used</label>
+                    </li>
+                    <li role="option">
+                        <input type="radio" id="mar" name="social-account" />
+                        <label for="mar">oldest</label>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+            <svg class='first__plus' width="800px" height="800px" viewBox="0 0 32 32" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+                <title>plus-circle</title>
+                <desc>Created with Sketch Beta.</desc>
+                <defs>
+
+                </defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)"
+                        fill="#7a4a4a">
+                        <path
+                            d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z"
+                            id="plus-circle" sketch:type="MSShapeGroup">
+
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+    </div>
+    <section class="main">
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+        <div class="main__folder">
+            <svg class='main__folder-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #dad7e5
+                        }
+
+                        .cls-6 {
+                            fill: #919191
+                        }
+                    </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                    <path style="fill:#c6c3d8" d="M42 1v20h-6V7H12V1h30z" />
+                    <path class="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
+                    <path
+                        d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#fc6" />
+                    <path d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                        style="fill:#ffde76" />
+                    <path class="cls-2" d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z" />
+                    <path d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z" style="fill:#edebf2" />
+                    <path class="cls-6"
+                        d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z" />
+                </g>
+            </svg>
+
+            <span class="main__folder-title">Biology12</span>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__img-container">
+            <img src="img/cake-logo-big.png" alt="" class="footer__logo">
+            <h1 class="footer__brand">CAKE</h1>
+        </div>
+        <div class="footer__text-container">
+
+            <h3 class="footer__h3-author">Author</h3>
+            <h4 class="footer__h4-author-1">minh</h4>
+            <h4 class="footer__h4-author-2">minh</h4>
+            <h4 class="footer__h4-author-3">minh</h4>
+            <h4 class="footer__h4-author-4">nam</h4>
+            <h3 class="footer__h3-about">About CAKE</h3>
+            <h4 class="footer__h4-about-1">How CAKE works</h4>
+            <h4 class="footer__h4-about-2">Q&A</h4>
+            <h3 class="footer__h3-term-of-use">Terms of Use</h3>
+            <h4 class="footer__h4-term-of-use">Terms & Privacy</h4>
+
+        </div>
+        <div class="footer__text-container-1">
+            <h3 class="footer__h3-acknowledge">University Acknowledgement</h3>
+            <h4 class="footer__h4-acknowledge">A project for Hanoi University of Science and Technology's Web
+                Subject
+                Course</h4>
+        </div>
+
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollTrigger/1.0.6/ScrollTrigger.min.js"
+        integrity="sha512-+LXqbM6YLduaaxq6kNcjMsQgZQUTdZp7FTaArWYFt1nxyFKlQSMdIF/WQ/VgsReERwRD8w/9H9cahFx25UDd+g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="
+        https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/dist/lenis.min.js
+        "></script>
+    <script>
+        const navigationDropdown = document.querySelector('.navigation__dropdown button')
+
+        let status = false
+
+        const tl = gsap.timeline({
+            defaults:
+            {
+                duration: .6,
+                ease: 'power4.inOut'
+            }
+        })
+
+        tl.to('.navigation__dropdown-list', {
+            clipPath: ' polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+        })
+
+        tl.paused(true)
+
+        navigationDropdown.addEventListener('click', () => {
+            if (!status) {
+                tl.play()
+                status = true
+            }
+            else {
+                tl.reverse()
+                status = false
+            }
+        })
+
+    </script>
+
+    <script>
+
+
+        const customSelect = document.querySelector(".form__month");
+        const selectBtn = document.querySelector(".form__month--button");
+
+        const selectedValue = document.querySelector(".form__month--selected-value");
+        const optionsList = document.querySelectorAll(".form__month--dropdown li");
+
+        const customSelectt = document.querySelector(".form__month-brown");
+        const selectBtnn = document.querySelector(".form__month--button-brown");
+
+        const selectedValuee = document.querySelector(".form__month--selected-value-brown");
+        const optionsListt = document.querySelectorAll(".form__month--dropdown-brown li");
+
+        // add click event to select button
+        selectBtn.addEventListener("click", () => {
+            // add/remove active class on the container element
+            customSelect.classList.toggle("active");
+            // update the aria-expanded attribute based on the current state
+            selectBtn.setAttribute(
+                "aria-expanded",
+                selectBtn.getAttribute("aria-expanded") === "true" ? "false" : "true"
+            );
+        });
+
+        optionsList.forEach((option) => {
+            function handler(e) {
+                // Click Events
+                if (e.type === "click" && e.clientX !== 0 && e.clientY !== 0) {
+                    selectedValue.textContent = this.children[1].textContent;
+                    customSelect.classList.remove("active");
+                }
+                // Key Events
+                if (e.key === "Enter") {
+                    selectedValue.textContent = this.textContent;
+                    customSelect.classList.remove("active");
+                }
+            }
+
+            option.addEventListener("keyup", handler);
+            option.addEventListener("click", handler);
+        });
+
+
+
+
+        selectBtnn.addEventListener("click", () => {
+            // add/remove active class on the container element
+            customSelectt.classList.toggle("active");
+            // update the aria-expanded attribute based on the current state
+            selectBtnn.setAttribute(
+                "aria-expanded",
+                selectBtnn.getAttribute("aria-expanded") === "true" ? "false" : "true"
+            );
+        });
+
+        optionsListt.forEach((option) => {
+            function handler(e) {
+                // Click Events
+                if (e.type === "click" && e.clientX !== 0 && e.clientY !== 0) {
+                    selectedValuee.textContent = this.children[1].textContent;
+                    customSelectt.classList.remove("active");
+                }
+                // Key Events
+                if (e.key === "Enter") {
+                    selectedValuee.textContent = this.textContent;
+                    customSelectt.classList.remove("active");
+                }
+            }
+
+            option.addEventListener("keyup", handler);
+            option.addEventListener("click", handler);
+        });
+    </script>
+    <script>
+        const firstPlus = document.querySelector('.first__plus')
+        const mainPopup = document.querySelector('.main__popup')
+        const mainCross = document.querySelector('.main__cross')
+        let popupStatus = false
+        firstPlus.addEventListener('click', () => {
+            if (!popupStatus) {
+                mainPopup.style.display = 'flex'
+                popupStatus = true
+            }
+        })
+        mainCross.addEventListener('click', () => {
+            mainPopup.style.display = 'none'
+            popupStatus = false
+        })
+
+    </script>
+</body>
+
+</html>

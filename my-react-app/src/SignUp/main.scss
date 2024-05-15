@@ -1,0 +1,476 @@
+$true-brown: #7a4a4a;
+$color-cream: #EFE8D8;
+$color-cream-light: #FAEAD6;
+$color-crayola: #FFEA7C;
+
+$font-heading: "Mochiy Pop One", sans-serif;
+$font-primary: "Mogra", system-ui;
+$font-secondary: "Nerko One", cursive;
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: $true-brown;
+    // font-family: $font-primary;
+
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+}
+
+.illu {
+    grid-column: 1/2;
+    background-color: $color-crayola;
+    height: 100vh;
+    position: sticky;
+
+    top: 0;
+    text-align: center;
+
+    &__img {
+        width: 100%;
+        transform: translateY(5rem);
+    }
+
+    &__header {
+        font-family: $font-heading;
+        transform: translateY(2.5rem);
+    }
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(4, 23%);
+    grid-template-rows: repeat(14, min-content);
+    padding: 2rem 3rem;
+    row-gap: 1.5rem;
+    column-gap: 1rem;
+    overflow: scroll;
+
+    &__signup {
+        outline: none;
+        background-color: $true-brown;
+        font-family: $font-primary ;
+        color: white;
+        border-radius: 100px;
+        border: 1px solid $true-brown;
+        font-size: 1rem;
+        padding: .8rem 0;
+        cursor: pointer;
+        transition: all .2s;
+        overflow: scroll;
+
+        &:hover {
+            background-color: #946464;
+        }
+    }
+
+    &__login {
+        outline: none;
+        background-color: transparent;
+        font-family: $font-primary ;
+        border: 1px solid transparent;
+        border-radius: 100px;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all .2;
+        overflow: scroll;
+
+        &:hover {
+            background-color: rgb(231, 219, 219);
+        }
+    }
+
+    &__facebook {
+        display: flex;
+        text-align: center;
+        grid-column: 1/-1;
+        text-decoration: none;
+        font-family: $font-primary;
+        font-size: 1rem;
+        padding: 1.1rem 1rem;
+        border: 1px solid $true-brown;
+        box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        // align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: space-between;
+
+        & span {
+            margin: auto;
+            display: flex;
+        }
+
+        & img {
+            height: 1.7rem;
+            transform: translateY(-.15rem);
+            justify-self: start;
+            display: flex;
+            justify-items: start;
+
+
+        }
+
+
+    }
+
+    &__google {
+        display: flex;
+        text-align: center;
+        grid-column: 1/-1;
+        text-decoration: none;
+        font-family: $font-primary;
+        font-size: 1rem;
+        padding: 1.1rem 1rem;
+        border: 1px solid $true-brown;
+        box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        flex-direction: row;
+        align-items: center;
+
+        &:hover {}
+
+        // justify-content: space-between;
+        & span {
+            margin: auto;
+        }
+
+        & img {
+            height: 1.7rem;
+            justify-self: start;
+            display: flex;
+            // transform: translateY(-.15rem);
+        }
+    }
+
+    &__birthday {
+        font-size: 1rem;
+        color: $true-brown;
+        font-family: $font-primary;
+    }
+
+    &__email {
+        grid-column: 1/2;
+        font-size: 1rem;
+        color: $true-brown;
+        font-family: $font-primary;
+    }
+
+    &__password {
+        grid-column: 1/2;
+        font-size: 1rem;
+        color: $true-brown;
+        font-family: $font-primary;
+    }
+
+    &__user {
+        grid-column: 1/2;
+        font-size: 1rem;
+        color: $true-brown;
+        font-family: $font-primary;
+    }
+
+    &__email-input,
+    &__user-input,
+    &__password-input {
+        grid-column: 1/-1;
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        font-family: $font-primary;
+        outline: none;
+        border: 1px solid $true-brown;
+        border-radius: 5px;
+        box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+    }
+
+}
+
+.form__month {
+    grid-column: 1/2;
+    position: relative;
+    // width: 400px;
+    max-width: 100%;
+    font-size: 1.15rem;
+    font-family: $font-primary;
+    // display: flex;
+    justify-content: center;
+    // color: #000;
+    // margin-top: 3rem;
+}
+
+.form__date {
+    grid-column: 2/3;
+    position: relative;
+    // width: 400px;
+    max-width: 100%;
+    font-size: 1.15rem;
+    font-family: $font-primary;
+    // display: flex;
+    justify-content: center;
+    // color: #000;
+    // margin-top: 3rem;
+}
+
+.form__year {
+    grid-column: 3/4;
+    position: relative;
+    // width: 400px;
+    max-width: 100%;
+    font-size: 1.15rem;
+    font-family: $font-primary;
+    // display: flex;
+    justify-content: center;
+    // color: #000;
+    // margin-top: 3rem;
+}
+
+.form__month--button,
+.form__date--button,
+.form__year--button {
+    width: 100%;
+    font-size: 1.15rem;
+    background-color: transparent;
+    padding: 0.675em 1em;
+    border: 1px solid $true-brown;
+    box-shadow: 0 .05rem .2rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__month--selected-value,
+.form__date--selected-value,
+.form__year--selected-value {
+    display: flex;
+    justify-self: center;
+    text-align: center;
+
+    font-family: $font-primary;
+}
+
+.form__month--arrow,
+.form__date--arrow,
+.form__year--arrow {
+    // border-left: 5px solid transparent;
+    // border-right: 5px solid transparent;
+    // border-top: 6px solid #000;
+    scale: .5;
+    transition: transform ease-in-out 0.3s;
+}
+
+.form__month--dropdown,
+.form__date--dropdown,
+.form__year--dropdown {
+    list-style: none;
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border: 1px solid $true-brown;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: 0.5s ease;
+
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.form__month--dropdown:focus-within,
+.form__date--dropdown:focus-within,
+.form__year--dropdown:focus-within {
+    box-shadow: 0 10px 25px rgba(94, 108, 233, 0.6);
+}
+
+.form__month--dropdown li,
+.form__date--dropdown li,
+.form__year--dropdown li {
+
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form__month--dropdown li span,
+.form__date--dropdown li span,
+.form__year--dropdown li span {
+    width: 100%;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form__month--dropdown::-webkit-scrollbar,
+.form__date--dropdown::-webkit-scrollbar,
+.form__year--dropdown::-webkit-scrollbar {
+    width: 7px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-track,
+.form__date--dropdown::-webkit-scrollbar-track,
+.form__year--dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px;
+}
+
+.form__month--dropdown::-webkit-scrollbar-thumb,
+.form__date--dropdown::-webkit-scrollbar-thumb,
+.form__year--dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 25px;
+}
+
+.form__month--dropdown li:hover,
+.form__month--dropdown input:checked~label,
+.form__date--dropdown li:hover,
+.form__date--dropdown input:checked~label,
+.form__year--dropdown li:hover,
+.form__year--dropdown input:checked~label {
+    background-color: #f2f2f2;
+}
+
+.form__month--dropdown input:focus~label,
+.form__date--dropdown input:focus~label,
+.form__year--dropdown input:focus~label {
+    background-color: #dfdfdf;
+}
+
+.form__month--dropdown input[type="radio"],
+.form__date--dropdown input[type="radio"],
+.form__year--dropdown input[type="radio"] {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+}
+
+/* interactivity */
+
+.form__month.active .form__month--arrow,
+.form__date.active .form__date--arrow,
+.form__year.active .form__year--arrow {
+    transform: rotate(180deg);
+}
+
+.form__month.active .form__month--dropdown,
+.form__date.active .form__date--dropdown,
+.form__year.active .form__year--dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+/*=============
+  Aesthetics 
+  =========================*/
+.form-control {
+    font-family: $font-primary;
+    font-size: 1rem;
+    font-weight: light;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    cursor: pointer;
+    grid-column: 1/-1;
+}
+
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: transparent;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+.form-control {
+    margin-top: 1em;
+
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    background-color: brown;
+    color: brown;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* background-color: CanvasText; */
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+
+.signup-btn {
+    grid-column: 1/-1;
+    background-color: $true-brown;
+    border-radius: 5px;
+    border: 1px solid $true-brown;
+    font-family: $font-primary;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 1rem 1rem;
+    transition: all .2s;
+
+    &:hover {
+        background-color: transparent;
+        color: $true-brown;
+    }
+}
+
+.login-btn {
+    grid-column: 1/-1;
+    grid-column: 1/-1;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid $true-brown;
+    font-family: $font-primary;
+    font-size: 1rem;
+    color: $true-brown;
+    text-decoration: none;
+    text-align: center;
+    padding: 1rem 1rem;
+    transition: all .2s;
+
+    &:hover {
+        background-color: rgb(230, 221, 221);
+        color: $true-brown;
+    }
+}
