@@ -14,14 +14,14 @@ const getAll = async (req, res) => {
 const getMyCourses = async (req, res) => {
   const { userId } = req.params;
   try {
+    const _userId = new mongoose.Types.ObjectId(userId);
     const courses = await Folder.aggregate([
-      // { $match: { userId: mongoose.Types.ObjectId(userId) } }, // Match folders by userId
-      { $match: { userId } }, // Match folders by userId
+      { $match: { userId: _userId} },
       {
         $lookup: {
-          from: 'courses', // Collection to join (should match the collection name in MongoDB)
-          localField: '_id', // Field from the Folder collection
-          foreignField: 'folderId', // Field from the Course collection
+          from: 'courses', 
+          localField: '_id',
+          foreignField: 'folderId',
           as: 'courses' // Output array field
         }
       },
