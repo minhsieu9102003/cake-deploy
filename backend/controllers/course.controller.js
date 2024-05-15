@@ -15,17 +15,18 @@ const getMyCourses = async (req, res) => {
   const { userId } = req.params;
   try {
     const courses = await Folder.aggregate([
-      { $match: { userId: mongoose.Types.ObjectId(userId) } }, // Match folders by userId
+      // { $match: { userId: mongoose.Types.ObjectId(userId) } }, // Match folders by userId
+      { $match: { userId } }, // Match folders by userId
       {
         $lookup: {
-          from: 'course', // Collection to join (should match the collection name in MongoDB)
+          from: 'courses', // Collection to join (should match the collection name in MongoDB)
           localField: '_id', // Field from the Folder collection
           foreignField: 'folderId', // Field from the Course collection
-          as: 'course' // Output array field
+          as: 'courses' // Output array field
         }
       },
-      { $unwind: '$course' }, // Deconstruct the courses array
-      { $replaceRoot: { newRoot: '$course' } } // Replace the root to return only courses
+      { $unwind: '$courses' }, // Deconstruct the courses array
+      { $replaceRoot: { newRoot: '$courses' } } // Replace the root to return only courses
     ]);
     return res.status(200).json(courses);
   } catch (error) {

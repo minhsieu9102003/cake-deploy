@@ -10,6 +10,11 @@ const folderSchema = new mongoose.Schema({
     type: String,
   },
 
+  courses: [{
+    type: Schema.Types.ObjectId,
+    ref: "course"
+  }],
+
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'user',

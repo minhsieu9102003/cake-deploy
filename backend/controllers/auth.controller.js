@@ -40,7 +40,7 @@ const login = async (req, res, next) => {
     // });
 
     res.setHeader("Authorization", token);
-    return res.status(200).json({ success: true });
+    return res.status(200).json(token);
   } catch (error) {
     return res.status(500).json({ message: error });
   }
