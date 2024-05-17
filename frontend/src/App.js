@@ -9,6 +9,7 @@ import Folder from './Folder/Folder';
 import SignUp from './SignUp/SignUp';
 import Create_quiz from './Create_quiz/create_quiz';
 import Create_flash from './Create_flash/Create_flash';
+import Course from './Course/Course';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/create_quiz" element={<Create_quiz />} />
         <Route path="/create_flash" element={<Create_flash />} />
+        <Route path="/course" element={<Course />} />
       </Routes>
     </Router>
   );

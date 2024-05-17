@@ -30,17 +30,10 @@ const register = async (req, res) => {
 const login = async (req, res, next) => {
   try {
     const token = generateToken.generateAccessToken(req.user);
-    // const refreshToken = generateToken.generateRefreshToken(user);
+    const userId = req.user._id; // Assuming req.user is populated with the user object
 
-    // res.cookie("refreshToken", refreshToken, {
-    //   httpOnly: true,
-    //   secure: false,
-    //   path: "/",
-    //   sameSite: "strict",
-    // });
-
-    res.setHeader("Authorization", token);
-    return res.status(200).json(token);
+    // Return both token and userId
+    return res.status(200).json({ token, userId });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
