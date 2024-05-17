@@ -396,7 +396,7 @@ function Folder(User) {
       <section className="main">
         {folders.map((folder, i) => (
           <div className="main__folder" key={i}>
-          <Link to={`/course/`}>
+          <Link to={`/course/${folder.id}`}>
             <svg
               className="main__folder-svg"
               xmlns="http://www.w3.org/2000/svg"

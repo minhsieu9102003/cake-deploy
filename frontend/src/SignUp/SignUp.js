@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './stylee.css';
 
 function SignUp() {
@@ -11,6 +12,7 @@ function SignUp() {
     const [year, setYear] = useState('');
     const [acceptPolicy, setAcceptPolicy] = useState(false);
     const [daysInMonth, setDaysInMonth] = useState([]);
+    const navigate = useNavigate();
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const years = Array.from({ length: (2024 - 1924 + 1) }, (_, index) => 1924 + index);
@@ -41,6 +43,7 @@ function SignUp() {
             });
             console.log('Signup successful:', response.data);
             alert("Signup successful!");
+            navigate('/login');
         } catch (error) {
             console.error('Error during signup:', error.response.data);
             alert(`Signup failed: ${error.response.data.message}`);
@@ -81,8 +84,13 @@ function SignUp() {
                     I accept Cake's policy
                 </label>
 
+<<<<<<< HEAD
                 <button type="submit" className="signup-btn" onClick={handleSignup}>Sign up</button> 
                 <button type="button" className="login-btn" >Already have an account? Log in</button>
+=======
+                <button type="submit" className="signup-btn" onClick={handleSignup}>Sign up</button>
+                <button type="button" className="login-btn" onClick={() => navigate('/login')}>Already have an account? Log in</button>
+>>>>>>> c64fcf93c74c8e9790459ff9e04324f435730c3c
             </form>
         </div>
     );

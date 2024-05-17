@@ -16,10 +16,10 @@ const getMyCourses = async (req, res) => {
   try {
     const _userId = new mongoose.Types.ObjectId(userId);
     const courses = await Folder.aggregate([
-      { $match: { userId: _userId} },
+      { $match: { userId: _userId } },
       {
         $lookup: {
-          from: 'courses', 
+          from: 'courses',
           localField: '_id',
           foreignField: 'folderId',
           as: 'courses' // Output array field
@@ -95,6 +95,24 @@ const deleteCourse = async (req, res) => {
   }
 };
 
+const getLatestToOldest = async (req, res, next) => {
+  try {
+    const courses = await Course.find().sort({ updatedAt: -1 });
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getOldestToNewest = async (req, res, next) => {
+  try {
+    const courses = await Course.find().sort({ updatedAt: 1 });
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 export default {
   getAll,
   getMyCourses,
@@ -103,4 +121,6 @@ export default {
   create,
   update,
   deleteCourse,
+  getLatestToOldest,
+  getOldestToNewest,
 }
