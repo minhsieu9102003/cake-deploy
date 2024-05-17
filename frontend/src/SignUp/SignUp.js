@@ -81,7 +81,7 @@ function SignUp() {
                     I accept Cake's policy
                 </label>
 
-                <button type="submit" className="signup-btn" onClick={handleSignup}>Sign up</button>
+                <button type="submit" className="signup-btn" onClick={handleSignup}>Sign up</button> 
                 <button type="button" className="login-btn" >Already have an account? Log in</button>
             </form>
         </div>
