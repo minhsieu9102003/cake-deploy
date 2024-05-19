@@ -70,6 +70,30 @@ const deleteFolder = async (req, res) => {
   }
 };
 
+const addCourse = async (req, res, next) => {
+  const { folderId, courseId } = req.params;
+  try {
+    const folder = await Folder.findByIdAndUpdate(folderId, { $push: { courses: courseId } }, { new: true });
+
+    return res.status(200).json(folder);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  };
+};
+
+const deleteCourse = async (req, res, next) => {
+  const { folderId, courseId } = req.params;
+  try {
+    const folder = await Folder.findByIdAndUpdate(folderId, { $pull: { courses: courseId } });
+
+    return res.status(200).json({ message: "Delete course successfully!", folder });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  };
+};
+
 export default {
   getAll,
   getMyFolders,
@@ -77,4 +101,6 @@ export default {
   create,
   update,
   deleteFolder,
+  addCourse,
+  deleteCourse,
 }
