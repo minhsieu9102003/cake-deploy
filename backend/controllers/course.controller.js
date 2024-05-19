@@ -23,17 +23,6 @@ const getMyCourses = async (req, res) => {
   }
 }
 
-// get all courses in one folder
-const getCoursesInFolder = async (req, res) => {
-  const { folderId } = req.params;
-  try {
-    const folder = await Folder.findById(folderId).populate("courses");
-    return res.status(200).json(folder.courses);
-  } catch (error) {
-    return res.status(500).json({ message: error });
-  }
-}
-
 const getOne = async (req, res) => {
   const { id } = req.params;
 
@@ -147,7 +136,6 @@ const getOldestToNewest = async (req, res, next) => {
 export default {
   getAll,
   getMyCourses,
-  getCoursesInFolder,
   getOne,
   create,
   update,

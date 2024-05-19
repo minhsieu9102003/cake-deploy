@@ -13,4 +13,7 @@ folderRouter.delete("/:id", authMiddleware.verifyToken, folderController.deleteF
 folderRouter.put("/add-course/:folderId/:courseId", authMiddleware.verifyToken, folderController.addCourse);
 folderRouter.put("/delete-course/:folderId/:courseId", authMiddleware.verifyToken, folderController.deleteCourse);
 
+// get courses in a folder
+folderRouter.get("/courses/:folderId", authMiddleware.verifyToken, folderController.getCoursesInFolder);
+
 export default folderRouter;

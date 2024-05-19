@@ -31,6 +31,17 @@ const getMyFolders = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error });
   }
+};
+
+// get all courses in one folder
+const getCoursesInFolder = async (req, res) => {
+  const { folderId } = req.params;
+  try {
+    const folder = await Folder.findById(folderId).populate("courses");
+    return res.status(200).json(folder.courses);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
 }
 
 const create = async (req, res) => {
@@ -103,4 +114,5 @@ export default {
   deleteFolder,
   addCourse,
   deleteCourse,
+  getCoursesInFolder,
 }
