@@ -1,3 +1,4 @@
+import Card from "../models/card.model.js";
 import Course from "../models/course.model.js";
 import Folder from "../models/folder.model.js";
 import mongoose from "mongoose";
@@ -14,31 +15,8 @@ const getAll = async (req, res) => {
 const getMyCourses = async (req, res) => {
   const { userId } = req.params;
   try {
-    const _userId = new mongoose.Types.ObjectId(userId);
-    const courses = await Folder.aggregate([
-      { $match: { userId: _userId } },
-      {
-        $lookup: {
-          from: 'courses',
-          localField: '_id',
-          foreignField: 'folderId',
-          as: 'courses' // Output array field
-        }
-      },
-      { $unwind: '$courses' }, // Deconstruct the courses array
-      { $replaceRoot: { newRoot: '$courses' } } // Replace the root to return only courses
-    ]);
-    return res.status(200).json(courses);
-  } catch (error) {
-    return res.status(500).json({ message: error });
-  }
-}
+    const courses = await Course.findOne({ userId });
 
-// get all courses in one folder
-const getCoursesInFolder = async (req, res) => {
-  const { folderId } = req.params;
-  try {
-    const courses = await Course.find({ folderId });
     return res.status(200).json(courses);
   } catch (error) {
     return res.status(500).json({ message: error });
@@ -59,10 +37,30 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  const { title, description, listCards } = req.body;
   try {
-    const newCourse = await new Course(req.body);
-    const course = await newCourse.save();
-    return res.status(201).json(course);
+    const newCourse = await Course.create({
+      title,
+      description,
+      userId: req.payload.id,
+    });
+
+    const cardIds = [];
+    for (let card of listCards) {
+      const { key, value } = card;
+      const newCard = await Card.create({
+        key,
+        value,
+        courseId: newCourse._id,
+      });
+
+      cardIds.push(newCard._id);
+    };
+
+    newCourse.cards = cardIds;
+    await newCourse.save();
+
+    return res.status(201).json(newCourse);
   } catch (error) {
     return res.status(500).json({ message: error });
   }
@@ -70,12 +68,34 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   const { id } = req.params;
+  const { title, description, listCards } = req.body;
   try {
-    const updateCourse = await Course.findByIdAndUpdate(id, req.body);
+    await Card.deleteMany({ courseId: id });
 
-    if (!updateCourse) return res.status(404).json({ message: "Course not found" });
+    const updatedCourse = await Course.findByIdAndUpdate(id, {
+      title,
+      description,
+      userId: req.payload.id,
+    });
 
-    return res.status(200).json({ message: "Update successfully!" });
+    if (!updatedCourse) return res.status(404).json({ message: 'course not found!' });
+    
+    const cardIds = [];
+    for (let card of listCards) {
+      const { key, value } = card;
+      const newCard = await Card.create({
+        key,
+        value,
+        courseId: updatedCourse._id,
+      });
+
+      cardIds.push(newCard._id);
+    };
+
+    updatedCourse.cards = cardIds;
+    await updatedCourse.save();
+
+    return res.status(200).json({ message: "Update successfully!", updatedCourse });
   } catch (error) {
     return res.status(500).json({ message: error });
   }
@@ -116,7 +136,6 @@ const getOldestToNewest = async (req, res, next) => {
 export default {
   getAll,
   getMyCourses,
-  getCoursesInFolder,
   getOne,
   create,
   update,

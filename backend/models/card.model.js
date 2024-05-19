@@ -18,7 +18,6 @@ const cardSchema = new mongoose.Schema({
   courseId: {
     type: Schema.Types.ObjectId,
     ref: 'course',
-    required: true,
   }
 }, { timestamps: true });
 

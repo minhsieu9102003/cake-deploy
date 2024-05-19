@@ -10,11 +10,20 @@ const courseSchema = new mongoose.Schema({
     type: String,
   },
 
-  folderId: {
+  folders: [{
     type: Schema.Types.ObjectId,
     ref: 'folder',
-    required: true,
-  }
+  }],
+
+  cards: [{
+    type: Schema.Types.ObjectId,
+    ref: "card",
+  }],
+
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
 
 }, { timestamps: true });
 

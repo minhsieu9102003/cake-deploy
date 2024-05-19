@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const Create_quiz = () => {
+  const navigate = useNavigate();
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const [count, setCount] = useState(4);
   const [title, setTitle] = useState("");
@@ -97,10 +99,15 @@ const Create_quiz = () => {
       const response = await axios.post('http://localhost:8000/courses/', {
         title,
         description,
-        listCard,
+        listCards: listCard,
       }, config);
 
-      console.log('Create response:', response);
+      if (response.status === 201 || response.status === 201) {
+        //alert('Login successful!');
+        navigate('/course');
+      } else {
+        alert('Failed to create. Please try again.');
+      }
     } catch (error) {
       console.error('Error during Create:', error.response?.data || error.message);
       alert(`Create failed: ${error.response?.data?.message || error.message}`);
@@ -117,13 +124,13 @@ const Create_quiz = () => {
 
   const handleWordChange = (index, value) => {
     const newCards = [...listCard];
-    newCards[index] = { ...newCards[index], word: value };
+    newCards[index] = { ...newCards[index], key: value };
     setListCard(newCards);
   };
 
   const handleMeaningChange = (index, value) => {
     const newCards = [...listCard];
-    newCards[index] = { ...newCards[index], meaning: value };
+    newCards[index] = { ...newCards[index], value: value };
     setListCard(newCards);
   };
 
@@ -298,7 +305,7 @@ const Create_quiz = () => {
                   <input
                     type="text"
                     id={`quizzTitle${i + 1}`}
-                    value={listCard[i]?.word || ""}
+                    value={listCard[i]?.key || ""}
                     onChange={(e) => handleWordChange(i, e.target.value)}
                     required
                   />
@@ -308,7 +315,7 @@ const Create_quiz = () => {
                   <input
                     type="text"
                     id={`quizzMeaning${i + 1}`}
-                    value={listCard[i]?.meaning || ""}
+                    value={listCard[i]?.value || ""}
                     onChange={(e) => handleMeaningChange(i, e.target.value)}
                     required
                   />
