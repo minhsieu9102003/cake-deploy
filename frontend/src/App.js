@@ -8,6 +8,7 @@ import FlashCard from './Flash_card/Flash_card';
 import Folder from './Folder/Folder';
 import SignUp from './SignUp/SignUp';
 import Create_quiz from './Create_quiz/create_quiz';
+import Create_course from './create-course/create_course';
 import Create_flash from './Create_flash/Create_flash';
 import Course from './Course/Course';
 
@@ -23,6 +24,8 @@ function App() {
         <Route path="/folder" element={<Folder />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/create_quiz" element={<Create_quiz />} />
+        <Route path="/folder/:folderId/create_course" element={<Create_course />} />
+        <Route path="/create_course" element={<Create_course />} />
         <Route path="/create_flash" element={<Create_flash />} />
         <Route path="/course" element={<Course />} />
       </Routes>
