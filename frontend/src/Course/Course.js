@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./style.css";
+import { useParams } from 'react-router-dom';
 
 function Folder(User) {
   const [dropdownStatus, setDropdownStatus] = useState(false);
@@ -94,35 +95,7 @@ function Folder(User) {
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (token && userId) {
-      const fetchFolders = async () => {
-        try {
-          const response = await axios.get(`http://localhost:8000/folders/my/${userId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setFolders(response.data);
-        } catch (error) {
-          console.error("Error fetching folders:", error);
-        }
-      };
-
-      fetchFolders();
-    } else {
-      alert("No token found. Redirecting to login.");
-      navigate("/login");
-    }
-  }, [token, userId, navigate]);
-  useEffect(() => {
-    if (token && userId) {
-      alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
-    } else {
-      alert("No token found. Redirecting to login.");
-      navigate("/login");
-    }
-  }, [token, userId, navigate]);
+  
 
   const [newFolderTitle, setNewFolderTitle] = useState("");
 
@@ -150,12 +123,43 @@ function Folder(User) {
     }
   };
 
+
+
+    const { folderId } = useParams();
+    const [courses, setCourses] = useState([]);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+  
+      if (!token || !userId) {
+        alert("No token or userId found. Redirecting to login.");
+        navigate("/login");
+        return;
+      }
+  
+      const fetchCourses = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8000/folders/courses/${folderId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "User-ID": userId,
+            },
+          });
+          setCourses(response.data);
+        } catch (error) {
+          console.error("Error fetching courses:", error);
+        }
+      };
+  
+      fetchCourses();
+    }, [folderId, navigate]);
+  
   return (
     <div>
       <form
         className="main__popup"
         style={{ display: popupStatus ? "flex" : "none" }}
-        onSubmit={handleFormSubmit}
       >
         <div className="main__popup-inner">
           <button
@@ -394,9 +398,9 @@ function Folder(User) {
       </div>
 
       <section className="main">
-        {folders.map((folder, i) => (
+        {courses.map((course, i) => (
           <div className="main__folder" key={i}>
-          <Link to={`/course/${folder.id}`}>
+          <Link to={`/flash_card/${course._id}/`}>
             <svg
               className="main__folder-svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -439,7 +443,7 @@ function Folder(User) {
                 />
               </g>
             </svg>
-            <span className="main__folder-title">{folder.title}</span>
+            <span className="main__folder-title">{course.title}</span>
           </Link>
         </div>
         ))}

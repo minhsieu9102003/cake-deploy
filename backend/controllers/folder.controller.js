@@ -1,4 +1,5 @@
 import Folder from "../models/folder.model.js";
+import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
   try {
@@ -36,10 +37,13 @@ const getMyFolders = async (req, res) => {
 // get all courses in one folder
 const getCoursesInFolder = async (req, res) => {
   const { folderId } = req.params;
+  //console.log(folderId);
   try {
-    const folder = await Folder.findById(folderId).populate("courses");
+    const _folderId = new mongoose.Types.ObjectId(folderId);
+    const folder = await Folder.findById(_folderId).populate("courses");
     return res.status(200).json(folder.courses);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error });
   }
 }
