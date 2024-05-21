@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 //import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import "./style.css";
 
 function Folder(User) {
@@ -195,7 +194,9 @@ function Folder(User) {
             alt=""
             className="navigation__logo-img"
           />
-          <div className="navigation__brand">Cake</div>
+          <div className="navigation__brand">
+            Cake
+            </div>
         </div>
         <div className="navigation__search-box">
           <svg

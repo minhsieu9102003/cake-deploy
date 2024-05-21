@@ -1,18 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-
-import Login from "../Login/Login";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-//import { Link } from 'react-router-dom';
 import Lenis from "@studio-freight/lenis";
-import { useNavigate } from "react-router-dom";
 import "./style.css"; // Assuming you'll also style it using Main.css
 
-const Main = (User) => {
+const Main = () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
+
   useEffect(() => {
     if (token && userId) {
       alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
@@ -21,6 +18,7 @@ const Main = (User) => {
       navigate("/login");
     }
   }, [token, userId, navigate]);
+
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -40,6 +38,7 @@ const Main = (User) => {
       },
     });
     tl.to(".myElement", { x: 100 });
+
     const lenis = new window.Lenis({
       lerp: 0.1,
       smooth: true,
@@ -113,15 +112,12 @@ const Main = (User) => {
   const handleAvatarClick = () => {
     navigate(`/folder`, { state: { token, userId } });
   };
+
   return (
     <div className="all">
       <div className="navigation">
         <div className="navigation__logo">
-          <img
-            src="img/cake-logo-small.png"
-            alt=""
-            className="navigation__logo-img"
-          />
+          <img src="img/cake-logo-small.png" alt="" className="navigation__logo-img" />
           <div className="navigation__brand">Cake</div>
         </div>
 
@@ -129,39 +125,21 @@ const Main = (User) => {
           <svg className="navigation__search-box-icon">
             <use xlinkHref="img/symbol-defs.svg#icon-search"></use>
           </svg>
-          <input
-            className="navigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
+          <input className="navigation__search-box-bar" type="text" placeholder="Search for folders, tutor,.." />
         </div>
 
         <ul className="navigation__link">
           <div className="navigation__dropdown">
             <button onClick={toggleDropdown} ref={navigationDropdown}>
               <span>Your library</span>
-              <svg
-                width="28"
-                className="form__month--arrow-brown"
-                height="25"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
+              <svg width="28" className="form__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
               </svg>
             </button>
             <ul className="navigation__dropdown-list">
               <div className="navigation__dropdown-button-container">
-                <button className="navigation__dropdown-button navigation__dropdown-button-1">
-                  Flash-slices
-                </button>
-                <button className="navigation__dropdown-button navigation__dropdown-button-2">
-                  Quick-bites
-                </button>
+                <button className="navigation__dropdown-button navigation__dropdown-button-1">Flash-slices</button>
+                <button className="navigation__dropdown-button navigation__dropdown-button-2">Quick-bites</button>
               </div>
               <div className="navigation__dropdown-item-container">
                 {Array.from({ length: 6 }).map((_, index) => (
@@ -171,67 +149,30 @@ const Main = (User) => {
                   </div>
                 ))}
               </div>
-              <a className="navigation__dropdown-all" href="#">
-                All
-              </a>
+              <a className="navigation__dropdown-all" href="#">All</a>
             </ul>
           </div>
 
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Help Center
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Language: VN
-            </a>
-          </li>
-          <img
-            className="navigation__avatar"
-            src="img/avatar2.png"
-            alt="User Avatar"
-            onClick={handleAvatarClick}
-          />
+          <li className="navigation__link-btn"><a className="navigation__link-btn-a" href="#">Help Center</a></li>
+          <li className="navigation__link-btn"><a className="navigation__link-btn-a" href="#">Language: VN</a></li>
+          <img className="navigation__avatar" src="img/avatar2.png" alt="User Avatar" onClick={handleAvatarClick} />
         </ul>
       </div>
-      <section className="main">
+      <section className="mainn">
         <div className="yellow">
           <img src="img/bg1.PNG" alt="" className="yellow__bg" />
           <h1 className="yellow__header">Quick-bites</h1>
           <div className="form__month">
-            <button
-              className="form__month--button"
-              onClick={toggleDropdown1}
-              role="combobox"
-              aria-labelledby="select button"
-              aria-haspopup="listbox"
-              aria-expanded={isDropdownOpen}
-              aria-controls="select-dropdown"
-            >
+            <button className="form__month--button" onClick={toggleDropdown1} role="combobox" aria-labelledby="select button"
+              aria-haspopup="listbox" aria-expanded={isDropdownOpen} aria-controls="select-dropdown">
               <span className="form__month--selected-value">latest</span>
               {/* SVG code for the button */}
-              <svg
-                width="28"
-                class="form__month--arrow"
-                height="25"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
+              <svg width="28" className="form__month--arrow" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
               </svg>
             </button>
             {isDropdownOpen && (
-              <ul
-                className="form__month--dropdown"
-                onClick={toggleDropdown1}
-                role="listbox"
-                id="select-dropdown"
-              >
+              <ul className="form__month--dropdown" onClick={toggleDropdown1} role="listbox" id="select-dropdown">
                 <li role="option" onClick={() => selectOption("latest")}>
                   <input type="radio" id="jan" name="social-account" />
                   <label htmlFor="jan">latest</label>
@@ -249,30 +190,21 @@ const Main = (User) => {
           </div>
           <button className="yellow__add">
             {/* SVG for the add button */}
-            <svg
-              width="37"
-              height="37"
-              viewBox="0 0 37 37"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                fill="#734A4A"
-              />
+                fill="#734A4A" />
             </svg>
           </button>
           <div className="yellow__card-container">
             {/* Card containers with repeated card structures */}
             {Array.from({ length: 8 }).map((_, index) => (
-              <div class="card">
-                <div class="card__side">
-                  <div class="card__side card__side--front">
+              <div key={index} className="card">
+                <div className="card__side">
+                  <div className="card__side card__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
-                  <div class="card__side card__side--back card__side--back-1">
+                  <div className="card__side card__side--back card__side--back-1">
                     <h4>Animals</h4>
                     <h5>50 quizzes</h5>
                     <div>
@@ -289,46 +221,21 @@ const Main = (User) => {
           <img src="img/bg2.PNG" alt="" className="brown__bg" />
           <h1 className="brown__header">Flash-slices</h1>
           <div className="form__month-brown">
-            <button
-              className="form__month--button-brown"
-              onClick={toggleDropdownBrown}
-              role="combobox"
-              aria-labelledby="select button"
-              aria-haspopup="listbox"
-              aria-expanded={isDropdownOpenBrown}
-              aria-controls="select-dropdown"
-            >
+            <button className="form__month--button-brown" onClick={toggleDropdownBrown} role="combobox" aria-labelledby="select button"
+              aria-haspopup="listbox" aria-expanded={isDropdownOpenBrown} aria-controls="select-dropdown">
               <span className="form__month--selected-value-brown">latest</span>
               {/* SVG code for the button */}
-              <svg
-                width="28"
-                class="form__month--arrow-brown"
-                height="25"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
+              <svg width="28" className="form__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
               </svg>
             </button>
             {isDropdownOpenBrown && (
-              <ul
-                className="form__month--dropdown-brown"
-                onClick={toggleDropdownBrown}
-                role="listbox"
-                id="select-dropdown"
-              >
+              <ul className="form__month--dropdown-brown" onClick={toggleDropdownBrown} role="listbox" id="select-dropdown">
                 <li role="option" onClick={() => selectOptionBrown("latest")}>
                   <input type="radio" id="jan" name="social-account" />
                   <label htmlFor="jan">latest</label>
                 </li>
-                <li
-                  role="option"
-                  onClick={() => selectOptionBrown("most used")}
-                >
+                <li role="option" onClick={() => selectOptionBrown("most used")}>
                   <input type="radio" id="feb" name="social-account" />
                   <label htmlFor="feb">most used</label>
                 </li>
@@ -341,30 +248,21 @@ const Main = (User) => {
           </div>
           <button className="brown__add">
             {/* SVG for the add button */}
-            <svg
-              width="37"
-              height="37"
-              viewBox="0 0 37 37"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                fill="#734A4A"
-              />
+                fill="#734A4A" />
             </svg>
           </button>
           <div className="brown__card-container">
             {/* Card containers with repeated card structures */}
             {Array.from({ length: 8 }).map((_, index) => (
-              <div class="card">
-                <div class="card__side">
-                  <div class="card__side card__side--front">
+              <div key={index} className="card">
+                <div className="card__side">
+                  <div className="card__side card__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
-                  <div class="card__side card__side--back card__side--back-1">
+                  <div className="card__side card__side--back card__side--back-1">
                     <h4>Animals</h4>
                     <h5>50 quizzes</h5>
                     <div>
@@ -380,11 +278,7 @@ const Main = (User) => {
       </section>
       <footer className="footer">
         <div className="footer__img-container">
-          <img
-            src="img/cake-logo-big.png"
-            alt="Large Cake Logo"
-            className="footer__logo"
-          />
+          <img src="img/cake-logo-big.png" alt="Large Cake Logo" className="footer__logo" />
           <h1 className="footer__brand">CAKE</h1>
         </div>
         <div className="footer__text-container">
@@ -401,10 +295,7 @@ const Main = (User) => {
         </div>
         <div className="footer__text-container-1">
           <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">
-            A project for Hanoi University of Science and Technology's Web
-            Subject Course
-          </h4>
+          <h4 className="footer__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
         </div>
       </footer>
     </div>

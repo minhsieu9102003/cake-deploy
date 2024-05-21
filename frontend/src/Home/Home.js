@@ -94,8 +94,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="all">
-      {/* Navigation */}
+    <>
       <div className="navigation">
         <div className="navigation__logo">
           <img src={logo} alt="Cake Logo" className="navigation__logo-img" />
@@ -214,7 +213,7 @@ function Home() {
           </h4>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
 
