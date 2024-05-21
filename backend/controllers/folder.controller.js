@@ -75,12 +75,13 @@ const deleteFolder = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const Folder = await Folder.findByIdAndDelete(id);
+    const folder = await Folder.findByIdAndDelete(id);
 
-    if (!Folder) return res.status(404).json({ message: "Folder not found" });
+    if (!folder) return res.status(404).json({ message: "Folder not found" });
 
     return res.status(200).json({ message: "Delete successfully!" });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error });
   }
 };

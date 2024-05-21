@@ -97,11 +97,14 @@ function Folder(User) {
     if (token && userId) {
       const fetchFolders = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/folders/my/${userId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await axios.get(
+            `http://localhost:8000/folders/my/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setFolders(response.data);
         } catch (error) {
           console.error("Error fetching folders:", error);
@@ -146,6 +149,19 @@ function Folder(User) {
       setNewFolderTitle("");
     } catch (error) {
       console.error("Error creating folder:", error);
+    }
+  };
+
+  const handleDelete = async (folderId) => {
+    try {
+      await axios.delete(`http://localhost:8000/folders/${folderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setFolders(folders.filter(folder => folder._id !== folderId));
+    } catch (error) {
+      console.error("Error deleting folder:", error);
     }
   };
 
@@ -194,9 +210,7 @@ function Folder(User) {
             alt=""
             className="navigation__logo-img"
           />
-          <div className="navigation__brand">
-            Cake
-            </div>
+          <div className="navigation__brand">Cake</div>
         </div>
         <div className="navigation__search-box">
           <svg
@@ -395,58 +409,64 @@ function Folder(User) {
       </div>
 
       <section className="main">
-  {folders.map((folder, i) => (
-    <div className="main__folder" key={i}>
-      <Link to={`/course/${folder._id}`}>
-  <svg
-    className="main__folder-svg"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 48 48"
-  >
-          <defs>
-            <style>
-              {`
-                .cls-2 {
-                  fill: #dad7e5;
-                }
-                .cls-6 {
-                  fill: #919191;
-                }
-              `}
-            </style>
-          </defs>
-          <g id="File_and_folder" data-name="File and folder">
-            <path style={{ fill: "#c6c3d8" }} d="M42 1v20h-6V7H12V1h30z" />
-            <path className="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
-            <path
-              d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-              style={{ fill: "#fc6" }}
-            />
-            <path
-              d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-              style={{ fill: "#ffde76" }}
-            />
-            <path
-              className="cls-2"
-              d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z"
-            />
-            <path
-              d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z"
-              style={{ fill: "#edebf2" }}
-            />
-            <path
-              className="cls-6"
-              d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z"
-            />
-          </g>
-        </svg>
-        <span className="main__folder-title">{folder.title}</span>
-        <span className="main__folder-id">ID: {folder._id}</span> {/* Display folder ID */}
-      </Link>
-    </div>
-  ))}
-</section>
-
+        {folders.map((folder, i) => (
+          <div className="main__folder" key={i}>
+            <Link to={`/course/${folder._id}`}>
+              <svg
+                className="main__folder-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+              >
+                <defs>
+                  <style>
+                    {`
+                      .cls-2 {
+                        fill: #dad7e5;
+                      }
+                      .cls-6 {
+                        fill: #919191;
+                      }
+                    `}
+                  </style>
+                </defs>
+                <g id="File_and_folder" data-name="File and folder">
+                  <path
+                    style={{ fill: "#c6c3d8" }}
+                    d="M42 1v20h-6V7H12V1h30z"
+                  />
+                  <path
+                    className="cls-2"
+                    d="M42 1v18h-9A18 18 0 0 1 15 1h27z"
+                  />
+                  <path
+                    d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                    style={{ fill: "#fc6" }}
+                  />
+                  <path
+                    d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
+                    style={{ fill: "#ffde76" }}
+                  />
+                  <path
+                    className="cls-2"
+                    d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z"
+                  />
+                  <path
+                    d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z"
+                    style={{ fill: "#edebf2" }}
+                  />
+                  <path
+                    className="cls-6"
+                    d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z"
+                  />
+                </g>
+              </svg>
+              <span className="main__folder-title">{folder.title}</span>
+              <span className="main__folder-id">ID: {folder._id}</span>
+            </Link>
+            <button onClick={() => handleDelete(folder._id)}>Delete</button>
+          </div>
+        ))}
+      </section>
 
       <footer className="footer">
         <div className="footer__img-container">
