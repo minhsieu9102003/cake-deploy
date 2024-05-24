@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 
-const Create_quiz = () => {
+const Update_quiz = () => {
   const navigate = useNavigate();
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const [count, setCount] = useState(4);
@@ -79,6 +79,48 @@ const Create_quiz = () => {
     setCount(count + 1);
   };
 
+  // const [courses, setCourses] = useState([]);
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const { courseId } = useParams();
+
+  useEffect(() => {
+    if (token && userId) {
+      const fetchCourses = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/courses/${courseId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          // setCourses(response.data);
+          setTitle(response.data.title)
+          setDescription(response.data.description)
+          console.log(response.data);
+          const response2 = await axios.get(
+            `http://localhost:8000/cards/course/${courseId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setCount(response2.data.length)
+          setListCard(response2.data)
+        } catch (error) {
+          console.error("Error fetching courses:", error);
+        }
+      };
+      fetchCourses();
+    } else {
+      alert("No token found. Redirecting to login.");
+      navigate("/login");
+    }
+  }, [token, userId, navigate]);
+
   const handleDeleteClick = (index) => {
     if(count > 4) {
       console.log(index);
@@ -96,15 +138,14 @@ const Create_quiz = () => {
         headers: { Authorization: `Bearer ${token}` },
       };
 
-      const response = await axios.post('http://localhost:8000/courses/', {
+      const response = await axios.put(`http://localhost:8000/courses/${courseId}`, {
         title,
         description,
         listCards: listCard,
       }, config);
 
       if (response.status === 201 || response.status === 200) {
-        //alert('Login successful!');
-        navigate('/course');
+        navigate(`/course/${courseId}`);
       } else {
         alert('Failed to create. Please try again.');
       }
@@ -219,7 +260,7 @@ const Create_quiz = () => {
       <div className="first">
         <div className="first__heading">
           <div className="first__title">
-            <h1>Create Course</h1>
+            <h1>Update Course</h1>
             <svg
               className="first__paw"
               fill="#000000"
@@ -257,7 +298,6 @@ const Create_quiz = () => {
             </svg>
           </button>
         </div>
-        <div className="first__description">Create a new course</div>
         <form action="" className="first__form">
           <input
             type="text"
@@ -374,4 +414,4 @@ const Create_quiz = () => {
   );
 };
 
-export default Create_quiz;
+export default Update_quiz;
