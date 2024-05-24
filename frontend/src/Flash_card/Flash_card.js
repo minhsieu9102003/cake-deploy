@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
+import { useNavigate } from "react-router-dom";
 import "./style.css"; // Adjust the path as necessary
 import logo from "./img/cake-logo-small.png";
 import avatar1 from "./img/avatar1.png";
@@ -11,7 +12,15 @@ import orangeImage from './img/orange.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function FlashCard(){
+function FlashCard() {
+  const [cards, setCards] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [completedCards, setCompletedCards] = useState([]);
+  const { courseId } = useParams(); // Get courseId from URL parameters
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
+
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -37,19 +46,55 @@ function FlashCard(){
         inertia: 0.75
     });
 
-  function raf(time) {
-    lenis.raf(time);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
 
+    return () => {
+      lenis.destroy();
+      gsap.killTweensOf('*');
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
-  return () => {
-    lenis.destroy();
-    gsap.killTweensOf('*');
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  useEffect(() => {
+    if (!token || !userId) {
+      alert("No token or userId found. Redirecting to login.");
+      navigate("/login");
+      return;
+    }
+      const fetchCards = async () => {
+        try {
+          const response = await fetch(`http://localhost:8000/cards/course/${courseId}`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "User-ID": userId,
+            }
+          });
+          console.log('Response:', response);
+          if (response.ok) {
+            const data = await response.json();
+            setCards(data);
+            localStorage.setItem(`cards_${courseId}`, JSON.stringify(data));
+          } else {
+            console.error('Failed to fetch cards');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+      fetchCards();
+    }, [courseId, token]);
+
+  const handleNextCard = () => {
+    if (currentIndex < cards.length - 1) {
+      setCompletedCards([...completedCards, cards[currentIndex]]);
+      setCurrentIndex(currentIndex + 1);
+    }
   };
-}, []);
 
   return (
     <div>
@@ -164,39 +209,37 @@ function FlashCard(){
           <h6 className="study__stat">5.0 (3rate)</h6>
         </div>
 
-        <div className="quiz">
-          <div className="quiz__title">
-            <div className="quiz__card">
-              <div className="card__side">
-                <div className="card__side card__side--front">
-                  <h1>Cow</h1>
-                </div>
-                <div className="card__side card__side--back card__side--back-1">
-                  <h1>con bò</h1>
+        {cards.length > 0 && currentIndex < cards.length && (
+          <div className="quiz">
+            <div className="quiz__title">
+              <div className="quiz__card">
+                <div className="card__side">
+                  <div className="card__side card__side--front">
+                    <h1>{cards[currentIndex].key}</h1>
+                  </div>
+                  <div className="card__side card__side--back card__side--back-1">
+                    <h1>{cards[currentIndex].value}</h1>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="quiz__count">1/50</div>
-        </div>
-
-        <div className="author">
-          <div className="author__avt">
-            <img src={avatar1} alt="" />
-            <div className="avt__name">anhlenguyen</div>
+            <div className="quiz__count">{currentIndex + 1}/{cards.length}</div>
           </div>
-          <div className="author__time">created in March 13rd 2024</div>
-        </div>
+        )}
+
+        <button onClick={handleNextCard} disabled={currentIndex >= cards.length - 1}>
+          Next Card
+        </button>
 
         <h1 className="quizzes__header">Cards List</h1>
         <ul className="quizzes__list">
-          {/* Map through an array for quizzes list items if available */}
-          <li className="quizzes__item">
-            <div className="quizzes__title">Cow</div>
-            <div className="quizzes__answer">con bò</div>
-          </li>
-          {/* Repeat for other quizzes */}
+          {completedCards.map((card, index) => (
+            <li key={index} className="quizzes__item">
+              <div className="quizzes__title">{card.key}</div>
+              <div className="quizzes__answer">{card.value}</div>
+            </li>
+          ))}
         </ul>
       </section>
       <footer className="footer">
@@ -223,6 +266,6 @@ function FlashCard(){
       </footer>
     </div>
   );
-  }
+}
 
 export default FlashCard;

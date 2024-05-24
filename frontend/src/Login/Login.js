@@ -67,58 +67,58 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:8000/auth/login', {
-            email,
-            password
-        });
+      const response = await axios.post('http://localhost:8000/auth/login', {
+        email,
+        password
+      });
 
-        console.log('Login response:', response);
+      console.log('Login response:', response);
 
-        const { token, userId } = response.data;
+      const { token, userId } = response.data;
 
-        if (!token || !userId) {
-            throw new Error('Invalid login response: missing token or userId');
-        }
+      if (!token || !userId) {
+        throw new Error('Invalid login response: missing token or userId');
+      }
 
-        // Store the token and userId in localStorage
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
+      // Store the token and userId in localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
 
-        // Parse and store the token payload
-        const parsedToken = parseJwt(token);
-        localStorage.setItem('userPayload', JSON.stringify(parsedToken));
+      // Parse and store the token payload
+      const parsedToken = parseJwt(token);
+      localStorage.setItem('userPayload', JSON.stringify(parsedToken));
 
-        // Check if the token and userId are stored correctly
-        const storedToken = localStorage.getItem('token');
-        const storedUserId = localStorage.getItem('userId');
+      // Check if the token and userId are stored correctly
+      const storedToken = localStorage.getItem('token');
+      const storedUserId = localStorage.getItem('userId');
 
-        if (storedToken && storedUserId) {
-            //alert('Login successful!');
-            navigate('/main');
-        } else {
-            alert('Failed to store user credentials. Please try again.');
-        }
+      if (storedToken && storedUserId) {
+        //alert('Login successful!');
+        navigate('/main');
+      } else {
+        alert('Failed to store user credentials. Please try again.');
+      }
     } catch (error) {
-        console.error('Error during login:', error.response?.data || error.message);
-        alert(`Login failed: ${error.response?.data?.message || error.message}`);
+      console.error('Error during login:', error.response?.data || error.message);
+      alert(`Login failed: ${error.response?.data?.message || error.message}`);
     }
-};
+  };
 
-// Function to parse JWT
-function parseJwt(token) {
+  // Function to parse JWT
+  function parseJwt(token) {
     try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
 
-        return JSON.parse(jsonPayload);
+      return JSON.parse(jsonPayload);
     } catch (error) {
-        console.error('Failed to parse JWT:', error);
-        return null;
+      console.error('Failed to parse JWT:', error);
+      return null;
     }
-}
+  }
 
   return (
     <div className="container">
@@ -146,13 +146,15 @@ function parseJwt(token) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div className='last-btn'>
+          <button type="submit" className="login-btn" onClick={handleLogin}>
+            Login
+          </button>
+          <button type="button" className="signup-btn">
+            Don't have an account? Sign up
+          </button>
+        </div>
 
-        <button type="submit" className="login-btn" onClick={handleLogin}>
-          Login
-        </button>
-        <button type="button" className="Signup-btn">
-          Don't have an account? Sign up
-        </button>
       </form>
     </div>
   );
