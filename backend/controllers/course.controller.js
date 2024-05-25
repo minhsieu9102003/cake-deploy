@@ -27,7 +27,7 @@ const getOne = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const course = await Course.findById(id);
+    const course = await Course.findById(id).populate("cards");
     if (!course) return res.status(404).json({ message: "Course not found" });
 
     return res.status(200).json(course);

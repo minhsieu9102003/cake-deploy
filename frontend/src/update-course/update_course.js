@@ -100,16 +100,8 @@ const Update_quiz = () => {
           setTitle(response.data.title)
           setDescription(response.data.description)
           console.log(response.data);
-          const response2 = await axios.get(
-            `http://localhost:8000/cards/course/${courseId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setCount(response2.data.length)
-          setListCard(response2.data)
+          setCount(response.data.cards.length)
+          setListCard(response.data.cards)
         } catch (error) {
           console.error("Error fetching courses:", error);
         }
