@@ -360,12 +360,12 @@
     transform: translateY(-4.7rem);
 }
 
-.first {
+.kfirst {
     padding: 1rem 2rem;
-    background-color: white;
+    background-color: white !important;
 }
 
-.first__heading {
+.kfirst__heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -373,20 +373,20 @@
     position: relative;
 }
 
-.first__title h1 {
+.kfirst__title h1 {
     font-family: 'Nerko One';
     font-size: 5rem;
     color: #7a4a4a;
 
 }
 
-.first__title {
+.kfirst__title {
     display: flex;
     margin: auto;
     align-items: center;
 }
 
-.first__paw {
+.kfirst__paw {
     width: 5rem;
     height: 5rem;
     opacity: .2;
@@ -394,7 +394,7 @@
 
 }
 
-.first__back {
+.kfirst__back {
     width: 4rem;
     height: 4rem;
     fill: #7a4a4a;
@@ -541,27 +541,32 @@
 }
 
 
-.first__plus {
-    height: 3em;
-    width: 3rem;
-    cursor: pointer;
-    fill: white;
+.kfirst__plus {
+    height: 3rem !important;
+    width: 3rem !important;
+    cursor: pointer !important;
+    fill: white !important;
+    margin-left: 17rem;
+    margin-top: 1rem;
 }
 
-.first__filter {
-    display: flex;
-    gap: 1rem;
+.kfirst__filter {
+    display: flex !important;
+    gap: 1rem !important;
+    justify-content: start;
+    align-items: center !important;
+    height: max-content;
 }
 
 .main {
-    width: 100%;
-    height: 100vh;
-    padding: 1rem 2rem;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: start;
+    width: 100% !important;
+    height: 100vh !important;
+    padding: 1rem 2rem !important;
+    background-color: white !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+    justify-content: start !important;
 }
 
 .main__card-inner-avatar {
@@ -581,7 +586,7 @@
 .main__card-inner {
     color: #7a4a4a;
     width: 100%;
-    background-color: white;
+    background-color: white !important;
     border-radius: 20px;
     display: flex;
     padding: 2rem 2rem;
@@ -604,21 +609,30 @@
 }
 
 .main__card-inner-number {
-    color: white;
+    color: white !important;
     border-radius: 20px;
     background-color: #7a4a4a;
     padding: 0 .5rem;
 }
 
 .main__folder {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: min-content !important;
+    gap: 1rem !important;
+    cursor: pointer !important;
+    transition: all .2s ease-in-out !important;
+    width: 17% !important;
+}
+
+.main__folder a {
+    width: min-content;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min-content;
-    gap: 1rem;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    width: 17%
+    text-decoration: none;
 }
 
 .main__folder:hover {

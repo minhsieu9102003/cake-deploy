@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -32,44 +32,41 @@ const Update_quiz = () => {
       },
     });
     tl.to(".myElement", { x: 100 });
-    const lenis = new window.Lenis({
-      lerp: 0.1,
-      smooth: true,
-      inertia: 0.75,
-    });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
+
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
-  useEffect(() => {
-    const tl = gsap.timeline({
+  const navigationDropdown = useRef(null);
+  const [status, setStatus] = useState(false);
+  const tl = useRef(
+    gsap.timeline({
+      paused: true,
       defaults: {
         duration: 0.6,
         ease: "power4.inOut",
       },
+    })
+  );
+
+  useEffect(() => {
+    // Set up the GSAP animation timeline
+    tl.current.to(".navigation__dropdown-list", {
+      clipPath: "polygon(0 0, 100% 0,100% 100%, 0 100% )",
     });
+  }, []);
 
-    tl.to(".navigation__dropdown-list", {
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-    });
-
-    tl.paused(true);
-
-    if (dropdownStatus) {
-      tl.play();
+  const toggleDropdown = () => {
+    if (!status) {
+      tl.current.play();
     } else {
-      tl.reverse();
+      tl.current.reverse();
     }
-  }, [dropdownStatus]);
+    setStatus(!status);
+  };
 
   const handleDropdownClick = () => {
     setDropdownStatus(!dropdownStatus);
@@ -114,7 +111,7 @@ const Update_quiz = () => {
   }, [token, userId, navigate]);
 
   const handleDeleteClick = (index) => {
-    if(count > 4) {
+    if (count > 4) {
       console.log(index);
       const newCards = listCard.filter((_, i) => i !== index);
       setListCard(newCards);
@@ -172,7 +169,7 @@ const Update_quiz = () => {
       <div className="navigation">
         <div className="navigation__logo">
           <img
-            src="img/cake-logo-small.png"
+            src="/img/cake-logo-small.png"
             alt=""
             className="navigation__logo-img"
           />
@@ -196,7 +193,7 @@ const Update_quiz = () => {
 
         <ul className="navigation__link">
           <div className="navigation__dropdown">
-            <button onClick={handleDropdownClick}>
+            <button onClick={toggleDropdown} ref={navigationDropdown}>
               <span>Your library</span>
               <svg
                 width="15"
@@ -225,7 +222,7 @@ const Update_quiz = () => {
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="navigation__dropdown-item">
                     <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
+                    <img src="/img/avatar1.png" alt="" />
                   </div>
                 ))}
               </div>
@@ -245,7 +242,7 @@ const Update_quiz = () => {
               Language: VN
             </a>
           </li>
-          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
+          <img className="navigation__avatar" src="/img/avatar2.png" alt="" />
         </ul>
       </div>
 
@@ -264,10 +261,10 @@ const Update_quiz = () => {
               <path d="M189.02051,145.33984A31.35052,31.35052,0,0,1,174.0918,126.606a47.99847,47.99847,0,0,0-92.18262-.00635,31.35,31.35,0,0,1-14.92969,18.74023,44.00739,44.00739,0,0,0,38.11719,79.21094,60.16331,60.16331,0,0,1,45.80664,0,44.00678,44.00678,0,0,0,38.11719-79.21094ZM168,204a19.86485,19.86485,0,0,1-7.80078-1.57568c-.04395-.019-.08887-.0376-.13379-.05616a84.02637,84.02637,0,0,0-64.13086,0c-.04492.01856-.08984.03711-.13379.05616a20.00673,20.00673,0,0,1-17.31445-36.02246c.03515-.01954.07129-.03907.10644-.05909A55.21137,55.21137,0,0,0,104.957,133.29541a23.99908,23.99908,0,0,1,46.08887.00439,55.20367,55.20367,0,0,0,26.36133,33.043c.03515.02.07129.03955.10644.05909A20.00364,20.00364,0,0,1,168,204Zm64-100a24,24,0,1,1-24-24A23.99994,23.99994,0,0,1,232,104ZM48,128a24,24,0,1,1,24-24A23.99994,23.99994,0,0,1,48,128ZM72,56A24,24,0,1,1,96,80,23.99994,23.99994,0,0,1,72,56Zm64,0a24,24,0,1,1,24,24A23.99994,23.99994,0,0,1,136,56Z" />
             </svg>
           </div>
-          
+
           <button
             type="button"
-            // onClick={() => handleDeleteClick(i)}
+          // onClick={() => handleDeleteClick(i)}
           >
             <svg
               className="first__back"
@@ -378,7 +375,7 @@ const Update_quiz = () => {
 
       <footer className="footer">
         <div className="footer__img-container">
-          <img src="img/cake-logo-big.png" alt="" className="footer__logo" />
+          <img src="/img/cake-logo-big.png" alt="" className="footer__logo" />
           <h1 className="footer__brand">CAKE</h1>
         </div>
         <div className="footer__text-container">

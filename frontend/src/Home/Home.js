@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Login from "../Login/Login";
 import { Link } from "react-router-dom";
@@ -20,6 +20,7 @@ import "./style.css";
 gsap.registerPlugin(ScrollTrigger);
 function Home() {
   const [showLogin, setShowLogin] = useState(false);
+
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -38,6 +39,7 @@ function Home() {
         toggleActions: "play none none none",
       },
     });
+
     tl.to(".myElement", { x: 100 });
 
     // Animate the header
@@ -72,7 +74,7 @@ function Home() {
         duration: 1,
       },
       "-=.75"
-    );
+    )
 
 
 
@@ -82,6 +84,7 @@ function Home() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
 
   return (
     <>
@@ -120,6 +123,17 @@ function Home() {
             <Link to="/signup" className="navigation__link-btn-a sign-up">
               Sign up
             </Link>
+          </li>
+          <li className="navigation__link-btn-menu">
+            <svg className='navigation__link-menu' width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+              <g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+
+            </svg>
           </li>
         </ul>
       </div>

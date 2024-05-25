@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import "./style.css";
 
 function Folder(User) {
@@ -88,14 +89,11 @@ function Folder(User) {
     if (token && userId) {
       const fetchFolders = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:8000/folders/my/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.get(`http://localhost:8000/folders/my/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setFolders(response.data);
         } catch (error) {
           console.error("Error fetching folders:", error);
@@ -292,12 +290,12 @@ function Folder(User) {
         </ul>
       </div>
 
-      <div className="first">
-        <div className="first__heading">
-          <div className="first__title">
+      <div className="kfirst">
+        <div className="kfirst__heading">
+          <div className="kfirst__title">
             <h1>My Folder</h1>
             <svg
-              className="first__paw"
+              className="kfirst__paw"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 120 120"
             >
@@ -312,7 +310,7 @@ function Folder(User) {
             </svg>
           </div>
           <svg
-            className="first__back"
+            className="kfirst__back"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 128 128"
           >
@@ -334,7 +332,7 @@ function Folder(User) {
             </g>
           </svg>
         </div>
-        <div className="first__filter">
+        <div className="kfirst__filter">
           <div className="form__month">
             <button
               className="form__month--button"
@@ -363,9 +361,8 @@ function Folder(User) {
               </svg>
             </button>
             <ul
-              className={`form__month--dropdown ${
-                customSelectActive ? "active" : ""
-              }`}
+              className={`form__month--dropdown ${customSelectActive ? "active" : ""
+                }`}
               role="listbox"
               id="select-dropdown"
             >
@@ -384,7 +381,7 @@ function Folder(User) {
             </ul>
           </div>
           <svg
-            className="first__plus"
+            className="kfirst__plus"
             width="800px"
             height="800px"
             viewBox="0 0 32 32"
@@ -416,56 +413,9 @@ function Folder(User) {
         {folders.map((folder, i) => (
           <div className="main__folder" key={i}>
             <Link to={`/folder/${folder._id}`}>
-              <svg
-                className="main__folder-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 48 48"
-              >
-                <defs>
-                  <style>
-                    {`
-                      .cls-2 {
-                        fill: #dad7e5;
-                      }
-                      .cls-6 {
-                        fill: #919191;
-                      }
-                    `}
-                  </style>
-                </defs>
-                <g id="File_and_folder" data-name="File and folder">
-                  <path
-                    style={{ fill: "#c6c3d8" }}
-                    d="M42 1v20h-6V7H12V1h30z"
-                  />
-                  <path
-                    className="cls-2"
-                    d="M42 1v18h-9A18 18 0 0 1 15 1h27z"
-                  />
-                  <path
-                    d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-                    style={{ fill: "#fc6" }}
-                  />
-                  <path
-                    d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-                    style={{ fill: "#ffde76" }}
-                  />
-                  <path
-                    className="cls-2"
-                    d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z"
-                  />
-                  <path
-                    d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z"
-                    style={{ fill: "#edebf2" }}
-                  />
-                  <path
-                    className="cls-6"
-                    d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z"
-                  />
-                </g>
-              </svg>
+              <svg className='main__folder-svg' width='10rem' height='10rem' viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFA000" /><path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFCA28" /></svg>
               <span className="main__folder-title">{folder.title}</span>
-              <span className="main__folder-id">ID: {folder._id}</span>
+
             </Link>
             <button onClick={() => handleDelete(folder._id)}>Delete</button>
             <button onClick={() => {

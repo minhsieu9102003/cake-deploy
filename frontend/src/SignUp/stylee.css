@@ -21,7 +21,15 @@ body {
   display: flex;
   width: 100%;
   gap: 1rem;
+
+  height: 4rem;
+
+}
+
+.last-btn button {
+  cursor: pointer;
   height: 3rem;
+
 }
 
 .illu {
@@ -220,6 +228,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.signup-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.login-btn {
+  display: flex;
+  justify-content: center;
 }
 
 .form__month--selected-value,
