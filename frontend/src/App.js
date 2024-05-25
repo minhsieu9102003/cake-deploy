@@ -11,6 +11,7 @@ import Create_quiz from './Create_quiz/create_quiz';
 import Create_flash from './Create_flash/Create_flash';
 import Course from './Course/Course';
 import Create_course from './create-course/create_course';
+import Update_course from './update-course/update_course';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/create_flash" element={<Create_flash />} />
         <Route path="/course/:folderId" element={<Course />} /> {/* Updated route */}
         <Route path="/create_course" element={<Create_course />} />
+        <Route path="/update_course/:courseId" element={<Update_course />} />
       </Routes>
     </Router>
   );
