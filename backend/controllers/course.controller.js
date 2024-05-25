@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 const getMyCourses = async (req, res) => {
   const { userId } = req.params;
   try {
-    const courses = await Course.findOne({ userId });
+    const courses = await Course.find({ userId });
 
     return res.status(200).json(courses);
   } catch (error) {

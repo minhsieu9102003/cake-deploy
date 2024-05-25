@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import axios from "axios";
 import Lenis from "@studio-freight/lenis";
 import "./style.css"; // Assuming you'll also style it using Main.css
 
@@ -9,6 +10,8 @@ const Main = () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState({ folders: [], courses: [], users: [] });
 
   useEffect(() => {
     if (token && userId) {
@@ -100,6 +103,26 @@ const Main = () => {
     navigate(`/folder`, { state: { token, userId } });
   };
 
+  const handleSearchChange = async (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      try {
+        const response = await axios.get(`http://localhost:8000/other/search/${query}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    } else {
+      setSearchResults({ folders: [], courses: [], users: [] });
+    }
+  };
+
   return (
     <div className="mall">
       <div className="mnavigation">
@@ -112,7 +135,13 @@ const Main = () => {
           <svg className="mnavigation__search-box-icon">
             <use xlinkHref="img/symbol-defs.svg#icon-search"></use>
           </svg>
-          <input className="mnavigation__search-box-bar" type="text" placeholder="Search for folders, tutor,.." />
+          <input
+            className="mnavigation__search-box-bar"
+            type="text"
+            placeholder="Search for folders, tutor,.."
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
         </div>
 
         <ul className="mnavigation__link">
@@ -145,6 +174,41 @@ const Main = () => {
           <img className="mnavigation__avatar" src="img/avatar2.png" alt="User Avatar" onClick={handleAvatarClick} />
         </ul>
       </div>
+
+      <div className="search-results">
+        <h2>Search Results</h2>
+        {searchResults.folders.length > 0 && (
+          <div>
+            <h3>Folders</h3>
+            <ul>
+              {searchResults.folders.map((folder) => (
+                <li key={folder._id}>{folder.title}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {searchResults.courses.length > 0 && (
+          <div>
+            <h3>Courses</h3>
+            <ul>
+              {searchResults.courses.map((course) => (
+                <li key={course._id}>{course.title}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {searchResults.users.length > 0 && (
+          <div>
+            <h3>Users</h3>
+            <ul>
+              {searchResults.users.map((user) => (
+                <li key={user._id}>{user.username}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
       <section className="mmainn">
         <div className="myellow">
           <img src="img/bg1.PNG" alt="" className="myellow__bg" />

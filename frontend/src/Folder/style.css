@@ -387,8 +387,8 @@
 }
 
 .kfirst__paw {
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     opacity: .2;
     justify-self: center;
 
@@ -401,12 +401,13 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%) rotate(-90deg);
-    right: 0;
+    left: 0;
     cursor: pointer;
 }
 
 .form__month,
-.form__month-brown {
+.form__month-brown,
+.form__month1 {
 
 
     width: 10rem;
@@ -417,7 +418,9 @@
     border-radius: 0.25rem;
 }
 
+
 .form__month--button,
+.form__month--button1,
 .form__month--button-brown {
     color: #7a4a4a;
     width: 100%;
@@ -433,7 +436,12 @@
     align-items: center;
 }
 
+.form__month--button {
+    margin-bottom: 1rem;
+}
+
 .form__month--selected-value,
+.form__month--selected-value1,
 .form__month--selected-value-brown {
     color: #7a4a4a;
     display: flex;
@@ -443,12 +451,14 @@
 }
 
 .form__month--arrow,
+.form__month--arrow1,
 .form__month--arrow-brown {
     scale: .5;
     transition: transform ease-in-out 0.3s;
 }
 
 .form__month--dropdown,
+.form__month--dropdown1,
 .form__month--dropdown-brown {
     color: #7a4a4a;
     list-style: none;
@@ -472,6 +482,7 @@
 }
 
 .form__month--dropdown li,
+.form__month--dropdown1 li,
 .form__month--dropdown-brown li {
     position: relative;
     cursor: pointer;
@@ -481,6 +492,7 @@
 }
 
 .form__month--dropdown li span,
+.form__month--dropdown1 li span,
 .form__month--dropdown-brown li span {
     width: 100%;
     padding: 8px 10px;
@@ -491,17 +503,20 @@
 }
 
 .form__month--dropdown::-webkit-scrollbar,
+.form__month--dropdown1::-webkit-scrollbar,
 .form__month--dropdown-brown::-webkit-scrollbar {
     width: 7px;
 }
 
 .form__month--dropdown::-webkit-scrollbar-track,
+.form__month--dropdown1::-webkit-scrollbar-track,
 .form__month--dropdown-brown::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 25px;
 }
 
 .form__month--dropdown::-webkit-scrollbar-thumb,
+.form__month--dropdown1::-webkit-scrollbar-thumb,
 .form__month--dropdown-brown::-webkit-scrollbar-thumb {
     background: #ccc;
     border-radius: 25px;
@@ -510,16 +525,20 @@
 .form__month--dropdown li:hover,
 .form__month--dropdown input:checked~label,
 .form__month--dropdown-brown li:hover,
-.form__month--dropdown-brown input:checked~label {
+.form__month--dropdown-brown input:checked~label,
+.form__month--dropdown1 li:hover,
+.form__month--dropdown1 input:checked~label {
     background-color: #f2f2f2;
 }
 
 .form__month--dropdown input:focus~label,
+.form__month--dropdown1 input:focus~label,
 .form__month--dropdown-brown input:focus~label {
     background-color: #dfdfdf;
 }
 
 .form__month--dropdown input[type="radio"],
+.form__month--dropdown1 input[type="radio"],
 .form__month--dropdown-brown input[type="radio"] {
     position: absolute;
     left: 0;
@@ -528,11 +547,13 @@
 
 /* interactivity */
 .form__month.active .form__month--arrow,
+.form__month1.active .form__month--arrow1,
 .form__month-brown.active .form__month--arrow-brown {
     transform: rotate(180deg);
 }
 
 .form__month.active .form__month--dropdown,
+.form__month1.active .form__month--dropdown1,
 .form__month-brown.active .form__month--dropdown-brown {
     opacity: 1;
     visibility: visible;
@@ -541,16 +562,21 @@
 }
 
 
-.kfirst__plus {
-    height: 3rem !important;
-    width: 3rem !important;
+.kfirst__plus,
+.kfirst__plus1 {
+    height: 4rem !important;
+    width: 4rem !important;
     cursor: pointer !important;
     fill: white !important;
-    margin-left: 17rem;
-    margin-top: 1rem;
+
 }
 
-.kfirst__filter {
+.kfirst__plus {
+    margin-right: 2rem;
+}
+
+.kfirst__filter,
+.kfirst__filter1 {
     display: flex !important;
     gap: 1rem !important;
     justify-content: start;
@@ -558,9 +584,10 @@
     height: max-content;
 }
 
-.main {
+.main,
+.main1 {
     width: 100% !important;
-    height: 100vh !important;
+    height: 20rem !important;
     padding: 1rem 2rem !important;
     background-color: white !important;
     display: flex !important;
@@ -615,7 +642,8 @@
     padding: 0 .5rem;
 }
 
-.main__folder {
+.main__folder,
+.main__folder1 {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -624,27 +652,32 @@
     cursor: pointer !important;
     transition: all .2s ease-in-out !important;
     width: 17% !important;
+    height: min-content;
 }
 
-.main__folder a {
+.main__folder a,
+.main__folder1 a {
     width: min-content;
-    height: max-content;
+    height: min-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
 }
 
-.main__folder:hover {
+.main__folder:hover,
+.main__folder1:hover {
     transform: translateY(-5px);
 }
 
-.main__folder-svg {
+.main__folder-svg,
+.main__folder-svg1 {
     height: 10rem;
     width: 10rem;
 }
 
-.main__folder-title {
+.main__folder-title,
+.main__folder-title1 {
     font-family: 'Mogra';
     color: #7a4a4a;
     font-size: 1.2rem;
@@ -738,4 +771,125 @@
     color: black;
     background-color: white;
     border: 1px solid black;
+}
+
+.my__folders,
+.my__courses {
+    width: 100% !important;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Mogra';
+}
+
+.my__courses {
+    margin-top: -1rem;
+}
+
+.my__courses h1 {
+    margin-left: 2rem;
+}
+
+.form__month {
+    margin-left: 2rem;
+}
+
+
+.lprofile {
+    margin-top: 2rem;
+
+}
+
+.lprofile__first {
+    display: flex;
+    align-items: center;
+    display: flex;
+    font-family: 'Mogra';
+    gap: 3rem;
+}
+
+.lprofile img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+
+}
+
+
+.lprofile__swap {
+    margin: 2rem 0;
+    display: flex;
+    gap: 2rem;
+
+}
+
+.lprofile__swap button {
+    font-family: 'Mogra';
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    color: rgb(175, 175, 175);
+
+}
+
+.lprofile__swap .active {
+    color: #7a4a4a;
+    border-bottom: 2px solid #7a4a4a;
+}
+
+/* .lprofile__swap .lprofile__swap-folder {
+    border-bottom: 2px solid transparent !important;
+} */
+
+.lprofile__swap .lprofile__swap-folder:hover,
+.lprofile__swap .lprofile__swap-course:hover {
+    color: #7a4a4a;
+    border-bottom: 2px solid #7a4a4a;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* .lprofile__swap button:nth-child(2) {
+    font-family: 'Mogra';
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: rgb(175, 175, 175);
+    border-bottom: 2px solid transparent;
+    /* border-bottom: 2px solid #7a4a4a;}  */
+
+
+.main__folder1-button-container svg,
+.main__folder-button-container svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.main__folder1-button-container,
+.main__folder-button-container {
+    display: none;
+    gap: 1rem;
+}
+
+.main__folder1-button-container button,
+.main__folder-button-container button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, .2);
+    padding: .2rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+
+}
+
+.main__folder1:hover .main__folder1-button-container,
+.main__folder:hover .main__folder-button-container {
+    display: flex;
 }
