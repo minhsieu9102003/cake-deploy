@@ -14,7 +14,7 @@ const getOne = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const folder = await Folder.findById(id).populate("courses");
+    const folder = await Folder.findById(id);
     if (!folder) return res.status(404).json({ message: "Folder not found" });
 
     return res.status(200).json(folder);

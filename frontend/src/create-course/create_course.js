@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const Create_quiz = () => {
@@ -12,7 +12,6 @@ const Create_quiz = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [listCard, setListCard] = useState([]);
-  const folderId = useParams();
 
   useEffect(() => {
     gsap.to(".myElement", {
@@ -33,8 +32,20 @@ const Create_quiz = () => {
       },
     });
     tl.to(".myElement", { x: 100 });
+    const lenis = new window.Lenis({
+      lerp: 0.1,
+      smooth: true,
+      inertia: 0.75,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     return () => {
+      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -89,12 +100,11 @@ const Create_quiz = () => {
         title,
         description,
         listCards: listCard,
-        folderId: folderId.folderId,
       }, config);
 
       if (response.status === 201 || response.status === 200) {
         //alert('Login successful!');
-        navigate(`/course/${response.data._id}`);
+        navigate('/course');
       } else {
         alert('Failed to create. Please try again.');
       }

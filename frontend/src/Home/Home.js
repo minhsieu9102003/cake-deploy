@@ -74,10 +74,20 @@ function Home() {
       "-=.75"
     );
 
+    const lenis = new window.Lenis({
+      lerp: 0.1,
+      smooth: true,
+      inertia: 0.75,
+    });
 
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     return () => {
-
+      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+//import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
@@ -11,16 +12,6 @@ function Folder(User) {
   const [customSelectActive, setCustomSelectActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState("latest");
   const [selectedValueBrown, setSelectedValueBrown] = useState("latest");
-  const [folders, setFolders] = useState([]);
-  const [popupStatus, setPopupStatus] = useState(false);
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
-  const navigate = useNavigate();
-  const [newFolderTitle, setNewFolderTitle] = useState("");
-  const [selectedFolder, setSelectedFolder] = useState(null);
-  const [updatedTitle, setUpdatedTitle] = useState("");
-  const [updatedDescription, setUpdatedDescription] = useState("");
-
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -40,8 +31,20 @@ function Folder(User) {
       },
     });
     tl.to(".myElement", { x: 100 });
+    const lenis = new window.Lenis({
+      lerp: 0.1,
+      smooth: true,
+      inertia: 0.75,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     return () => {
+      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -84,6 +87,12 @@ function Folder(User) {
     setPopupStatus(false);
   };
 
+  const [folders, setFolders] = useState([]);
+  const [popupStatus, setPopupStatus] = useState(false);
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (token && userId) {
       const fetchFolders = async () => {
@@ -108,6 +117,16 @@ function Folder(User) {
       navigate("/login");
     }
   }, [token, userId, navigate]);
+  useEffect(() => {
+    if (token && userId) {
+      alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
+    } else {
+      alert("No token found. Redirecting to login.");
+      navigate("/login");
+    }
+  }, [token, userId, navigate]);
+
+  const [newFolderTitle, setNewFolderTitle] = useState("");
 
   const handleInputChange = (event) => {
     setNewFolderTitle(event.target.value);
@@ -143,29 +162,6 @@ function Folder(User) {
       setFolders(folders.filter(folder => folder._id !== folderId));
     } catch (error) {
       console.error("Error deleting folder:", error);
-    }
-  };
-
-  const handleUpdate = async (folderId) => {
-    try {
-      await axios.put(
-        `http://localhost:8000/folders/${folderId}`,
-        { title: updatedTitle, description: updatedDescription },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const updatedFolders = folders.map(folder =>
-        folder._id === folderId ? { ...folder, title: updatedTitle, description: updatedDescription } : folder
-      );
-      setFolders(updatedFolders);
-      setSelectedFolder(null);
-      setUpdatedTitle("");
-      setUpdatedDescription("");
-    } catch (error) {
-      console.error("Error updating folder:", error);
     }
   };
 
@@ -415,7 +411,7 @@ function Folder(User) {
       <section className="main">
         {folders.map((folder, i) => (
           <div className="main__folder" key={i}>
-            <Link to={`/folder/${folder._id}`}>
+            <Link to={`/course/${folder._id}`}>
               <svg
                 className="main__folder-svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -468,34 +464,9 @@ function Folder(User) {
               <span className="main__folder-id">ID: {folder._id}</span>
             </Link>
             <button onClick={() => handleDelete(folder._id)}>Delete</button>
-            <button onClick={() => {
-              setSelectedFolder(folder._id);
-              setUpdatedTitle(folder.title);
-              setUpdatedDescription(folder.description || "");
-            }}>Edit</button>
           </div>
         ))}
       </section>
-
-      {selectedFolder && (
-        <div className="update-form">
-          <h2>Update Folder</h2>
-          <input
-            type="text"
-            placeholder="New Title"
-            value={updatedTitle}
-            onChange={(e) => setUpdatedTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="New Description"
-            value={updatedDescription}
-            onChange={(e) => setUpdatedDescription(e.target.value)}
-          />
-          <button onClick={() => handleUpdate(selectedFolder)}>Update</button>
-          <button onClick={() => setSelectedFolder(null)}>Cancel</button>
-        </div>
-      )}
 
       <footer className="footer">
         <div className="footer__img-container">
