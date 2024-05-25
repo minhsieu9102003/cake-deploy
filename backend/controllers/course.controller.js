@@ -37,13 +37,24 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { title, description, listCards } = req.body;
+  const { title, description, listCards, folderId } = req.body;
   try {
+
     const newCourse = await Course.create({
       title,
       description,
       userId: req.payload.id,
     });
+
+    const _folderId = new mongoose.Types.ObjectId(folderId);
+
+    if(folderId !== null && folderId !== undefined) {
+      await Course.findByIdAndUpdate(newCourse._id, {$push: {folders: _folderId}});
+
+      await Folder.findByIdAndUpdate(_folderId, {$push: {courses: newCourse._id}});
+    };
+
+  
 
     const cardIds = [];
     for (let card of listCards) {
@@ -62,7 +73,7 @@ const create = async (req, res) => {
 
     return res.status(201).json(newCourse);
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -105,13 +116,25 @@ const deleteCourse = async (req, res) => {
   const { id } = req.params;
 
   try {
+    const foundCourse = await Course.findById(id);
+
+    const cards = foundCourse.cards;
+
+    console.log(cards);
+
+    for (let card of cards) {
+      await Card.findByIdAndDelete(card);
+    }
+
+    await Folder.updateMany({ courses: id }, { $pull: { courses: id } });
+
     const course = await Course.findByIdAndDelete(id);
 
     if (!course) return res.status(404).json({ message: "Course not found" });
 
     return res.status(200).json({ message: "Delete successfully!" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message });
   }
 };
 

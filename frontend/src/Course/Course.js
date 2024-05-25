@@ -9,7 +9,7 @@ import axios from "axios";
 import "./style.css";
 import { useParams } from 'react-router-dom';
 
-function Folder(User) {
+function Course(User) {
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const [customSelectActive, setCustomSelectActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState("latest");
@@ -33,20 +33,8 @@ function Folder(User) {
       },
     });
     tl.to(".myElement", { x: 100 });
-    const lenis = new window.Lenis({
-      lerp: 0.1,
-      smooth: true,
-      inertia: 0.75,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -123,10 +111,9 @@ function Folder(User) {
     }
   };
 
-
-
     const { folderId } = useParams();
     const [courses, setCourses] = useState([]);
+    const [updatedTitle, setUpdatedTitle] = useState("");
   
     useEffect(() => {
       const token = localStorage.getItem("token");
@@ -140,13 +127,13 @@ function Folder(User) {
   
       const fetchCourses = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/folders/courses/${folderId}`, {
+          const response = await axios.get(`http://localhost:8000/folders/${folderId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
               "User-ID": userId,
             },
           });
-          setCourses(response.data);
+          setCourses(response.data.courses);
         } catch (error) {
           console.error("Error fetching courses:", error);
         }
@@ -154,6 +141,19 @@ function Folder(User) {
   
       fetchCourses();
     }, [folderId, navigate]);
+
+    const handleDelete = async (courseId) => {
+      try {
+        await axios.delete(`http://localhost:8000/courses/${courseId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setCourses(courses.filter(course => course._id !== courseId));
+      } catch (error) {
+        console.error("Error deleting folder:", error);
+      }
+    };
   
   return (
     <div>
@@ -319,6 +319,13 @@ function Folder(User) {
             </g>
           </svg>
         </div>
+        <button
+            type="button"
+            onClick={() => navigate(`create_course`)}
+            className="create-course-button"
+          >
+            Create New Course
+          </button>
         <div className="first__filter">
           <div className="form__month">
             <button
@@ -400,7 +407,7 @@ function Folder(User) {
       <section className="main">
         {courses.map((course, i) => (
           <div className="main__folder" key={i}>
-          <Link to={`/flash_card/${course._id}/`}>
+          <Link to={`/course/${course._id}/`}>
             <svg
               className="main__folder-svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -445,6 +452,7 @@ function Folder(User) {
             </svg>
             <span className="main__folder-title">{course.title}</span>
           </Link>
+          <button onClick={() => handleDelete(course._id)}>Delete</button>
         </div>
         ))}
       </section>
@@ -480,4 +488,4 @@ function Folder(User) {
   );
 }
 
-export default Folder;
+export default Course;
