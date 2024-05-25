@@ -5,6 +5,19 @@
 }
 
 
+#root,
+html,
+body {
+  overflow-x: hidden !important;
+
+}
+
+
+html,
+body {
+  overflow-y: hidden !important;
+}
+
 
 .navigation {
   width: 95vw;
@@ -201,17 +214,13 @@
   transition: .2s;
 }
 
-html,
-body {
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-}
+
 
 .img-1 {
   position: absolute;
   scale: .8;
   rotate: -15deg;
-  z-index: 10;
+  z-index: 10000;
   width: 100%;
   top: -5%;
   left: 20%;
@@ -261,7 +270,7 @@ body {
 
   background: linear-gradient(170deg, #EFE8D8 50%, #7a4a4a 50%);
   width: 100%;
-  clip-path: polygon(0% 0%, 100% 15%, 100% 75%, 0% 75%);
+  clip-path: polygon(0% 9%, 100% 15%, 100% 75%, 0% 75%);
   position: relative;
   z-index: 10000000000;
   display: flex;
