@@ -7,9 +7,9 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [month, setMonth] = useState('');
-    const [date, setDate] = useState('');
-    const [year, setYear] = useState('');
+    const [month, setMonth] = useState('Jan');
+    const [date, setDate] = useState(1);
+    const [year, setYear] = useState(2024);
     const [acceptPolicy, setAcceptPolicy] = useState(false);
     const [daysInMonth, setDaysInMonth] = useState([]);
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ function SignUp() {
                 password
             });
             console.log('Signup successful:', response.data);
-            alert("Signup successful!");
+            // alert("Signup successful!");
             navigate('/login');
         } catch (error) {
             console.error('Error during signup:', error.response.data);
@@ -68,16 +68,13 @@ function SignUp() {
                 <input className="form__password-input" type="password" value={password} onChange={e => setPassword(e.target.value)} />
 
                 <select className='form__select' value={month} onChange={e => setMonth(e.target.value)}>
-                    <option value="">Month</option>
                     {months.map((m, index) => <option key={index} value={m}>{m}</option>)}
                 </select>
                 <select className='form__select-1' value={date} onChange={e => setDate(e.target.value)}>
-                    <option value="">Date</option>
                     {daysInMonth.map(day => <option key={day} value={day}>{day}</option>)}
                 </select>
                 <select className='form__select-2' value={year} onChange={e => setYear(e.target.value)}>
-                    <option value="">Year</option>
-                    {years.map(y => <option key={y} value={y}>{y}</option>)}
+                    {years.reverse().map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
                 <label className="form__control">
                     <input type="checkbox" checked={acceptPolicy} onChange={e => setAcceptPolicy(e.target.checked)} />
@@ -86,7 +83,7 @@ function SignUp() {
 
                 <div className='last-btn'>
                     <button type="submit" className="signup-btn">Sign up</button>
-                    <button type="button" className="login-btn" onClick={() => alert("Redirect to login")}>Already have an account? Log in</button>
+                    <button type="button" className="login-btn" onClick={() => navigate("/login")}>Already have an account? Log in</button>
                 </div>
             </form>
         </div>

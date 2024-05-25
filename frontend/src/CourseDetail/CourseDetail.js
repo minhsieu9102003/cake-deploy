@@ -1,22 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Login from "../Login/Login";
 import { Link, useParams } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-import Lenis from "@studio-freight/lenis";
 import logo from "../img/cake-logo-small.png"; // Ensure images are in the public/img folder
-import watermark from "../img/cake-water-mark.png";
-import cake1 from "../img/cake1.png";
-import cake2 from "../img/cake2.png";
-import quickCat from "../img/quick-cat.png";
-import flashChef from "../img/flash-chef.png";
-import pawWatermark from "../img/paw-water-mark.png";
-import hatWatermark from "../img/hat-water-mark.png";
 import cakeLogoBig from "../img/cake-logo-big.png";
 import "./style.css";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+
 gsap.registerPlugin(ScrollTrigger);
+
 function CourseDetail() {
   const [showLogin, setShowLogin] = useState(false);
   useEffect(() => {
@@ -120,45 +115,7 @@ function CourseDetail() {
 
   return (
     <>
-      <div className="navigation">
-        <div className="navigation__logo">
-          <img src={logo} alt="Cake Logo" className="navigation__logo-img" />
-          <div className="navigation__brand">Cake</div>
-        </div>
-        <div className="navigation__search-box">
-          <svg className="navigation__search-box-icon">
-            <use href="../img/symbol-defs.svg#icon-search"></use>
-          </svg>
-          <input
-            className="navigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
-        </div>
-        <ul className="navigation__link">
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Help Center
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Language: VN
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <Link to="/login" className="navigation__link-btn-a">
-              Sign in
-            </Link>
-          </li>
-          <li className="navigation__link-btn sign-up">
-            <Link to="/signup" className="navigation__link-btn-a sign-up">
-              Sign up
-            </Link>
-          </li>
-        </ul>
-      </div>
-
+      <Header />
       <div>
       <h1>Course Detail</h1>
       <div className="buttons-container">
@@ -177,35 +134,7 @@ function CourseDetail() {
       </div>
     </div>
 
-      <footer className="footer">
-        <div className="footer__img-container">
-          <img
-            src={cakeLogoBig}
-            alt="Large Cake Logo"
-            className="footer__logo"
-          />
-          <h1 className="footer__brand">CAKE</h1>
-        </div>
-        <div className="footer__text-container">
-          <h3 className="footer__h3-author">Author</h3>
-          <h4 className="footer__h4-author-1">minh</h4>
-          <h4 className="footer__h4-author-2">minh</h4>
-          <h4 className="footer__h4-author-3">minh</h4>
-          <h4 className="footer__h4-author-4">nam</h4>
-          <h3 className="footer__h3-about">About CAKE</h3>
-          <h4 className="footer__h4-about-1">How CAKE works</h4>
-          <h4 className="footer__h4-about-2">Q&A</h4>
-          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
-          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="footer__text-container-1">
-          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">
-            A project for Hanoi University of Science and Technology's Web
-            Subject Course
-          </h4>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

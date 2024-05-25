@@ -7,6 +7,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 // import Lenis from "@studio-freight/lenis";
 import { useNavigate } from "react-router-dom";
 import "./stylle.css";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Quiz = () => {
     const [cards, setCards] = useState([]);
@@ -17,6 +19,7 @@ const Quiz = () => {
     const { courseId } = useParams();
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchCards(courseId);
@@ -89,59 +92,7 @@ const Quiz = () => {
 
     return (
         <div>
-            <div className="hnavigation">
-                <div className="hnavigation__logo">
-                    <img src="/img/cake-logo-small.png" alt="" className="hnavigation__logo-img" />
-                    <div className="hnavigation__brand">Cake</div>
-                </div>
-
-                <div className="hnavigation__search-box">
-                    <svg className="hnavigation__search-box-icon">
-                        <use xlinkHref="/img/symbol-defs.svg#icon-search"></use>
-                    </svg>
-                    <input className="hnavigation__search-box-bar" type="text" placeholder="Search for folders, tutor,.." />
-                </div>
-
-                <ul className="hnavigation__link">
-                    <div className="hnavigation__dropdown">
-                        <button>
-                            <span>Your library</span>
-                            <svg width="64px" height="64px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-
-                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-                                <g id="SVGRepo_iconCarrier">
-
-                                    <path fill="#7a4a4a" d="M8 1.25a2.101 2.101 0 00-1.785.996l.64.392-.642-.388-5.675 9.373-.006.01a2.065 2.065 0 00.751 2.832c.314.183.67.281 1.034.285h11.366a2.101 2.101 0 001.791-1.045 2.064 2.064 0 00-.006-2.072L9.788 2.25l-.003-.004A2.084 2.084 0 008 1.25z" />
-
-                                </g>
-
-                            </svg>
-                        </button>
-                        <ul className="hnavigation__dropdown-list">
-                            <div className="hnavigation__dropdown-button-container">
-                                <button className="hnavigation__dropdown-button hnavigation__dropdown-button-1">Flash-slices</button>
-                                <button className="hnavigation__dropdown-button hnavigation__dropdown-button-2">Quick-bites</button>
-                            </div>
-                            <div className="hnavigation__dropdown-item-container">
-                                {Array.from({ length: 6 }).map((_, index) => (
-                                    <div key={index} className="hnavigation__dropdown-item">
-                                        <h6>Animals</h6>
-                                        <img src="/img/avatar1.png" alt="" />
-                                    </div>
-                                ))}
-                            </div>
-                            <a className="hnavigation__dropdown-all" href="#">All</a>
-                        </ul>
-                    </div>
-
-                    <li className="hnavigation__link-btn"><a className='hnavigation__link-btn-a' href='#'>Help Center</a></li>
-                    <li className="hnavigation__link-btn"><a className='hnavigation__link-btn-a' href='#'>Language: VN</a></li>
-                    <img className='hnavigation__avatar' src="/img/avatar2.png" alt="" />
-                </ul>
-            </div>
+            <Header />
 
             <section className="hmain">
                 <div className="hstudy__top">
@@ -218,28 +169,7 @@ const Quiz = () => {
                 </ul>
             </section>
 
-            <footer className="hfooter">
-                <div className="hfooter__img-container">
-                    <img src="/img/cake-logo-big.png" alt="Large Cake Logo" className="hfooter__logo" />
-                    <h1 className="hfooter__brand">CAKE</h1>
-                </div>
-                <div className="hfooter__text-container">
-                    <h3 className="hfooter__h3-author">Author</h3>
-                    <h4 className="hfooter__h4-author-1">minh</h4>
-                    <h4 className="hfooter__h4-author-2">minh</h4>
-                    <h4 className="hfooter__h4-author-3">minh</h4>
-                    <h4 className="hfooter__h4-author-4">nam</h4>
-                    <h3 className="hfooter__h3-about">About CAKE</h3>
-                    <h4 className="hfooter__h4-about-1">How CAKE works</h4>
-                    <h4 className="hfooter__h4-about-2">Q&A</h4>
-                    <h3 className="hfooter__h3-term-of-use">Terms of Use</h3>
-                    <h4 className="hfooter__h4-term-of-use">Terms & Privacy</h4>
-                </div>
-                <div className="hfooter__text-container-1">
-                    <h3 className="hfooter__h3-acknowledge">University Acknowledgement</h3>
-                    <h4 className="hfooter__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

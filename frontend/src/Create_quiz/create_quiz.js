@@ -101,7 +101,7 @@ const Create_quiz = () => {
   return (
     <div>
       <div className="navigation">
-        <div className="navigation__logo">
+        <div className="navigation__logo" onClick={() => navigate("/")}>
           <img
             src="img/cake-logo-small.png"
             alt=""

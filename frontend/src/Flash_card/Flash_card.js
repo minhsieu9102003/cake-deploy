@@ -9,6 +9,8 @@ import logo from "./img/cake-logo-small.png";
 import avatar1 from "./img/avatar1.png";
 import avatar2 from "./img/avatar2.png";
 import orangeImage from './img/orange.png';
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,84 +90,7 @@ function FlashCard() {
 
   return (
     <div>
-      <div className="fnavigation">
-        <div className="fnavigation__logo">
-          <img src={logo} alt="" className="fnavigation__logo-img" />
-          <div className="fnavigation__brand">Cake</div>
-        </div>
-
-        <div className="fnavigation__search-box">
-          <svg
-            className="fnavigation__search-box-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 32 32"
-          >
-            <path d="M 19 3 C 13.488281 3 9 7.488281 9 13 C 9 15.394531 9.839844 17.589844 11.25 19.3125 L 3.28125 27.28125 L 4.71875 28.71875 L 12.6875 20.75 C 14.410156 22.160156 16.605469 23 19 23 C 24.511719 23 29 18.511719 29 13 C 29 7.488281 24.511719 3 19 3 Z M 19 5 C 23.429688 5 27 8.570313 27 13 C 27 17.429688 23.429688 21 19 21 C 14.570313 21 11 17.429688 11 13 C 11 8.570313 14.570313 5 19 5 Z" />
-          </svg>
-          <input
-            className="fnavigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
-        </div>
-
-        <ul className="fnavigation__link">
-          <div className="fnavigation__dropdown">
-            <button>
-              <span>Your library</span>
-              <svg
-                width="15"
-                className="fform__month--arrow-brown"
-                height="15"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
-              </svg>
-            </button>
-            <ul className="fnavigation__dropdown-list">
-              <div className="fnavigation__dropdown-button-container">
-                <button className="fnavigation__dropdown-button fnavigation__dropdown-button-1">
-                  Flash-slices
-                </button>
-                <button className="fnavigation__dropdown-button fnavigation__dropdown-button-2">
-                  Quick-bites
-                </button>
-              </div>
-              <div className="fnavigation__dropdown-item-container">
-                <Link to="#" className="fnavigation__dropdown-item">
-                  <h6>Animals</h6>
-                  <img src={avatar1} alt="" />
-                </Link>
-                <div className="fnavigation__dropdown-item">
-                  <h6>Animals</h6>
-                  <img src={avatar1} alt="" />
-                </div>
-                {/* Repeat as necessary */}
-              </div>
-              <Link className="fnavigation__dropdown-all" to="#">
-                All
-              </Link>
-            </ul>
-          </div>
-
-          <li className="fnavigation__link-btn">
-            <Link className="fnavigation__link-btn-a" to="#">
-              Help Center
-            </Link>
-          </li>
-          <li className="fnavigation__link-btn">
-            <Link className="fnavigation__link-btn-a" to="#">
-              Language: VN
-            </Link>
-          </li>
-          <img className="fnavigation__avatar" src={avatar2} alt="" />
-        </ul>
-      </div>
+      <Header />
 
       <section className="fmain">
         <div className="fstudy__top">
@@ -242,28 +167,7 @@ function FlashCard() {
           ))}
         </ul>
       </section>
-      <footer className="ffooter">
-        <div className="ffooter__img-container">
-          <img src="/img/cake-logo-big.png" alt="Large Cake Logo" className="ffooter__logo" />
-          <h1 className="ffooter__brand">CAKE</h1>
-        </div>
-        <div className="ffooter__text-container">
-          <h3 className="ffooter__h3-author">Author</h3>
-          <h4 className="ffooter__h4-author-1">minh</h4>
-          <h4 className="ffooter__h4-author-2">minh</h4>
-          <h4 className="ffooter__h4-author-3">minh</h4>
-          <h4 className="ffooter__h4-author-4">nam</h4>
-          <h3 className="ffooter__h3-about">About CAKE</h3>
-          <h4 className="ffooter__h4-about-1">How CAKE works</h4>
-          <h4 className="ffooter__h4-about-2">Q&A</h4>
-          <h3 className="ffooter__h3-term-of-use">Terms of Use</h3>
-          <h4 className="ffooter__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="ffooter__text-container-1">
-          <h3 className="ffooter__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="ffooter__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

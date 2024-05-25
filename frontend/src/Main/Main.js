@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
-import Lenis from "@studio-freight/lenis";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 import "./style.css"; // Assuming you'll also style it using Main.css
 
 const Main = () => {
@@ -15,7 +16,7 @@ const Main = () => {
 
   useEffect(() => {
     if (token && userId) {
-      alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
+      // alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
     } else {
       alert("No token found. Redirecting to login.");
       navigate("/login");
@@ -100,7 +101,7 @@ const Main = () => {
   };
 
   const handleAvatarClick = () => {
-    navigate(`/folder`, { state: { token, userId } });
+    navigate(`/profile`, { state: { token, userId } });
   };
 
   const handleSearchChange = async (event) => {
@@ -125,89 +126,7 @@ const Main = () => {
 
   return (
     <div className="mall">
-      <div className="mnavigation">
-        <div className="mnavigation__logo">
-          <img src="img/cake-logo-small.png" alt="" className="mnavigation__logo-img" />
-          <div className="mnavigation__brand">Cake</div>
-        </div>
-
-        <div className="mnavigation__search-box">
-          <svg className="mnavigation__search-box-icon">
-            <use xlinkHref="img/symbol-defs.svg#icon-search"></use>
-          </svg>
-          <input
-            className="mnavigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-        </div>
-
-        <ul className="mnavigation__link">
-          <div className="mnavigation__dropdown">
-            <button onClick={toggleDropdown} ref={mnavigationDropdown}>
-              <span>Your library</span>
-              <svg width="28" className="mform__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
-              </svg>
-            </button>
-            <ul className="mnavigation__dropdown-list">
-              <div className="mnavigation__dropdown-button-container">
-                <button className="mnavigation__dropdown-button mnavigation__dropdown-button-1">Flash-slices</button>
-                <button className="mnavigation__dropdown-button mnavigation__dropdown-button-2">Quick-bites</button>
-              </div>
-              <div className="mnavigation__dropdown-item-container">
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <div key={index} className="mnavigation__dropdown-item">
-                    <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
-                  </div>
-                ))}
-              </div>
-              <a className="mnavigation__dropdown-all" href="#">All</a>
-            </ul>
-          </div>
-
-          <li className="mnavigation__link-btn"><a className="mnavigation__link-btn-a" href="#">Help Center</a></li>
-          <li className="mnavigation__link-btn"><a className="mnavigation__link-btn-a" href="#">Language: VN</a></li>
-          <img className="mnavigation__avatar" src="img/avatar2.png" alt="User Avatar" onClick={handleAvatarClick} />
-        </ul>
-      </div>
-
-      <div className="search-results">
-        <h2>Search Results</h2>
-        {searchResults.folders.length > 0 && (
-          <div>
-            <h3>Folders</h3>
-            <ul>
-              {searchResults.folders.map((folder) => (
-                <li key={folder._id}>{folder.title}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {searchResults.courses.length > 0 && (
-          <div>
-            <h3>Courses</h3>
-            <ul>
-              {searchResults.courses.map((course) => (
-                <li key={course._id}>{course.title}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {searchResults.users.length > 0 && (
-          <div>
-            <h3>Users</h3>
-            <ul>
-              {searchResults.users.map((user) => (
-                <li key={user._id}>{user.username}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      <Header />
 
       <section className="mmainn">
         <div className="myellow">
@@ -327,28 +246,7 @@ const Main = () => {
           </div>
         </div>
       </section>
-      <footer className="mfooter">
-        <div className="mfooter__img-container">
-          <img src="img/cake-logo-big.png" alt="Large Cake Logo" className="mfooter__logo" />
-          <h1 className="mfooter__brand">CAKE</h1>
-        </div>
-        <div className="mfooter__text-container">
-          <h3 className="mfooter__h3-author">Author</h3>
-          <h4 className="mfooter__h4-author-1">minh</h4>
-          <h4 className="mfooter__h4-author-2">minh</h4>
-          <h4 className="mfooter__h4-author-3">minh</h4>
-          <h4 className="mfooter__h4-author-4">nam</h4>
-          <h3 className="mfooter__h3-about">About CAKE</h3>
-          <h4 className="mfooter__h4-about-1">How CAKE works</h4>
-          <h4 className="mfooter__h4-about-2">Q&A</h4>
-          <h3 className="mfooter__h3-term-of-use">Terms of Use</h3>
-          <h4 className="mfooter__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="mfooter__text-container-1">
-          <h3 className="mfooter__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="mfooter__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

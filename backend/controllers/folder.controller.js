@@ -67,7 +67,7 @@ const update = async (req, res) => {
 
     return res.status(200).json({ message: "Update successfully!" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message });
   }
 };
 
