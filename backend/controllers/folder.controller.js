@@ -110,6 +110,36 @@ const deleteCourse = async (req, res, next) => {
   };
 };
 
+const getList = async (req, res) => {
+  const { userId } = req.params;
+  const { limit } = req.query;
+
+  try {
+    const folders = await Folder.find({ userId }).limit(parseInt(limit, 10) || 10);
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
+const getLatestToOldest = async (req, res, next) => {
+  try {
+    const folders = await Folder.find().sort({ updatedAt: -1 });
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getOldestToNewest = async (req, res, next) => {
+  try {
+    const folders = await Folder.find().sort({ updatedAt: 1 });
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 export default {
   getAll,
   getMyFolders,
@@ -120,4 +150,7 @@ export default {
   addCourse,
   deleteCourse,
   getCoursesInFolder,
+  getLatestToOldest,
+  getOldestToNewest,
+  getList,
 }

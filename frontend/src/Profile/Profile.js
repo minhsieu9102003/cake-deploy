@@ -33,12 +33,17 @@ function Profile() {
     setActiveButton("courses");
     if (token && userId) {
       try {
-        const response = await axios.get(`http://localhost:8000/courses/my/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const fetchedCourses = Array.isArray(response.data) ? response.data : [];
+        const response = await axios.get(
+          `http://localhost:8000/courses/my/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const fetchedCourses = Array.isArray(response.data)
+          ? response.data
+          : [];
         setCourses(fetchedCourses);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -129,11 +134,14 @@ function Profile() {
     if (token && userId) {
       const fetchFolders = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/folders/my/${userId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await axios.get(
+            `http://localhost:8000/folders/my/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setFolders(response.data);
         } catch (error) {
           console.error("Error fetching folders:", error);
@@ -181,7 +189,7 @@ function Profile() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCourses(courses.filter(course => course._id !== courseId));
+      setCourses(courses.filter((course) => course._id !== courseId));
     } catch (error) {
       console.error("Error deleting folder:", error);
     }
@@ -194,7 +202,7 @@ function Profile() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setFolders(folders.filter(folder => folder._id !== folderId));
+      setFolders(folders.filter((folder) => folder._id !== folderId));
     } catch (error) {
       console.error("Error deleting folder:", error);
     }
@@ -202,17 +210,21 @@ function Profile() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`http://localhost:8000/auth/logout`,{}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if(response.status === 200) {
-        navigate("/login")
+      const response = await axios.post(
+        `http://localhost:8000/auth/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        navigate("/login");
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
       } else {
-        alert("Logout Failed!!!")
+        alert("Logout Failed!!!");
       }
     } catch (error) {
       console.error("Error deleting folder:", error);
@@ -230,8 +242,14 @@ function Profile() {
           },
         }
       );
-      const updatedFolders = folders.map(folder =>
-        folder._id === selectedFolder ? { ...folder, title: newFolderTitle, description: newFolderDescription } : folder
+      const updatedFolders = folders.map((folder) =>
+        folder._id === selectedFolder
+          ? {
+              ...folder,
+              title: newFolderTitle,
+              description: newFolderDescription,
+            }
+          : folder
       );
       setFolders(updatedFolders);
       setSelectedFolder(null);
@@ -326,14 +344,15 @@ function Profile() {
       <Header />
 
       <div className="kfirst">
-      <div className="kfirst__heading">
-          <svg
-            className="kfirst__back"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 128 128"
-          >
-            <style>
-              {`
+        <div className="kfirst__heading">
+          <Link to="/">
+            <svg
+              className="kfirst__back"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 128 128"
+            >
+              <style>
+                {`
                                 .st0 {
                                     display: none;
                                 }
@@ -341,39 +360,75 @@ function Profile() {
                                     display: inline;
                                 }
                             `}
-            </style>
-            <g id="_x34__1_">
-              <path
-                d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z"
-                id="icon_35_"
-              />
-            </g>
-          </svg>
-
+              </style>
+              <g id="_x34__1_">
+                <path
+                  d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z"
+                  id="icon_35_"
+                />
+              </g>
+            </svg>
+          </Link>
         </div>
         <div className="lprofile">
           <div className="lprofile__first">
-            <img className="lprofile__img" src='/img/avatar2.png' />
-            <h1 className='lprofile__username'>Chi Pu</h1>
-            <button className='lprofile__logout' onClick={handleLogout}>
+            <img className="lprofile__img" src="/img/avatar2.png" />
+            <h1 className="lprofile__username">Chi Pu</h1>
+            <button className="lprofile__logout" onClick={handleLogout}>
               <span> Log out</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180)">
-
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64px"
+                height="64px"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7a4a4a"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                transform="rotate(180)"
+              >
                 <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
 
-                <g id="SVGRepo_iconCarrier"> <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /> <polyline points="16 17 21 12 16 7" /> <line x1="21" y1="12" x2="9" y2="12" /> </g>
-
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />{" "}
+                  <polyline points="16 17 21 12 16 7" />{" "}
+                  <line x1="21" y1="12" x2="9" y2="12" />{" "}
+                </g>
               </svg>
             </button>
           </div>
         </div>
         <div className="lprofile__swap">
-          <button onClick={handleSwapFolders} className={`lprofile__swap-folder ${activeButton === "folders" ? "active" : ""}`}>Folder</button>
-          <button onClick={handleSwapCourses} className={`lprofile__swap-course ${activeButton === "courses" ? "active" : ""}`}>Course</button>
+          <button
+            onClick={handleSwapFolders}
+            className={`lprofile__swap-folder ${
+              activeButton === "folders" ? "active" : ""
+            }`}
+          >
+            Folder
+          </button>
+          <button
+            onClick={handleSwapCourses}
+            className={`lprofile__swap-course ${
+              activeButton === "courses" ? "active" : ""
+            }`}
+          >
+            Course
+          </button>
         </div>
-        <div className={`my__folders ${activeButton === "folders" ? "" : "hidden"}`}>
+        <div
+          className={`my__folders ${
+            activeButton === "folders" ? "" : "hidden"
+          }`}
+        >
           <h1>My folders</h1>
           <div className="form__month1">
             <button
@@ -403,8 +458,9 @@ function Profile() {
               </svg>
             </button>
             <ul
-              className={`form__month--dropdown1 ${customSelectActive ? "active" : ""
-                }`}
+              className={`form__month--dropdown1 ${
+                customSelectActive ? "active" : ""
+              }`}
               role="listbox"
               id="select-dropdown"
             >
@@ -449,56 +505,148 @@ function Profile() {
             </g>
           </svg>
         </div>
-        <div className={`kfirst__filter1 ${activeButton === "folders" ? "" : "hidden"}`}>
-
-
-        </div>
+        <div
+          className={`kfirst__filter1 ${
+            activeButton === "folders" ? "" : "hidden"
+          }`}
+        ></div>
       </div>
 
-      <section className={`main1 ${activeButton === "folders" ? "" : "hidden"}`}>
+      <section
+        className={`main1 ${activeButton === "folders" ? "" : "hidden"}`}
+      >
         {folders.map((folder, i) => (
           <div className="main__folder1" key={i}>
             <Link to={`/folder/${folder._id}`}>
-              <svg className='main__folder-svg1' width='10rem' height='10rem' viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFA000" /><path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFCA28" /></svg>
+              <svg
+                className="main__folder-svg1"
+                width="10rem"
+                height="10rem"
+                viewBox="0 0 1024 1024"
+                class="icon"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z"
+                  fill="#FFA000"
+                />
+                <path
+                  d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z"
+                  fill="#FFCA28"
+                />
+              </svg>
               <span className="main__folder-title1">{folder.title}</span>
-
             </Link>
-            <div className='main__folder1-button-container'>
-              <button className='main__folder1-button-delete' onClick={() => handleDelete(folder._id)}>
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
+            <div className="main__folder1-button-container">
+              <button
+                className="main__folder1-button-delete"
+                onClick={() => handleDelete(folder._id)}
+              >
+                <svg
+                  width="64px"
+                  height="64px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
 
-                  <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M14 11V17" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M4 7H20" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
-
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="M10 11V17"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M14 11V17"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M4 7H20"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                  </g>
                 </svg>
               </button>
-              <button className='main__folder1-button-edit' onClick={() => {
-                setSelectedFolder(folder._id);
-                setPopupUpdate(true)
-                setNewFolderTitle(folder?.title)
-                setNewFolderDescription(folder?.description)
-              }}>
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-
+              <button
+                className="main__folder1-button-edit"
+                onClick={() => {
+                  setSelectedFolder(folder._id);
+                  setPopupUpdate(true);
+                  setNewFolderTitle(folder?.title);
+                  setNewFolderDescription(folder?.description);
+                }}
+              >
+                <svg
+                  width="64px"
+                  height="64px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
 
-                  <g id="SVGRepo_iconCarrier"> <path d="M11 4H7.2C6.0799 4 5.51984 4 5.09202 4.21799C4.71569 4.40974 4.40973 4.7157 4.21799 5.09202C4 5.51985 4 6.0799 4 7.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H16.8C17.9201 20 18.4802 20 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V12.5M15.5 5.5L18.3284 8.32843M10.7627 10.2373L17.411 3.58902C18.192 2.80797 19.4584 2.80797 20.2394 3.58902C21.0205 4.37007 21.0205 5.6364 20.2394 6.41745L13.3774 13.2794C12.6158 14.0411 12.235 14.4219 11.8012 14.7247C11.4162 14.9936 11.0009 15.2162 10.564 15.3882C10.0717 15.582 9.54378 15.6885 8.48793 15.9016L8 16L8.04745 15.6678C8.21536 14.4925 8.29932 13.9048 8.49029 13.3561C8.65975 12.8692 8.89125 12.4063 9.17906 11.9786C9.50341 11.4966 9.92319 11.0768 10.7627 10.2373Z" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
-
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="M11 4H7.2C6.0799 4 5.51984 4 5.09202 4.21799C4.71569 4.40974 4.40973 4.7157 4.21799 5.09202C4 5.51985 4 6.0799 4 7.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H16.8C17.9201 20 18.4802 20 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V12.5M15.5 5.5L18.3284 8.32843M10.7627 10.2373L17.411 3.58902C18.192 2.80797 19.4584 2.80797 20.2394 3.58902C21.0205 4.37007 21.0205 5.6364 20.2394 6.41745L13.3774 13.2794C12.6158 14.0411 12.235 14.4219 11.8012 14.7247C11.4162 14.9936 11.0009 15.2162 10.564 15.3882C10.0717 15.582 9.54378 15.6885 8.48793 15.9016L8 16L8.04745 15.6678C8.21536 14.4925 8.29932 13.9048 8.49029 13.3561C8.65975 12.8692 8.89125 12.4063 9.17906 11.9786C9.50341 11.4966 9.92319 11.0768 10.7627 10.2373Z"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                  </g>
                 </svg>
               </button>
             </div>
-
           </div>
         ))}
       </section>
-      <div className={`my__courses ${activeButton === "courses" ? "" : "hidden"}`}>
+      <div
+        className={`my__courses ${activeButton === "courses" ? "" : "hidden"}`}
+      >
         <h1>My courses</h1>
-        <div className={`form__month ${activeButton === "courses" ? "" : "hidden"}`}>
+        <div
+          className={`form__month ${
+            activeButton === "courses" ? "" : "hidden"
+          }`}
+        >
           <button
             className="form__month--button"
             role="combobox"
@@ -508,9 +656,7 @@ function Profile() {
             aria-controls="select-dropdown"
             onClick={handleSelectClick}
           >
-            <span className="form__month--selected-value">
-              {selectedValue}
-            </span>
+            <span className="form__month--selected-value">{selectedValue}</span>
             <svg
               width="28"
               className="form__month--arrow"
@@ -527,8 +673,9 @@ function Profile() {
           </button>
 
           <ul
-            className={`form__month--dropdown ${customSelectActive ? "active" : ""
-              }`}
+            className={`form__month--dropdown ${
+              customSelectActive ? "active" : ""
+            }`}
             role="listbox"
             id="select-dropdown"
           >
@@ -574,19 +721,88 @@ function Profile() {
         </svg>
       </div>
 
-      <section className={`main1 ${activeButton === "courses" ? "" : "hidden"}`}>
+      <section
+        className={`main1 ${activeButton === "courses" ? "" : "hidden"}`}
+      >
         {courses.map((course, i) => (
           <div className="main__folder1" key={i}>
             <Link to={`/course/${course._id}`}>
-              <svg className='main__folder-svg1' width='10rem' height='10rem' viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFA000" /><path d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z" fill="#FFCA28" /></svg>
+              <svg
+                className="main__folder-svg1"
+                width="10rem"
+                height="10rem"
+                viewBox="0 0 1024 1024"
+                class="icon"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z"
+                  fill="#FFA000"
+                />
+                <path
+                  d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z"
+                  fill="#FFCA28"
+                />
+              </svg>
               <span className="main__folder-title1">{course.title}</span>
             </Link>
-            <div className='main__folder1-button-container'>
-              <button className='main__folder1-button-delete' onClick={() => handleDelete1(course._id)}>
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="main__folder1-button-container">
+              <button
+                className="main__folder1-button-delete"
+                onClick={() => handleDelete1(course._id)}
+              >
+                <svg
+                  width="64px"
+                  height="64px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-                  <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M14 11V17" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M4 7H20" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <path
+                      d="M10 11V17"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M14 11V17"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M4 7H20"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                    <path
+                      d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                      stroke="#7a4a4a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />{" "}
+                  </g>
                 </svg>
               </button>
             </div>
