@@ -326,7 +326,7 @@ function Profile() {
       <Header />
 
       <div className="kfirst">
-        <div className="kfirst__heading">
+      <div className="kfirst__heading">
           <svg
             className="kfirst__back"
             xmlns="http://www.w3.org/2000/svg"
@@ -349,63 +349,32 @@ function Profile() {
               />
             </g>
           </svg>
-          <div className="kfirst__title">
-            <h1>My Profile</h1>
-            <svg className="kfirst__paw" width="64px" height="64px" viewBox="0 0 20 20" version="1.1" fill="#000000">
-
-              <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-              <g id="SVGRepo_iconCarrier"> <title>profile_round [#1342]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -2159.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598" id="profile_round-[#1342]"> </path> </g> </g> </g> </g>
-
-            </svg>
-          </div>
-
 
         </div>
         <div className="lprofile">
           <div className="lprofile__first">
             <img className="lprofile__img" src='/img/avatar2.png' />
             <h1 className='lprofile__username'>Chi Pu</h1>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
+            <button className='lprofile__logout'>
+              <span> Log out</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180)">
 
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                <g id="SVGRepo_iconCarrier"> <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /> <polyline points="16 17 21 12 16 7" /> <line x1="21" y1="12" x2="9" y2="12" /> </g>
+
+              </svg>
+            </button>
+          </div>
         </div>
         <div className="lprofile__swap">
-        <button onClick={() => setActiveButton("folders")} className={`lprofile__swap-folder ${activeButton === "folders" ? "active" : ""}`}>Folder</button>
-        <button onClick={handleSwapCourses} className={`lprofile__swap-course ${activeButton === "courses" ? "active" : ""}`}>Course</button>
-      </div>
+          <button onClick={handleSwapFolders} className={`lprofile__swap-folder ${activeButton === "folders" ? "active" : ""}`}>Folder</button>
+          <button onClick={handleSwapCourses} className={`lprofile__swap-course ${activeButton === "courses" ? "active" : ""}`}>Course</button>
+        </div>
         <div className={`my__folders ${activeButton === "folders" ? "" : "hidden"}`}>
           <h1>My folders</h1>
-          <svg
-            className="kfirst__plus1"
-            width="800px"
-            height="800px"
-            viewBox="0 0 32 32"
-            onClick={handlePopupClick}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>plus-circle</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g
-              id="Page-1"
-              stroke="none"
-              strokeWidth="1"
-              fill="none"
-              fillRule="evenodd"
-            >
-              <g
-                id="Icon-Set"
-                transform="translate(-464.000000, -1087.000000)"
-                fill="#7a4a4a"
-              >
-                <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" />
-              </g>
-            </g>
-          </svg>
-        </div>
-        <div className={`kfirst__filter1 ${activeButton === "folders" ? "" : "hidden"}`}>
           <div className="form__month1">
             <button
               className="form__month--button1"
@@ -453,6 +422,35 @@ function Profile() {
               </li>
             </ul>
           </div>
+          <svg
+            className="kfirst__plus1"
+            width="800px"
+            height="800px"
+            viewBox="0 0 32 32"
+            onClick={handlePopupClick}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>plus-circle</title>
+            <desc>Created with Sketch Beta.</desc>
+            <g
+              id="Page-1"
+              stroke="none"
+              strokeWidth="1"
+              fill="none"
+              fillRule="evenodd"
+            >
+              <g
+                id="Icon-Set"
+                transform="translate(-464.000000, -1087.000000)"
+                fill="#7a4a4a"
+              >
+                <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div className={`kfirst__filter1 ${activeButton === "folders" ? "" : "hidden"}`}>
+
 
         </div>
       </div>
@@ -500,6 +498,54 @@ function Profile() {
       </section>
       <div className={`my__courses ${activeButton === "courses" ? "" : "hidden"}`}>
         <h1>My courses</h1>
+        <div className={`form__month ${activeButton === "courses" ? "" : "hidden"}`}>
+          <button
+            className="form__month--button"
+            role="combobox"
+            aria-labelledby="select button"
+            aria-haspopup="listbox"
+            aria-expanded={customSelectActive ? "true" : "false"}
+            aria-controls="select-dropdown"
+            onClick={handleSelectClick}
+          >
+            <span className="form__month--selected-value">
+              {selectedValue}
+            </span>
+            <svg
+              width="28"
+              className="form__month--arrow"
+              height="25"
+              viewBox="0 0 28 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
+                fill="#734A4A"
+              />
+            </svg>
+          </button>
+
+          <ul
+            className={`form__month--dropdown ${customSelectActive ? "active" : ""
+              }`}
+            role="listbox"
+            id="select-dropdown"
+          >
+            <li role="option" onClick={handleOptionClick}>
+              <input type="radio" id="jan" name="social-account" />
+              <label htmlFor="jan">latest</label>
+            </li>
+            <li role="option" onClick={handleOptionClick}>
+              <input type="radio" id="feb" name="social-account" />
+              <label htmlFor="feb">most used</label>
+            </li>
+            <li role="option" onClick={handleOptionClick}>
+              <input type="radio" id="mar" name="social-account" />
+              <label htmlFor="mar">oldest</label>
+            </li>
+          </ul>
+        </div>
         <svg
           className="kfirst__plus"
           width="800px"
@@ -526,54 +572,6 @@ function Profile() {
             </g>
           </g>
         </svg>
-      </div>
-      <div className={`form__month ${activeButton === "courses" ? "" : "hidden"}`}>
-        <button
-          className="form__month--button"
-          role="combobox"
-          aria-labelledby="select button"
-          aria-haspopup="listbox"
-          aria-expanded={customSelectActive ? "true" : "false"}
-          aria-controls="select-dropdown"
-          onClick={handleSelectClick}
-        >
-          <span className="form__month--selected-value">
-            {selectedValue}
-          </span>
-          <svg
-            width="28"
-            className="form__month--arrow"
-            height="25"
-            viewBox="0 0 28 25"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-              fill="#734A4A"
-            />
-          </svg>
-        </button>
-
-        <ul
-          className={`form__month--dropdown ${customSelectActive ? "active" : ""
-            }`}
-          role="listbox"
-          id="select-dropdown"
-        >
-          <li role="option" onClick={handleOptionClick}>
-            <input type="radio" id="jan" name="social-account" />
-            <label htmlFor="jan">latest</label>
-          </li>
-          <li role="option" onClick={handleOptionClick}>
-            <input type="radio" id="feb" name="social-account" />
-            <label htmlFor="feb">most used</label>
-          </li>
-          <li role="option" onClick={handleOptionClick}>
-            <input type="radio" id="mar" name="social-account" />
-            <label htmlFor="mar">oldest</label>
-          </li>
-        </ul>
       </div>
 
       <section className={`main1 ${activeButton === "courses" ? "" : "hidden"}`}>

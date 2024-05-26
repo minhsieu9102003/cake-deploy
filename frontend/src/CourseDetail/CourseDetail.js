@@ -4,8 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-import logo from "../img/cake-logo-small.png"; // Ensure images are in the public/img folder
-import cakeLogoBig from "../img/cake-logo-big.png";
 import "./style.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -13,7 +11,6 @@ import Footer from "../components/footer/Footer";
 gsap.registerPlugin(ScrollTrigger);
 
 function CourseDetail() {
-  const [showLogin, setShowLogin] = useState(false);
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -116,23 +113,27 @@ function CourseDetail() {
   return (
     <>
       <Header />
-      <div>
-      <h1>Course Detail</h1>
-      <div className="buttons-container">
-        <button className="nav-button"><Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link></button>
-        <button className="nav-button"><Link to={`/quiz/${courseId}`}>Go to Quiz</Link></button>
-      </div>
 
-      <h2 className="cards-title">Cards Data</h2>
-      <div className="cards-container">
-        {cards.map(card => (
-          <div className="card" key={card._id}>
-            <div className="card-key">{card.key}</div>
-            <div className="card-value">{card.value}</div>
+      <div>
+        <div className='course-detail__top'>
+          <h1 className='course-detail__name'>Course [gì gì đó]</h1>
+          <div className="buttons-container">
+            <button className="flash-button"><Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link></button>
+            <button className="quiz-button"><Link to={`/quiz/${courseId}`}>Go to Quiz</Link></button>
           </div>
-        ))}
+        </div>
+
+
+        <h2 className="cards-title">Cards Data</h2>
+        <div className="cards-container">
+          {cards.map(card => (
+            <div className="card" key={card._id}>
+              <div className="card-key">{card.key}</div>
+              <div className="card-value">{card.value}</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
       <Footer />
     </>

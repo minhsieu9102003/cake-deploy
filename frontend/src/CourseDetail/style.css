@@ -735,72 +735,122 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .main-title {
+}
+
+.main-title {
     text-align: center;
     margin-bottom: 20px;
-  }
-  
-  .buttons-container {
+}
+
+.buttons-container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: end;
+    gap: .5rem;
     margin-bottom: 20px;
-  }
-  
-  .nav-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+
+}
+
+.buttons-container button {
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    font-family: 'Mogra';
+    width: 20rem;
+    border: 2px solid black !important;
+    transition: all .2s ease-in-out;
     cursor: pointer;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-button a {
-    color: white;
+}
+
+.flash-button {
+    background-color: #7a4a4a !important;
+    color: white !important;
+
+}
+
+.quiz-button {
+    background-color: #FFEA7C !important;
+
+}
+
+.flash-button a {
+
+    color: white !important;
+}
+
+.buttons-container button:first-child:hover {
+    width: 24rem;
+}
+
+
+
+.buttons-container button:nth-child(2):hover {
+    width: 24rem;
+}
+
+.buttons-container button:nth-child(2):hover~.flash-button:has(+ .quiz-button) {
+    opacity: .8;
+    height: 80%;
+}
+
+.buttons-container a {
     text-decoration: none;
-  }
-  
-  .nav-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .cards-title {
+
+}
+
+.cards-title {
     text-align: center;
     margin-bottom: 20px;
-  }
-  
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  .card {
+    font-family: 'Mogra' !important;
+}
+
+.cards-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.card {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.3);
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
-  }
-  
-  .card:hover {
+    font-family: 'Mogra' !important;
+    width: 10rem;
+    height: 10rem;
+    flex: 10rem 1 10rem
+}
+
+.card:hover {
     transform: translateY(-5px);
-  }
-  
-  .card-key {
+}
+
+.card-key {
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
-  }
-  
-  .card-value {
+}
+
+.card-value {
     margin-top: 10px;
     color: #666;
-  }
-  
+}
+
+
+.course-detail__name {
+    font-family: 'Mogra';
+    font-size: 3rem;
+
+}
+
+.course-detail__top {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    justify-content: space-between;
+}

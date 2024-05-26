@@ -401,7 +401,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%) rotate(-90deg);
-    left: 0;
+    right: 0;
+    top: 5rem;
     cursor: pointer;
 }
 
@@ -416,6 +417,8 @@
     justify-content: center;
     background-color: white;
     border-radius: 0.25rem;
+    margin-left: auto;
+
 }
 
 
@@ -436,9 +439,7 @@
     align-items: center;
 }
 
-.form__month--button {
-    margin-bottom: 1rem;
-}
+.form__month--button {}
 
 .form__month--selected-value,
 .form__month--selected-value1,
@@ -587,7 +588,7 @@
 .main,
 .main1 {
     width: 100% !important;
-    height: 20rem !important;
+    height: max-content !important;
     padding: 1rem 2rem !important;
     background-color: white !important;
     display: flex !important;
@@ -652,7 +653,7 @@
     cursor: pointer !important;
     transition: all .2s ease-in-out !important;
     width: 17% !important;
-    height: min-content;
+    height: 15rem;
 }
 
 .main__folder a,
@@ -777,13 +778,17 @@
 .my__courses {
     width: 100% !important;
     height: 5rem;
-    display: flex;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: space-between !important;
     font-family: 'Mogra';
+    gap: 2rem;
+    align-items: center !important;
 }
 
 .my__courses {
     margin-top: -1rem;
+    margin-bottom: 1rem;
+
 }
 
 .my__courses h1 {
@@ -791,7 +796,9 @@
 }
 
 .form__month {
-    margin-left: 2rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -892,4 +899,114 @@
 .main__folder1:hover .main__folder1-button-container,
 .main__folder:hover .main__folder-button-container {
     display: flex;
+}
+
+.update-form-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.548);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-form {
+    background-color: white;
+    width: 30rem;
+    height: 25rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    justify-content: space-between;
+
+}
+
+.update-form h2 {
+    font-family: 'Mogra';
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
+
+
+}
+
+.update-form input {
+    font-family: 'Mogra';
+    font-size: 1.5rem;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    width: 100%;
+}
+
+.update-form input::placeholder {
+    color: rgb(209, 209, 209)
+}
+
+.update-form-button-container {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    justify-content: space-evenly;
+}
+
+.update-form-button-container button {
+    font-family: 'Mogra';
+    font-size: 1.5rem;
+    background-color: transparent;
+    background-color: #7a4a4a;
+    padding: 1rem;
+    border: 1px solid #7a4a4a;
+    border-radius: 20px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    color: white
+}
+
+.update-form-button-container button:hover {
+    background-color: transparent;
+    color: #7a4a4a
+}
+
+
+.lprofile__logout {
+    background-color: transparent;
+    border: 1px solid #7a4a4a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .3rem 1rem;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.lprofile__logout:hover span {
+    color: white;
+}
+
+.lprofile__logout:hover {
+    background-color: #7a4a4a;
+}
+
+.lprofile__logout:hover svg {
+    stroke: white;
+}
+
+.lprofile__logout span {
+    font-family: 'Mogra' !important;
+    color: #7a4a4a;
+    font-size: 1.2rem;
+    transition: all .1s ease-in-out;
+}
+
+.lprofile__logout svg {
+    height: 2.2rem;
+    width: 2.2rem;
+    transition: all .1s ease-in-out;
 }
