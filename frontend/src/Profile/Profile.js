@@ -355,7 +355,7 @@ function Profile() {
           <div className="lprofile__first">
             <img className="lprofile__img" src='/img/avatar2.png' />
             <h1 className='lprofile__username'>Chi Pu</h1>
-            <button className='lprofile__logout'>
+            <button className='lprofile__logout' onClick={handleLogout}>
               <span> Log out</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180)">
 

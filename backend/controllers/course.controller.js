@@ -120,8 +120,6 @@ const deleteCourse = async (req, res) => {
 
     const cards = foundCourse.cards;
 
-    console.log(cards);
-
     for (let card of cards) {
       await Card.findByIdAndDelete(card);
     }

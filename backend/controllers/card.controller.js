@@ -13,7 +13,6 @@ const getAll = async (req, res) => {
 const getCardsInCourse = async(req, res) => {
   try {
     const {courseId} = req.params;
-    console.log(courseId);
     const cards = await Card.find({courseId});
     return res.status(200).json(cards);
   } catch (error) {

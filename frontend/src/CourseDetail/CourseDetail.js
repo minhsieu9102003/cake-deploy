@@ -114,7 +114,7 @@ function CourseDetail() {
     <>
       <Header />
 
-      <div>
+      <div style={{backgroundColor: "#FFEA7C"}}>
         <div className='course-detail__top'>
           <h1 className='course-detail__name'>Course [gì gì đó]</h1>
           <div className="buttons-container">

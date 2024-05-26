@@ -57,7 +57,7 @@ function SignUp() {
                 <h1 className='illu__header'>Welcome to CAKE</h1>
                 <img src="../img/castle.png" alt="Castle illustration" className='illu__img' />
             </div>
-            <form className="form">
+            <form className="form" onSubmit={handleSignup}>
                 <span className='form__email'>Email</span>
                 <input className="form__email-input" type="text" value={email} onChange={e => setEmail(e.target.value)} />
 

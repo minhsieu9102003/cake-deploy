@@ -110,7 +110,7 @@ function Header() {
             <div className="search-popup">
               {searchResults.folders.length > 0 && (
                 <div>
-                  <h3>Folders</h3>
+                  <h3>Folders ({searchResults.folders.length})</h3>
                   <ul>
                     {searchResults.folders.map((folder) => (
                       <li key={folder._id} onClick={() => navigate(`/folder/${folder._id}`)}>
@@ -122,7 +122,7 @@ function Header() {
               )}
               {searchResults.courses.length > 0 && (
                 <div>
-                  <h3>Courses</h3>
+                  <h3>Courses ({searchResults.courses.length})</h3>
                   <ul>
                     {searchResults.courses.map((course) => (
                       <li key={course._id} onClick={() => navigate(`/course/${course._id}`)}>
