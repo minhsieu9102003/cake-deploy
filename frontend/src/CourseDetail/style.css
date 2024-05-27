@@ -854,3 +854,19 @@
     padding: 1.5rem;
     justify-content: space-between;
 }
+
+.xstudy__pen {
+    height: 1.6rem;
+    width: 1.6rem;
+    fill: white;
+    cursor: pointer;
+  }
+  
+  .xstudy__arrow {
+    width: 3rem;
+    height: 3rem;
+    transform: rotate(-90deg);
+    margin-left: auto;
+    fill: white;
+    cursor: pointer;
+  }

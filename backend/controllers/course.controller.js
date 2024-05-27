@@ -154,6 +154,18 @@ const getOldestToNewest = async (req, res, next) => {
   }
 }
 
+const getList = async (req, res) => {
+  const { userId } = req.params;
+  const { limit } = req.query;
+
+  try {
+    const courses = await Course.find({ userId }).limit(parseInt(limit, 10) || 10);
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
 export default {
   getAll,
   getMyCourses,
@@ -163,4 +175,5 @@ export default {
   deleteCourse,
   getLatestToOldest,
   getOldestToNewest,
+  getList,
 }

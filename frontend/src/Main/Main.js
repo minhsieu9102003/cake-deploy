@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
@@ -12,15 +12,51 @@ const Main = () => {
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState({ folders: [], courses: [], users: [] });
+  const [searchResults, setSearchResults] = useState({
+    folders: [],
+    courses: [],
+    users: [],
+  });
+  const [folders, setFolders] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    if (token && userId) {
-      // alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
-    } else {
+    if (!token || !userId) {
       alert("No token found. Redirecting to login.");
       navigate("/login");
+      return;
     }
+
+    const fetchFolders = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/folders/list/${userId}?limit=8`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setFolders(response.data);
+      } catch (error) {
+        console.error("Error fetching folders:", error);
+      }
+    };
+
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/courses/list/${userId}?limit=8`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchFolders();
+    fetchCourses();
   }, [token, userId, navigate]);
 
   useEffect(() => {
@@ -93,11 +129,65 @@ const Main = () => {
   const selectOption = (value) => {
     setSelectedValue(value);
     setDropdownOpen(false);
+    if (value === "latest") {
+      fetchLatestFolders();
+    } else if (value === "oldest") {
+      fetchOldestFolders();
+    }
   };
 
   const selectOptionBrown = (value) => {
     setSelectedValueBrown(value);
     setDropdownOpenBrown(false);
+    if (value === "latest") {
+      fetchLatestCourses();
+    } else if (value === "oldest") {
+      fetchOldestCourses();
+    }
+  };
+
+  const fetchLatestFolders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/folders/latest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFolders(response.data);
+    } catch (error) {
+      console.error("Error fetching latest folders:", error);
+    }
+  };
+
+  const fetchOldestFolders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/folders/oldest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFolders(response.data);
+    } catch (error) {
+      console.error("Error fetching oldest folders:", error);
+    }
+  };
+
+  const fetchLatestCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses/latest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Error fetching latest courses:", error);
+    }
+  };
+
+  const fetchOldestCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses/oldest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Error fetching oldest courses:", error);
+    }
   };
 
   const handleAvatarClick = () => {
@@ -110,11 +200,14 @@ const Main = () => {
 
     if (query) {
       try {
-        const response = await axios.get(`http://localhost:8000/other/search/${query}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `http://localhost:8000/other/search/${query}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setSearchResults(response.data);
       } catch (error) {
         console.error("Error fetching search results:", error);
@@ -130,20 +223,40 @@ const Main = () => {
 
       <section className="mmainn">
         <div className="myellow">
-
           <div className="mmain__top">
             <h1 className="myellow__header">My folders</h1>
             <div className="mform__month">
-              <button className="mform__month--button" onClick={toggleDropdown1} role="combobox" aria-labelledby="select button"
-                aria-haspopup="listbox" aria-expanded={isDropdownOpen} aria-controls="select-dropdown">
+              <button
+                className="mform__month--button"
+                onClick={toggleDropdown1}
+                role="combobox"
+                aria-labelledby="select button"
+                aria-haspopup="listbox"
+                aria-expanded={isDropdownOpen}
+                aria-controls="select-dropdown"
+              >
                 <span className="mform__month--selected-value">latest</span>
                 {/* SVG code for the button */}
-                <svg width="28" className="mform__month--arrow" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
+                <svg
+                  width="28"
+                  className="mform__month--arrow"
+                  height="25"
+                  viewBox="0 0 28 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
+                    fill="#734A4A"
+                  />
                 </svg>
               </button>
               {isDropdownOpen && (
-                <ul className="mform__month--dropdown" onClick={toggleDropdown1} role="listbox" id="select-dropdown">
+                <ul
+                  className="mform__month--dropdown"
+                  role="listbox"
+                  id="select-dropdown"
+                >
                   <li role="option" onClick={() => selectOption("latest")}>
                     <input type="radio" id="jan" name="social-account" />
                     <label htmlFor="jan">latest</label>
@@ -159,31 +272,41 @@ const Main = () => {
                 </ul>
               )}
             </div>
-            <button className="myellow__add">
-              {/* SVG for the add button */}
-              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                  fill="#734A4A" />
-              </svg>
-            </button>
+            <Link to="/profile">
+              <button className="myellow__add">
+                {/* SVG for the add button */}
+                <svg
+                  width="37"
+                  height="37"
+                  viewBox="0 0 37 37"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1V35.5Z"
+                    fill="#734A4A"
+                  />
+                </svg>
+              </button>
+            </Link>
           </div>
 
-
           <div className="myellow__card-container">
-            {/* Card containers with repeated card structures */}
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="mcard">
+            {folders.map((folder) => (
+              <div key={folder._id} className="mcard">
                 <div className="mcard__side">
                   <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
                   <div className="mcard__side mcard__side--back mcard__side--back-1">
-                    <h4>Animals</h4>
-                    <h5>50 quizzes</h5>
+                    <h4>{folder.title}</h4>
+                    <h6>{folder.description}</h6>
+                    <h5>{folder.courses.length} courses</h5>
                     <div>
                       <img src="img/avatar1.png" alt="" />
-                      <h6>anhlenguyen</h6>
+                      <h6>{folder.creatorName}</h6>
                     </div>
                   </div>
                 </div>
@@ -193,24 +316,50 @@ const Main = () => {
         </div>
         <div className="mbrown">
           <div className="mbrown__top">
-
             <h1 className="mbrown__header">My courses</h1>
             <div className="mform__month-brown">
-              <button className="mform__month--button-brown" onClick={toggleDropdownBrown} role="combobox" aria-labelledby="select button"
-                aria-haspopup="listbox" aria-expanded={isDropdownOpenBrown} aria-controls="select-dropdown">
-                <span className="mform__month--selected-value-brown">latest</span>
+              <button
+                className="mform__month--button-brown"
+                onClick={toggleDropdownBrown}
+                role="combobox"
+                aria-labelledby="select button"
+                aria-haspopup="listbox"
+                aria-expanded={isDropdownOpenBrown}
+                aria-controls="select-dropdown"
+              >
+                <span className="mform__month--selected-value-brown">
+                  latest
+                </span>
                 {/* SVG code for the button */}
-                <svg width="28" className="mform__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
+                <svg
+                  width="28"
+                  className="mform__month--arrow-brown"
+                  height="25"
+                  viewBox="0 0 28 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
+                    fill="#734A4A"
+                  />
                 </svg>
               </button>
               {isDropdownOpenBrown && (
-                <ul className="mform__month--dropdown-brown" onClick={toggleDropdownBrown} role="listbox" id="select-dropdown">
+                <ul
+                  className="mform__month--dropdown-brown"
+                  onClick={toggleDropdownBrown}
+                  role="listbox"
+                  id="select-dropdown"
+                >
                   <li role="option" onClick={() => selectOptionBrown("latest")}>
                     <input type="radio" id="jan" name="social-account" />
                     <label htmlFor="jan">latest</label>
                   </li>
-                  <li role="option" onClick={() => selectOptionBrown("most used")}>
+                  <li
+                    role="option"
+                    onClick={() => selectOptionBrown("most used")}
+                  >
                     <input type="radio" id="feb" name="social-account" />
                     <label htmlFor="feb">most used</label>
                   </li>
@@ -221,30 +370,21 @@ const Main = () => {
                 </ul>
               )}
             </div>
-            <button className="mbrown__add">
-              {/* SVG for the add button */}
-              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                  fill="#734A4A" />
-              </svg>
-            </button>
           </div>
 
           <div className="mbrown__card-container">
-            {/* Card containers with repeated card structures */}
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="mcard">
+            {courses.map((course) => (
+              <div key={course._id} className="mcard">
                 <div className="mcard__side">
                   <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
                   <div className="mcard__side mcard__side--back mcard__side--back-1">
-                    <h4>Animals</h4>
-                    <h5>50 quizzes</h5>
+                    <h4>{course.title}</h4>
+                    <h5>{course.description}</h5>
+                    <h6>{course.cards.length} cards</h6>
                     <div>
                       <img src="img/avatar1.png" alt="" />
-                      <h6>anhlenguyen</h6>
                     </div>
                   </div>
                 </div>
