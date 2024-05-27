@@ -89,6 +89,7 @@ function Folder(User) {
 
   const { folderId } = useParams();
   const [courses, setCourses] = useState([]);
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -109,6 +110,7 @@ function Folder(User) {
           },
         });
         setCourses(response.data.courses);
+        setTitle(response.data.title);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -137,7 +139,7 @@ function Folder(User) {
       <div className="cfirst">
         <div className="cfirst__heading">
           <div className="cfirst__title">
-            <h1>My Folder</h1>
+            <h1>Folder: {title}</h1>
             <svg
               className="cfirst__paw"
               xmlns="http://www.w3.org/2000/svg"

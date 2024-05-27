@@ -117,6 +117,8 @@ const Main = () => {
   const [selectedValue, setSelectedValue] = useState("latest");
   const [isDropdownOpenBrown, setDropdownOpenBrown] = useState(false);
   const [selectedValueBrown, setSelectedValueBrown] = useState("latest");
+  const [popupStatus, setPopupStatus] = useState(false);
+  const [newFolderTitle, setNewFolderTitle] = useState("");
 
   const toggleDropdown1 = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -217,8 +219,68 @@ const Main = () => {
     }
   };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/folders",
+        { title: newFolderTitle, userId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFolders([...folders, response.data]);
+      setPopupStatus(false);
+      setNewFolderTitle("");
+    } catch (error) {
+      console.error("Error creating folder:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setNewFolderTitle(event.target.value);
+  };
+
   return (
     <div className="mall">
+      <form
+        className="main__popup"
+        style={{ display: popupStatus ? "flex" : "none" }}
+        onSubmit={handleFormSubmit}
+      >
+        <div className="main__popup-inner">
+          <button
+            className="main__cross"
+            type="button"
+            onClick={() => setPopupStatus(false)}
+          >
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+            >
+              <path d="m4.12 6.137 1.521-1.52 7 7-1.52 1.52z" />
+              <path d="m4.12 11.61 7.001-7 1.52 1.52-7 7z" />
+            </svg>
+          </button>
+          <h1>Creating new folder</h1>
+          <input
+            type="text"
+            placeholder="Folder title"
+            value={newFolderTitle}
+            onChange={handleInputChange}
+            required
+          />
+          <div className="main__popup-submit-container">
+            <button className="main__popup-submit" type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+
       <Header />
 
       <section className="mmainn">
@@ -272,31 +334,20 @@ const Main = () => {
                 </ul>
               )}
             </div>
-            <Link to="/profile">
-              <button className="myellow__add">
-                {/* SVG for the add button */}
-                <svg
-                  width="37"
-                  height="37"
-                  viewBox="0 0 37 37"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1V35.5Z"
-                    fill="#734A4A"
-                  />
-                </svg>
-              </button>
-            </Link>
+            <button className="myellow__add" onClick={() => setPopupStatus(true)}>
+              {/* SVG for the add button */}
+              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
+                  fill="#734A4A" />
+              </svg>
+            </button>
           </div>
 
           <div className="myellow__card-container">
             {folders.map((folder) => (
               <div key={folder._id} className="mcard">
-                <div className="mcard__side">
+                <div className="mcard__side" onClick={() => navigate(`/folder/${folder._id}`)}>
                   <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
@@ -370,12 +421,20 @@ const Main = () => {
                 </ul>
               )}
             </div>
+            <button className="mbrown__add" onClick={() => navigate(`/create_course`)}>
+              {/* SVG for the add button */}
+              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
+                  fill="#734A4A" />
+              </svg>
+            </button>
           </div>
 
           <div className="mbrown__card-container">
             {courses.map((course) => (
               <div key={course._id} className="mcard">
-                <div className="mcard__side">
+                <div className="mcard__side" onClick={() => navigate(`/course/${course._id}`)}>
                   <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>

@@ -71,7 +71,7 @@ function CourseDetail() {
     };
   }, []);
 
-  const [cards, setCards] = useState([]);
+  const [course, setCourse] = useState();
   const { courseId } = useParams();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -83,10 +83,10 @@ function CourseDetail() {
       navigate("/login");
       return;
     }
-    const fetchCards = async () => {
+    const fetchCourse = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/cards/course/${courseId}`,
+          `http://localhost:8000/courses/${courseId}`,
           {
             method: "GET",
             headers: {
@@ -98,7 +98,7 @@ function CourseDetail() {
         console.log("Response:", response);
         if (response.ok) {
           const data = await response.json();
-          setCards(data);
+          setCourse(data);
           localStorage.setItem(`cards_${courseId}`, JSON.stringify(data));
         } else {
           console.error("Failed to fetch cards");
@@ -107,7 +107,7 @@ function CourseDetail() {
         console.error("Error:", error);
       }
     };
-    fetchCards();
+    fetchCourse();
   }, [courseId, token]);
 
   return (
@@ -116,7 +116,7 @@ function CourseDetail() {
 
       <div style={{ backgroundColor: "#FFEA7C" }}>
         <div className="course-detail__top">
-          <h1 className="course-detail__name">Course [gì gì đó]</h1>
+          <h1 className="course-detail__name">Course: {course?.title}</h1>
           <div className="buttons-container">
             <button className="flash-button">
               <Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link>
@@ -147,7 +147,7 @@ function CourseDetail() {
 
         <h2 className="cards-title">Cards Data</h2>
         <div className="cards-container">
-          {cards.map((card) => (
+          {course?.cards?.map((card) => (
             <div className="card" key={card._id}>
               <div className="card-key">{card.key}</div>
               <div className="card-value">{card.value}</div>
