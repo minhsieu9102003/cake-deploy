@@ -132,6 +132,12 @@ function Folder(User) {
     }
   };
 
+  const [selectedFolder, setSelectedFolder] = useState(null);
+
+  const handleFolderClick = (folder) => {
+    setSelectedFolder(folder);
+  };
+
   return (
     <div>
       <Header />
