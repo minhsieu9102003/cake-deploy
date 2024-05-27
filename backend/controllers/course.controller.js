@@ -2,6 +2,7 @@ import Card from "../models/card.model.js";
 import Course from "../models/course.model.js";
 import Folder from "../models/folder.model.js";
 import mongoose from "mongoose";
+import User from "../models/user.model.js";
 
 const getAll = async (req, res) => {
   try {
@@ -54,7 +55,7 @@ const create = async (req, res) => {
       await Folder.findByIdAndUpdate(_folderId, {$push: {courses: newCourse._id}});
     };
 
-  
+    await User.findByIdAndUpdate(req.payload.id, {$push: {courses: newCourse._id}})
 
     const cardIds = [];
     for (let card of listCards) {

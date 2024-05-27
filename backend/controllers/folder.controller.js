@@ -1,4 +1,5 @@
 import Folder from "../models/folder.model.js";
+import User from "../models/user.model.js";
 import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
@@ -52,6 +53,7 @@ const create = async (req, res) => {
   try {
     const newFolder = await new Folder(req.body);
     const folder = await newFolder.save();
+    await User.findByIdAndUpdate(req.payload.id, {$push: {folders: folder._id}})
     return res.status(201).json(folder);
   } catch (error) {
     return res.status(500).json({ message: error });

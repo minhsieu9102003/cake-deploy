@@ -15,6 +15,7 @@ function Profile() {
   const [selectedValue, setSelectedValue] = useState("latest");
   const [folders, setFolders] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [user, setUser] = useState();
   const [popupStatus, setPopupStatus] = useState(false);
   const [popupUpdate, setPopupUpdate] = useState(false);
   const token = localStorage.getItem("token");
@@ -31,24 +32,6 @@ function Profile() {
 
   const handleSwapCourses = async () => {
     setActiveButton("courses");
-    if (token && userId) {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/courses/my/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const fetchedCourses = Array.isArray(response.data)
-          ? response.data
-          : [];
-        setCourses(fetchedCourses);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    }
   };
 
   useEffect(() => {
@@ -132,23 +115,25 @@ function Profile() {
 
   useEffect(() => {
     if (token && userId) {
-      const fetchFolders = async () => {
+      const fetchUser = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/folders/my/${userId}`,
+            `http://localhost:8000/users/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             }
           );
-          setFolders(response.data);
+          setFolders(response.data.folders);
+          setCourses(response.data.courses);
+          setUser(response.data);
         } catch (error) {
-          console.error("Error fetching folders:", error);
+          console.error("Error fetching user:", error);
         }
       };
 
-      fetchFolders();
+      fetchUser();
     } else {
       alert("No token found. Redirecting to login.");
       navigate("/login");
@@ -373,7 +358,7 @@ function Profile() {
         <div className="lprofile">
           <div className="lprofile__first">
             <img className="lprofile__img" src="/img/avatar2.png" />
-            <h1 className="lprofile__username">Chi Pu</h1>
+            <h1 className="lprofile__username">{user?.username}</h1>
             <button className="lprofile__logout" onClick={handleLogout}>
               <span> Log out</span>
               <svg
