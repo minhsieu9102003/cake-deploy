@@ -471,7 +471,7 @@
 }
 
 .mcard__side--back {
-  transform: rotateY(180deg);
+  transform: none;
   border-radius: 4px;
   overflow: hidden;
   position: absolute;
