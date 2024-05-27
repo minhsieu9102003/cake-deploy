@@ -117,6 +117,7 @@ function CourseDetail() {
       <div style={{ backgroundColor: "#FFEA7C" }}>
         <div className="course-detail__top">
           <h1 className="course-detail__name">Course: {course?.title}</h1>
+          <h2>{course?.description}</h2>
           <div className="buttons-container">
             <button className="flash-button">
               <Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link>

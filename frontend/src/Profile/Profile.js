@@ -430,54 +430,6 @@ function Profile() {
           }`}
         >
           <h1>My folders</h1>
-          <div className="form__month1">
-            <button
-              className="form__month--button1"
-              role="combobox"
-              aria-labelledby="select button"
-              aria-haspopup="listbox"
-              aria-expanded={customSelectActive ? "true" : "false"}
-              aria-controls="select-dropdown"
-              onClick={handleSelectClick}
-            >
-              <span className="form__month--selected-value1">
-                {selectedValue}
-              </span>
-              <svg
-                width="28"
-                className="form__month--arrow1"
-                height="25"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
-              </svg>
-            </button>
-            <ul
-              className={`form__month--dropdown1 ${
-                customSelectActive ? "active" : ""
-              }`}
-              role="listbox"
-              id="select-dropdown"
-            >
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="jan" name="social-account" />
-                <label htmlFor="jan">latest</label>
-              </li>
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="feb" name="social-account" />
-                <label htmlFor="feb">most used</label>
-              </li>
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="mar" name="social-account" />
-                <label htmlFor="mar">oldest</label>
-              </li>
-            </ul>
-          </div>
           <svg
             className="kfirst__plus1"
             width="800px"
@@ -642,57 +594,6 @@ function Profile() {
         className={`my__courses ${activeButton === "courses" ? "" : "hidden"}`}
       >
         <h1>My courses</h1>
-        <div
-          className={`form__month ${
-            activeButton === "courses" ? "" : "hidden"
-          }`}
-        >
-          <button
-            className="form__month--button"
-            role="combobox"
-            aria-labelledby="select button"
-            aria-haspopup="listbox"
-            aria-expanded={customSelectActive ? "true" : "false"}
-            aria-controls="select-dropdown"
-            onClick={handleSelectClick}
-          >
-            <span className="form__month--selected-value">{selectedValue}</span>
-            <svg
-              width="28"
-              className="form__month--arrow"
-              height="25"
-              viewBox="0 0 28 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                fill="#734A4A"
-              />
-            </svg>
-          </button>
-
-          <ul
-            className={`form__month--dropdown ${
-              customSelectActive ? "active" : ""
-            }`}
-            role="listbox"
-            id="select-dropdown"
-          >
-            <li role="option" onClick={handleOptionClick}>
-              <input type="radio" id="jan" name="social-account" />
-              <label htmlFor="jan">latest</label>
-            </li>
-            <li role="option" onClick={handleOptionClick}>
-              <input type="radio" id="feb" name="social-account" />
-              <label htmlFor="feb">most used</label>
-            </li>
-            <li role="option" onClick={handleOptionClick}>
-              <input type="radio" id="mar" name="social-account" />
-              <label htmlFor="mar">oldest</label>
-            </li>
-          </ul>
-        </div>
         <svg
           className="kfirst__plus"
           width="800px"

@@ -90,6 +90,7 @@ function Folder(User) {
   const { folderId } = useParams();
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -111,6 +112,7 @@ function Folder(User) {
         });
         setCourses(response.data.courses);
         setTitle(response.data.title);
+        setDescription(response.data.description);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -146,6 +148,7 @@ function Folder(User) {
         <div className="cfirst__heading">
           <div className="cfirst__title">
             <h1>Folder: {title}</h1>
+            <h2>{description}</h2>
             <svg
               className="cfirst__paw"
               xmlns="http://www.w3.org/2000/svg"
@@ -185,53 +188,6 @@ function Folder(User) {
           </svg>
         </div>
         <div className="cfirst__filter">
-          <div className="cform__month">
-            <button
-              className="cform__month--button"
-              role="combobox"
-              aria-labelledby="select button"
-              aria-haspopup="listbox"
-              aria-expanded={customSelectActive ? "true" : "false"}
-              aria-controls="select-dropdown"
-              onClick={handleSelectClick}
-            >
-              <span className="cform__month--selected-value">
-                {selectedValue}
-              </span>
-              <svg
-                width="28"
-                className="cform__month--arrow"
-                height="25"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
-              </svg>
-            </button>
-            <ul
-              className={`cform__month--dropdown ${customSelectActive ? "active" : ""
-                }`}
-              role="listbox"
-              id="select-dropdown"
-            >
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="jan" name="social-account" />
-                <label htmlFor="jan">latest</label>
-              </li>
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="feb" name="social-account" />
-                <label htmlFor="feb">most used</label>
-              </li>
-              <li role="option" onClick={handleOptionClick}>
-                <input type="radio" id="mar" name="social-account" />
-                <label htmlFor="mar">oldest</label>
-              </li>
-            </ul>
-          </div>
           <svg
             className="cfirst__plus"
             width="800px"

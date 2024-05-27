@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 //import { Link } from 'react-router-dom';
@@ -82,6 +82,15 @@ function Home() {
     };
   }, []);
 
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (token && userId) {
+      navigate(0);
+    }
+
+  }, [token, userId, navigate]);
 
   return (
     <>

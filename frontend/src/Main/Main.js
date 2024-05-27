@@ -286,54 +286,7 @@ const Main = () => {
       <section className="mmainn">
         <div className="myellow">
           <div className="mmain__top">
-            <h1 className="myellow__header">My folders</h1>
-            <div className="mform__month">
-              <button
-                className="mform__month--button"
-                onClick={toggleDropdown1}
-                role="combobox"
-                aria-labelledby="select button"
-                aria-haspopup="listbox"
-                aria-expanded={isDropdownOpen}
-                aria-controls="select-dropdown"
-              >
-                <span className="mform__month--selected-value">latest</span>
-                {/* SVG code for the button */}
-                <svg
-                  width="28"
-                  className="mform__month--arrow"
-                  height="25"
-                  viewBox="0 0 28 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                    fill="#734A4A"
-                  />
-                </svg>
-              </button>
-              {isDropdownOpen && (
-                <ul
-                  className="mform__month--dropdown"
-                  role="listbox"
-                  id="select-dropdown"
-                >
-                  <li role="option" onClick={() => selectOption("latest")}>
-                    <input type="radio" id="jan" name="social-account" />
-                    <label htmlFor="jan">latest</label>
-                  </li>
-                  <li role="option" onClick={() => selectOption("most used")}>
-                    <input type="radio" id="feb" name="social-account" />
-                    <label htmlFor="feb">most used</label>
-                  </li>
-                  <li role="option" onClick={() => selectOption("oldest")}>
-                    <input type="radio" id="mar" name="social-account" />
-                    <label htmlFor="mar">oldest</label>
-                  </li>
-                </ul>
-              )}
-            </div>
+            <h1 className="myellow__header">Folders</h1>
             <button className="myellow__add" onClick={() => setPopupStatus(true)}>
               {/* SVG for the add button */}
               <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -367,60 +320,7 @@ const Main = () => {
         </div>
         <div className="mbrown">
           <div className="mbrown__top">
-            <h1 className="mbrown__header">My courses</h1>
-            <div className="mform__month-brown">
-              <button
-                className="mform__month--button-brown"
-                onClick={toggleDropdownBrown}
-                role="combobox"
-                aria-labelledby="select button"
-                aria-haspopup="listbox"
-                aria-expanded={isDropdownOpenBrown}
-                aria-controls="select-dropdown"
-              >
-                <span className="mform__month--selected-value-brown">
-                  latest
-                </span>
-                {/* SVG code for the button */}
-                <svg
-                  width="28"
-                  className="mform__month--arrow-brown"
-                  height="25"
-                  viewBox="0 0 28 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                    fill="#734A4A"
-                  />
-                </svg>
-              </button>
-              {isDropdownOpenBrown && (
-                <ul
-                  className="mform__month--dropdown-brown"
-                  onClick={toggleDropdownBrown}
-                  role="listbox"
-                  id="select-dropdown"
-                >
-                  <li role="option" onClick={() => selectOptionBrown("latest")}>
-                    <input type="radio" id="jan" name="social-account" />
-                    <label htmlFor="jan">latest</label>
-                  </li>
-                  <li
-                    role="option"
-                    onClick={() => selectOptionBrown("most used")}
-                  >
-                    <input type="radio" id="feb" name="social-account" />
-                    <label htmlFor="feb">most used</label>
-                  </li>
-                  <li role="option" onClick={() => selectOptionBrown("oldest")}>
-                    <input type="radio" id="mar" name="social-account" />
-                    <label htmlFor="mar">oldest</label>
-                  </li>
-                </ul>
-              )}
-            </div>
+            <h1 className="mbrown__header">Courses</h1>
             <button className="mbrown__add" onClick={() => navigate(`/create_course`)}>
               {/* SVG for the add button */}
               <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
