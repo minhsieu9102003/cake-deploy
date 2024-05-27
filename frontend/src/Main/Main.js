@@ -370,6 +370,25 @@ const Main = () => {
                 </ul>
               )}
             </div>
+            <Link to="/profile">
+              <button className="mbrown__add">
+                {/* SVG for the add button */}
+                <svg
+                  width="37"
+                  height="37"
+                  viewBox="0 0 37 37"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1V35.5Z"
+                    fill="#734A4A"
+                  />
+                </svg>
+              </button>
+            </Link>
           </div>
 
           <div className="mbrown__card-container">
