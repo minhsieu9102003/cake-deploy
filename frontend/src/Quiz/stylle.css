@@ -531,6 +531,11 @@ body,
   right: 0;
 }
 
+.hquiz__answer.selected {
+  color: white;
+  background-color: #7a4a4a;
+}
+
 .hauthor {
   display: flex;
   gap: 2rem;

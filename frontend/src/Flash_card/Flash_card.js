@@ -83,9 +83,11 @@ function FlashCard() {
   }, [courseId, token]);
 
   const handleNextCard = () => {
-    if (currentIndex < cards.length - 1) {
+    if (currentIndex <= cards.length - 1) {
       setCompletedCards([...completedCards, cards[currentIndex]]);
       setCurrentIndex(currentIndex + 1);
+    } else {
+      navigate(`/course/${courseId}`); // Điều hướng tới trang chi tiết khóa học
     }
   };
 
@@ -176,7 +178,7 @@ function FlashCard() {
             <button
               className="fquiz__next"
               onClick={handleNextCard}
-              disabled={currentIndex >= cards.length - 1}
+              disabled={currentIndex > cards.length - 1}
             >
               Next Card
             </button>

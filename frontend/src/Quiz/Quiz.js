@@ -89,7 +89,7 @@ const Quiz = () => {
     if (currentQuestion < cards.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      alert("Quiz completed!");
+      navigate(`/course/${courseId}`);
     }
   };
 
