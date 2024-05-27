@@ -83,7 +83,7 @@ function FlashCard() {
   }, [courseId, token]);
 
   const handleNextCard = () => {
-    if (currentIndex <= cards.length - 1) {
+    if (currentIndex < cards.length - 1) {
       setCompletedCards([...completedCards, cards[currentIndex]]);
       setCurrentIndex(currentIndex + 1);
     } else {
