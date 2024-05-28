@@ -357,7 +357,7 @@ function Profile() {
         </div>
         <div className="lprofile">
           <div className="lprofile__first">
-            <img className="lprofile__img" src="/img/avatar.jpeg" />
+            <img className="lprofile__img" src="/img/avatar2.png" />
             <h1 className="lprofile__username">{user?.username}</h1>
             <button className="lprofile__logout" onClick={handleLogout}>
               <span> Log out</span>

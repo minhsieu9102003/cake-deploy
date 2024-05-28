@@ -156,7 +156,7 @@ const Create_quiz = () => {
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="navigation__dropdown-item">
                     <h6>Animals</h6>
-                    <img src="img/avatar.jpeg" alt="" />
+                    <img src="img/avatar2.png" alt="" />
                   </div>
                 ))}
               </div>
@@ -176,7 +176,7 @@ const Create_quiz = () => {
               Language: VN
             </a>
           </li>
-          <img className="navigation__avatar" src="img/avatar.jpeg" alt="" />
+          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
         </ul>
       </div>
 
