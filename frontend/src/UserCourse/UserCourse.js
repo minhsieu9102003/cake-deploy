@@ -237,12 +237,12 @@ function UserCourse(User) {
               <div className="navigation__dropdown-item-container">
                 <a href="#" className="navigation__dropdown-item">
                   <h6>Animals</h6>
-                  <img src="img/avatar.jpeg" alt="" />
+                  <img src="img/avatar2.png" alt="" />
                 </a>
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="navigation__dropdown-item">
                     <h6>Animals</h6>
-                    <img src="img/avatar.jpeg" alt="" />
+                    <img src="img/avatar2.png" alt="" />
                   </div>
                 ))}
               </div>
@@ -261,7 +261,7 @@ function UserCourse(User) {
               Language: VN
             </a>
           </li>
-          <img className="navigation__avatar" src="img/avatar.jpeg" alt="" />
+          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
         </ul>
       </div>
 

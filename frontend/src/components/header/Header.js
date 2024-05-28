@@ -156,7 +156,7 @@ function Header() {
             Help Center
           </a>
         </li>
-        <img className="pfnavigation__avatar" src="/img/avatar.jpeg" alt="" onClick={() => navigate('/profile')}/>
+        <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" onClick={() => navigate('/profile')}/>
       </ul>
     </div>
   );

@@ -37,7 +37,61 @@ function Home() {
       },
     });
 
-    tl.to(".myElement", { x: 100 });
+    tl.to(".myElement", { x: 100 })
+
+    .to('.screenLoad__column-1', {
+      clipPath: ' polygon(0 100%, 100% 100%, 100% 0%, 0 0%)',
+
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    })
+    .to('.screenLoad__column-2', {
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '-=.7')
+    .to('.screenLoad__column-3', {
+      clipPath: ' polygon(0 100%, 100% 100%, 100% 0%, 0 0%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '-=.65')
+    .to('.screenLoad__column-4', {
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '-=.6')
+    .to('.screenLoad__column-1', {
+      clipPath: ' polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut',
+    })
+    .to('.screenLoad__column-2', {
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '<')
+    .to('.screenLoad__column-3', {
+      clipPath: ' polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '<')
+    .to('.screenLoad__column-4', {
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+      stagger: .2,
+      duration: 1,
+      ease: 'power4.inOut'
+    }, '<')
+    .to('.screenLoad', {
+      display: 'none'
+    }, '-=.6')
 
     // Animate the header
     tl.fromTo(
@@ -94,6 +148,20 @@ function Home() {
 
   return (
     <>
+      <div className="screenLoad">
+        <div className='screenLoad__column screenLoad__column-1'>
+          <h1>C</h1>
+        </div>
+        <div className='screenLoad__column screenLoad__column-2'>
+          <h1>A</h1>
+        </div>
+        <div className='screenLoad__column screenLoad__column-3'>
+          <h1>K</h1>
+        </div>
+        <div className='screenLoad__column screenLoad__column-4'>
+          <h1>E</h1>
+        </div>
+      </div>
       <div className="navigation">
         <div className="navigation__logo">
           <img src={logo} alt="Cake Logo" className="navigation__logo-img" />

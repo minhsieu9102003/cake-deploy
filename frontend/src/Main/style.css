@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -487,7 +489,13 @@
   flex-direction: column;
   padding: 2rem 2rem;
   cursor: pointer;
-  border: 1px solid
+  border: 1px solid;
+  gap: .5rem
+}
+.mcard__side--back h6 {
+  /* transform: rotateY(180deg); */
+  font-family: 'Dosis';
+  font-size: 1rem;
 }
 
 .mcard__side--back h4 {

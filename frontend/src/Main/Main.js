@@ -317,10 +317,10 @@ const Main = () => {
                   </div>
                   <div className="mcard__side mcard__side--back mcard__side--back-1">
                     <h4>{folder.title}</h4>
-                    <h6>{folder.description}</h6>
                     <h5>{folder.courses.length} courses</h5>
+                    <h6>{folder.description}</h6>
                     <div>
-                      <img src="img/avatar.jpeg" alt="" />
+                      <img src="img/avatar2.png" alt="" />
                       <h6>{folder.creatorName}</h6>
                     </div>
                   </div>
@@ -362,10 +362,10 @@ const Main = () => {
                   </div>
                   <div className="mcard__side mcard__side--back mcard__side--back-1">
                     <h4>{course.title}</h4>
-                    <h6>{course.description}</h6>
                     <h5>{course.cards.length} cards</h5>
+                    <h6>{course.description}</h6>
                     <div>
-                      <img src="img/avatar.jpeg" alt="" />
+                      <img src="img/avatar2.png" alt="" />
                     </div>
                   </div>
                 </div>
