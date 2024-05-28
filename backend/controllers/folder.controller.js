@@ -50,10 +50,15 @@ const getCoursesInFolder = async (req, res) => {
 }
 
 const create = async (req, res) => {
+  const { title, description } = req.body;
   try {
-    const newFolder = await new Folder(req.body);
+    const newFolder = await new Folder({
+      title,
+      description,
+      userId: req.payload.id,
+    });
     const folder = await newFolder.save();
-    await User.findByIdAndUpdate(req.payload.id, {$push: {folders: folder._id}})
+    await User.findByIdAndUpdate(req.payload.id, { $push: { folders: folder._id } })
     return res.status(201).json(folder);
   } catch (error) {
     return res.status(500).json({ message: error });
@@ -63,11 +68,16 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   try {
-    const updateFolder = await Folder.findByIdAndUpdate(id, req.body);
+    const foundFolder = await Folder.findById(id);
 
-    if (!updateFolder) return res.status(404).json({ message: "Folder not found" });
+    if (!foundFolder) return res.status(404).json({ message: "Folder not found" });
 
-    return res.status(200).json({ message: "Update successfully!" });
+    if (req.payload.id === foundFolder.userId) {
+
+      await Folder.findByIdAndUpdate(id, req.body);
+
+      return res.status(200).json({ message: "Update successfully!" });
+    } else return res.status(403).json({ message: "You are not allow to edit other's folder!" })
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -77,11 +87,16 @@ const deleteFolder = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const folder = await Folder.findByIdAndDelete(id);
+    const foundFolder = await Folder.findById(id);
 
-    if (!folder) return res.status(404).json({ message: "Folder not found" });
+    if (!foundFolder) return res.status(404).json({ message: "Folder not found" });
 
-    return res.status(200).json({ message: "Delete successfully!" });
+    if (req.payload.id === foundFolder.userId || req.payload.role === "admin") {
+
+      await Folder.findByIdAndDelete(id);
+
+      return res.status(200).json({ message: "Delete successfully!" });
+    } else return res.status(403).json({ message: "You are not allowed to delete other's folder!" })
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error });
