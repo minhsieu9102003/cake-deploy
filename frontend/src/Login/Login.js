@@ -5,64 +5,8 @@ import "./stylee.css";
 
 function Login() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [month, setMonth] = useState("");
-  const [date, setDate] = useState("");
-  const [year, setYear] = useState("");
-  const [acceptPolicy, setAcceptPolicy] = useState(false);
-  const [daysInMonth, setDaysInMonth] = useState([]);
   const navigate = useNavigate();
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const years = Array.from(
-    { length: 2024 - 1924 + 1 },
-    (_, index) => 1924 + index
-  );
-
-  useEffect(() => {
-    function updateDays() {
-      const monthIndex = months.indexOf(month);
-      const days = new Date(year, monthIndex + 1, 0).getDate();
-      setDaysInMonth(Array.from({ length: days }, (_, i) => i + 1));
-    }
-    if (month && year) {
-      updateDays();
-    }
-  }, [month, year]);
-
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    if (!acceptPolicy) {
-      alert("You must accept the policy to sign up.");
-      return;
-    }
-
-    try {
-      const response = await axios.post("http://localhost:8000/auth/register", {
-        email,
-        username,
-        password,
-      });
-      console.log("Signup successful:", response.data);
-      //alert("Signup successful!");
-    } catch (error) {
-      console.error("Error during signup:", error.response.data);
-      //alert(`Signup failed: ${error.response.data.message}`);
-    }
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -94,7 +38,7 @@ function Login() {
 
       if (storedToken && storedUserId) {
         //alert('Login successful!');
-        navigate('/main');
+        navigate('/');
       } else {
         alert('Failed to store user credentials. Please try again.');
       }
@@ -150,7 +94,7 @@ function Login() {
           <button type="submit" className="login-btn" onClick={handleLogin}>
             Login
           </button>
-          <button type="button" className="signup-btn">
+          <button type="button" className="signup-btn" onClick={() => navigate("/signup")}>
             Don't have an account? Sign up
           </button>
         </div>

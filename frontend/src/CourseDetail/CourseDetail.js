@@ -1,24 +1,16 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Login from "../Login/Login";
 import { Link, useParams } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-import Lenis from "@studio-freight/lenis";
-import logo from "../img/cake-logo-small.png"; // Ensure images are in the public/img folder
-import watermark from "../img/cake-water-mark.png";
-import cake1 from "../img/cake1.png";
-import cake2 from "../img/cake2.png";
-import quickCat from "../img/quick-cat.png";
-import flashChef from "../img/flash-chef.png";
-import pawWatermark from "../img/paw-water-mark.png";
-import hatWatermark from "../img/hat-water-mark.png";
-import cakeLogoBig from "../img/cake-logo-big.png";
 import "./style.css";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+
 gsap.registerPlugin(ScrollTrigger);
+
 function CourseDetail() {
-  const [showLogin, setShowLogin] = useState(false);
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -73,16 +65,13 @@ function CourseDetail() {
       "-=.75"
     );
 
-
-
     return () => {
-
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  const [cards, setCards] = useState([]);
+  const [course, setCourse] = useState();
   const { courseId } = useParams();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -94,118 +83,84 @@ function CourseDetail() {
       navigate("/login");
       return;
     }
-    const fetchCards = async () => {
+    const fetchCourse = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/cards/course/${courseId}`, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "User-ID": userId,
+        const response = await fetch(
+          `http://localhost:8000/courses/${courseId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "User-ID": userId,
+            },
           }
-        });
-        console.log('Response:', response);
+        );
+        console.log("Response:", response);
         if (response.ok) {
           const data = await response.json();
-          setCards(data);
+          setCourse(data);
           localStorage.setItem(`cards_${courseId}`, JSON.stringify(data));
         } else {
-          console.error('Failed to fetch cards');
+          console.error("Failed to fetch cards");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
-    fetchCards();
+    fetchCourse();
   }, [courseId, token]);
 
   return (
     <>
-      <div className="navigation">
-        <div className="navigation__logo">
-          <img src={logo} alt="Cake Logo" className="navigation__logo-img" />
-          <div className="navigation__brand">Cake</div>
-        </div>
-        <div className="navigation__search-box">
-          <svg className="navigation__search-box-icon">
-            <use href="../img/symbol-defs.svg#icon-search"></use>
-          </svg>
-          <input
-            className="navigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
-        </div>
-        <ul className="navigation__link">
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Help Center
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Language: VN
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <Link to="/login" className="navigation__link-btn-a">
-              Sign in
-            </Link>
-          </li>
-          <li className="navigation__link-btn sign-up">
-            <Link to="/signup" className="navigation__link-btn-a sign-up">
-              Sign up
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <Header />
 
-      <div>
-      <h1>Course Detail</h1>
-      <div className="buttons-container">
-        <button className="nav-button"><Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link></button>
-        <button className="nav-button"><Link to={`/quiz/${courseId}`}>Go to Quiz</Link></button>
-      </div>
+      <div style={{ backgroundColor: "#FFEA7C" }}>
+        <div className="course-detail__top">
+          <div className='course-detail-top-container'>
+            <h1 className="course-detail__name">Course: {course?.title}</h1>
+            <Link to={`/update_course/${courseId}`}>
+              <svg
+                className="xstudy__pen"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path d="M20.7,5.537a1.024,1.024,0,0,1,0,1.448L8.527,19.158,3,21l1.842-5.527L17.015,3.3a1.024,1.024,0,0,1,1.448,0Z" />
+              </svg>
+            </Link>
+            <Link to={`/profile`}>
+              <svg
+                className="xstudy__arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
 
-      <h2 className="cards-title">Cards Data</h2>
-      <div className="cards-container">
-        {cards.map(card => (
-          <div className="card" key={card._id}>
-            <div className="card-key">{card.key}</div>
-            <div className="card-value">{card.value}</div>
+              >
+                <path d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z" />
+              </svg>
+            </Link>
           </div>
-        ))}
-      </div>
-    </div>
+          <div className="buttons-container">
+            <button className="flash-button">
+              <Link to={`/flash_card/${courseId}`}>Go to Flash Cards</Link>
+            </button>
+            <button className="quiz-button">
+              <Link to={`/quiz/${courseId}`}>Go to Quiz</Link>
+            </button>
 
-      <footer className="footer">
-        <div className="footer__img-container">
-          <img
-            src={cakeLogoBig}
-            alt="Large Cake Logo"
-            className="footer__logo"
-          />
-          <h1 className="footer__brand">CAKE</h1>
+          </div>
         </div>
-        <div className="footer__text-container">
-          <h3 className="footer__h3-author">Author</h3>
-          <h4 className="footer__h4-author-1">minh</h4>
-          <h4 className="footer__h4-author-2">minh</h4>
-          <h4 className="footer__h4-author-3">minh</h4>
-          <h4 className="footer__h4-author-4">nam</h4>
-          <h3 className="footer__h3-about">About CAKE</h3>
-          <h4 className="footer__h4-about-1">How CAKE works</h4>
-          <h4 className="footer__h4-about-2">Q&A</h4>
-          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
-          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
+        <h2 className='course-detail__desc'>{course?.description}</h2>
+        <h2 className="cards-title">Cards Data</h2>
+        <div className="cards-container">
+          {course?.cards?.map((card) => (
+            <div className="card" key={card._id}>
+              <div className="card-key">{card.key}</div>
+              <div className="card-value">{card.value}</div>
+            </div>
+          ))}
         </div>
-        <div className="footer__text-container-1">
-          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">
-            A project for Hanoi University of Science and Technology's Web
-            Subject Course
-          </h4>
-        </div>
-      </footer>
+      </div>
+
+      <Footer />
     </>
   );
 }

@@ -28,7 +28,7 @@ function UserDetail() {
 
   useEffect(() => {
     if (token && userId) {
-      alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
+      // alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
     } else {
       alert("No token found. Redirecting to login.");
       navigate("/login");
@@ -133,7 +133,7 @@ function UserDetail() {
   return (
     <>
       <div className="navigation">
-        <div className="navigation__logo">
+        <div className="navigation__logo" onClick={() => navigate("/")}>
           <img src={logo} alt="Cake Logo" className="navigation__logo-img" />
           <div className="navigation__brand">Cake</div>
         </div>

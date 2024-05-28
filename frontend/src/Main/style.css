@@ -263,7 +263,9 @@
   margin-bottom: -10px;
   width: 100%;
   /* margin-left: -3rem; */
-  position: relative;
+  background-image: url(img/bg1.PNG);
+  height: 40rem;
+  background-size: cover;
 }
 
 .myellow__bg {
@@ -278,19 +280,22 @@
 }
 
 .myellow__header {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+
   font-family: "Nerko One", cursive;
   color: #7a4a4a;
   font-size: 3rem;
 }
 
+.mmain__top,
+.mbrown__top {
+  display: flex;
+  justify-content: space-between !important;
+  padding: 2rem 4.5rem;
+  gap: 1.5rem;
+}
+
 .myellow__add {
-  position: absolute;
-  top: 20%;
-  left: 20%;
+
   background-color: white;
   border: 1px solid #7a4a4a;
   border-radius: 50%;
@@ -317,7 +322,7 @@
   overflow-x: scroll;
   width: 100%;
   position: absolute;
-  top: 35%;
+  top: 20%;
   white-space: nowrap;
   height: 27rem;
 }
@@ -346,7 +351,12 @@
 .mbrown {
   width: 100%;
   position: relative;
+  background-image: url(img/bg2.PNG);
+  height: 40rem;
+  background-size: cover;
 }
+
+
 
 .mbrown__bg {
   object-fit: contain;
@@ -359,19 +369,15 @@
 }
 
 .mbrown__header {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+
+
   font-family: "Nerko One", cursive;
   color: white;
   font-size: 3rem;
 }
 
 .mbrown__add {
-  position: absolute;
-  top: 20%;
-  left: 20%;
+
   background-color: white;
   border: 1px solid #7a4a4a;
   border-radius: 50%;
@@ -398,7 +404,7 @@
   overflow-x: scroll;
   width: 100%;
   position: absolute;
-  top: 35%;
+  top: 20%;
   white-space: nowrap;
   height: 27rem;
 }
@@ -456,6 +462,7 @@
   -webkit-transform: translate3d(0, 0, 0);
   z-index: 1;
   cursor: pointer;
+  display: none;
 }
 
 .mcard__side--front img {
@@ -465,7 +472,7 @@
 }
 
 .mcard__side--back {
-  transform: rotateY(180deg);
+  /* transform: rotateY(180deg); */
   border-radius: 4px;
   overflow: hidden;
   position: absolute;
@@ -480,6 +487,7 @@
   flex-direction: column;
   padding: 2rem 2rem;
   cursor: pointer;
+  border: 1px solid
 }
 
 .mcard__side--back h4 {
@@ -527,15 +535,15 @@
 
 .mform__month,
 .mform__month-brown {
-  position: absolute !important;
-  top: 20.5% !important;
-  left: 5%;
+
   width: 10rem;
   font-size: 1.15rem;
   font-family: "Mogra", system-ui;
   justify-content: center;
   background-color: white;
   border-radius: 0.25rem;
+  margin-left: auto;
+  height: min-content;
 }
 
 .mform__month--button,

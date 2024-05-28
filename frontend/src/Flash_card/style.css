@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -368,6 +370,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  gap: 1rem;
 }
 
 .fstudy__header {
@@ -382,9 +385,12 @@
 }
 
 .fstudy__pen {
-  height: 1.6rem;
-  width: 1.6rem;
-  fill: white;
+  height: 2.8rem;
+  width: 2.8rem;
+  padding: .2rem;
+  fill: #7a4a4a;
+  background-color: #fff;
+  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -632,6 +638,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Dosis", sans-serif !important;
+}
+
+.fcard__side--back * {
+
+  font-family: "Dosis", sans-serif !important;
 }
 
 .fcard__side:hover .fcard__side--front {
@@ -658,4 +670,9 @@
 .fquiz__next:hover {
   background-color: transparent;
 
+}
+
+.fquizzes__answer {
+  font-family: "Dosis", sans-serif !important;
+  font-weight: 800;
 }

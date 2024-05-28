@@ -2,6 +2,7 @@ import Card from "../models/card.model.js";
 import Course from "../models/course.model.js";
 import Folder from "../models/folder.model.js";
 import mongoose from "mongoose";
+import User from "../models/user.model.js";
 
 const getAll = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ const getAll = async (req, res) => {
 const getMyCourses = async (req, res) => {
   const { userId } = req.params;
   try {
-    const courses = await Course.findOne({ userId });
+    const courses = await Course.find({ userId });
 
     return res.status(200).json(courses);
   } catch (error) {
@@ -54,7 +55,7 @@ const create = async (req, res) => {
       await Folder.findByIdAndUpdate(_folderId, {$push: {courses: newCourse._id}});
     };
 
-  
+    await User.findByIdAndUpdate(req.payload.id, {$push: {courses: newCourse._id}})
 
     const cardIds = [];
     for (let card of listCards) {
@@ -120,8 +121,6 @@ const deleteCourse = async (req, res) => {
 
     const cards = foundCourse.cards;
 
-    console.log(cards);
-
     for (let card of cards) {
       await Card.findByIdAndDelete(card);
     }
@@ -156,6 +155,19 @@ const getOldestToNewest = async (req, res, next) => {
   }
 }
 
+const getList = async (req, res) => {
+  const { limit } = req.query;
+
+  try {
+    const courses = await Course.aggregate([
+      { $sample: { size: parseInt(limit, 10) || 10 } }
+    ]);
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
 export default {
   getAll,
   getMyCourses,
@@ -165,4 +177,5 @@ export default {
   deleteCourse,
   getLatestToOldest,
   getOldestToNewest,
+  getList,
 }

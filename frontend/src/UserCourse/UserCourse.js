@@ -181,7 +181,7 @@ function UserCourse(User) {
       </form>
 
       <div className="navigation">
-        <div className="navigation__logo">
+        <div className="navigation__logo" onClick={() => navigate("/")}>
           <img
             src="img/cake-logo-small.png"
             alt=""
@@ -237,12 +237,12 @@ function UserCourse(User) {
               <div className="navigation__dropdown-item-container">
                 <a href="#" className="navigation__dropdown-item">
                   <h6>Animals</h6>
-                  <img src="img/avatar1.png" alt="" />
+                  <img src="img/avatar.jpeg" alt="" />
                 </a>
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="navigation__dropdown-item">
                     <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
+                    <img src="img/avatar.jpeg" alt="" />
                   </div>
                 ))}
               </div>
@@ -261,7 +261,7 @@ function UserCourse(User) {
               Language: VN
             </a>
           </li>
-          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
+          <img className="navigation__avatar" src="img/avatar.jpeg" alt="" />
         </ul>
       </div>
 
