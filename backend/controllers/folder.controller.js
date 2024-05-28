@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
   try {
-    const folders = await Folder.find();
+    const folders = await Folder.find().populate("userId");
     return res.status(200).json(folders);
   } catch (error) {
     return res.status(500).json({ message: error });

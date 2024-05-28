@@ -1,0 +1,51 @@
+.admin__container {
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  background: #f1f1f1;
+  border: none;
+  outline: none;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: #fff;
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+
+.admin__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin__table th, .admin__table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.admin__table th {
+  background-color: #f4f4f4;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #d9534f;
+  border: none;
+  outline: none;
+}
+

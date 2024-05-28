@@ -6,7 +6,7 @@ import User from "../models/user.model.js";
 
 const getAll = async (req, res) => {
   try {
-    const courses = await Course.find();
+    const courses = await Course.find().populate("userId").populate("folders").populate("cards");
     return res.status(200).json(courses);
   } catch (error) {
     return res.status(500).json({ message: error });
