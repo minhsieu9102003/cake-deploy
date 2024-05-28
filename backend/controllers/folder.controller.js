@@ -1,4 +1,5 @@
 import Folder from "../models/folder.model.js";
+import User from "../models/user.model.js";
 import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
@@ -14,7 +15,7 @@ const getOne = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const folder = await Folder.findById(id);
+    const folder = await Folder.findById(id).populate("courses");
     if (!folder) return res.status(404).json({ message: "Folder not found" });
 
     return res.status(200).json(folder);
@@ -52,6 +53,7 @@ const create = async (req, res) => {
   try {
     const newFolder = await new Folder(req.body);
     const folder = await newFolder.save();
+    await User.findByIdAndUpdate(req.payload.id, {$push: {folders: folder._id}})
     return res.status(201).json(folder);
   } catch (error) {
     return res.status(500).json({ message: error });
@@ -67,7 +69,7 @@ const update = async (req, res) => {
 
     return res.status(200).json({ message: "Update successfully!" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -110,6 +112,37 @@ const deleteCourse = async (req, res, next) => {
   };
 };
 
+const getList = async (req, res) => {
+  const { limit } = req.query;
+
+  try {
+    const folders = await Folder.aggregate([
+      { $sample: { size: parseInt(limit, 10) || 10 } }
+    ]);
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
+const getLatestToOldest = async (req, res, next) => {
+  try {
+    const folders = await Folder.find().sort({ updatedAt: -1 });
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getOldestToNewest = async (req, res, next) => {
+  try {
+    const folders = await Folder.find().sort({ updatedAt: 1 });
+    return res.status(200).json(folders);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 export default {
   getAll,
   getMyFolders,
@@ -120,4 +153,7 @@ export default {
   addCourse,
   deleteCourse,
   getCoursesInFolder,
+  getLatestToOldest,
+  getOldestToNewest,
+  getList,
 }

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./style.css";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Create_quiz = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const Create_quiz = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [listCard, setListCard] = useState([]);
+  const folderId = useParams();
 
   useEffect(() => {
     gsap.to(".myElement", {
@@ -32,20 +35,8 @@ const Create_quiz = () => {
       },
     });
     tl.to(".myElement", { x: 100 });
-    const lenis = new window.Lenis({
-      lerp: 0.1,
-      smooth: true,
-      inertia: 0.75,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -58,7 +49,7 @@ const Create_quiz = () => {
       },
     });
 
-    tl.to(".navigation__dropdown-list", {
+    tl.to(".unavigation__dropdown-list", {
       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
     });
 
@@ -80,7 +71,7 @@ const Create_quiz = () => {
   };
 
   const handleDeleteClick = (index) => {
-    if(count > 4) {
+    if (count > 4) {
       console.log(index);
       const newCards = listCard.filter((_, i) => i !== index);
       setListCard(newCards);
@@ -91,7 +82,7 @@ const Create_quiz = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
@@ -100,16 +91,17 @@ const Create_quiz = () => {
         title,
         description,
         listCards: listCard,
+        folderId: folderId.folderId,
       }, config);
 
       if (response.status === 201 || response.status === 200) {
         //alert('Login successful!');
-        navigate('/course');
+        navigate(`/course/${response.data._id}`);
       } else {
-        alert('Failed to create. Please try again.');
+        alert("Failed to create. Please try again.");
       }
     } catch (error) {
-      console.error('Error during Create:', error.response?.data || error.message);
+      console.error("Error during Create:", error.response?.data || error.message);
       alert(`Create failed: ${error.response?.data?.message || error.message}`);
     }
   };
@@ -135,93 +127,15 @@ const Create_quiz = () => {
   };
 
   return (
-    <div style={{ backdropFilter: '#yellow' }}>
-      <div className="navigation">
-        <div className="navigation__logo">
-          <img
-            src="img/cake-logo-small.png"
-            alt=""
-            className="navigation__logo-img"
-          />
-          <div className="navigation__brand">Cake</div>
-        </div>
+    <div style={{ backdropFilter: "#yellow" }}>
+      <Header />
 
-        <div className="navigation__search-box">
-          <svg
-            className="navigation__search-box-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 32 32"
-          >
-            <path d="M 19 3 C 13.488281 3 9 7.488281 9 13 C 9 15.394531 9.839844 17.589844 11.25 19.3125 L 3.28125 27.28125 L 4.71875 28.71875 L 12.6875 20.75 C 14.410156 22.160156 16.605469 23 19 23 C 24.511719 23 29 18.511719 29 13 C 29 7.488281 24.511719 3 19 3 Z M 19 5 C 23.429688 5 27 8.570313 27 13 C 27 17.429688 23.429688 21 19 21 C 14.570313 21 11 17.429688 11 13 C 11 8.570313 14.570313 5 19 5 Z" />
-          </svg>
-          <input
-            className="navigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
-        </div>
-
-        <ul className="navigation__link">
-          <div className="navigation__dropdown">
-            <button onClick={handleDropdownClick}>
-              <span>Your library</span>
-              <svg
-                width="15"
-                className="form__month--arrow-brown"
-                height="15"
-                viewBox="0 0 28 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z"
-                  fill="#734A4A"
-                />
-              </svg>
-            </button>
-            <ul className="navigation__dropdown-list">
-              <div className="navigation__dropdown-button-container">
-                <button className="navigation__dropdown-button navigation__dropdown-button-1">
-                  Flash-slices
-                </button>
-                <button className="navigation__dropdown-button navigation__dropdown-button-2">
-                  Quick-bites
-                </button>
-              </div>
-              <div className="navigation__dropdown-item-container">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="navigation__dropdown-item">
-                    <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
-                  </div>
-                ))}
-              </div>
-              <a className="navigation__dropdown-all" href="/all">
-                All
-              </a>
-            </ul>
-          </div>
-
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="/contact">
-              Help Center
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="/vn">
-              Language: VN
-            </a>
-          </li>
-          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
-        </ul>
-      </div>
-
-      <div className="first">
-        <div className="first__heading">
-          <div className="first__title">
+      <div className="ufirst">
+        <div className="ufirst__heading">
+          <div className="ufirst__title">
             <h1>Create Course</h1>
             <svg
-              className="first__paw"
+              className="ufirst__paw"
               fill="#000000"
               width="800px"
               height="800px"
@@ -231,13 +145,13 @@ const Create_quiz = () => {
               <path d="M189.02051,145.33984A31.35052,31.35052,0,0,1,174.0918,126.606a47.99847,47.99847,0,0,0-92.18262-.00635,31.35,31.35,0,0,1-14.92969,18.74023,44.00739,44.00739,0,0,0,38.11719,79.21094,60.16331,60.16331,0,0,1,45.80664,0,44.00678,44.00678,0,0,0,38.11719-79.21094ZM168,204a19.86485,19.86485,0,0,1-7.80078-1.57568c-.04395-.019-.08887-.0376-.13379-.05616a84.02637,84.02637,0,0,0-64.13086,0c-.04492.01856-.08984.03711-.13379.05616a20.00673,20.00673,0,0,1-17.31445-36.02246c.03515-.01954.07129-.03907.10644-.05909A55.21137,55.21137,0,0,0,104.957,133.29541a23.99908,23.99908,0,0,1,46.08887.00439,55.20367,55.20367,0,0,0,26.36133,33.043c.03515.02.07129.03955.10644.05909A20.00364,20.00364,0,0,1,168,204Zm64-100a24,24,0,1,1-24-24A23.99994,23.99994,0,0,1,232,104ZM48,128a24,24,0,1,1,24-24A23.99994,23.99994,0,0,1,48,128ZM72,56A24,24,0,1,1,96,80,23.99994,23.99994,0,0,1,72,56Zm64,0a24,24,0,1,1,24,24A23.99994,23.99994,0,0,1,136,56Z" />
             </svg>
           </div>
-          
+          <Link to="/profile">
           <button
             type="button"
-            // onClick={() => handleDeleteClick(i)}
+          // onClick={() => handleDeleteClick(i)}
           >
             <svg
-              className="first__back"
+              className="ufirst__back"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 128 128"
             >
@@ -256,13 +170,14 @@ const Create_quiz = () => {
               </g>
             </svg>
           </button>
+          </Link>
         </div>
-        <div className="first__description">Create a new course</div>
-        <form action="" className="first__form">
+        <div className="ufirst__description">Create a new course</div>
+        <form action="" className="ufirst__form">
           <input
             type="text"
             placeholder="Enter your course' title"
-            className="first__title-input"
+            className="ufirst__title-input"
             id="title"
             name="title"
             value={title}
@@ -272,7 +187,7 @@ const Create_quiz = () => {
           <input
             type="text"
             placeholder="Description"
-            className="first__title-input"
+            className="ufirst__title-input"
             id="description"
             name="description"
             value={description}
@@ -280,15 +195,15 @@ const Create_quiz = () => {
             required
           />
           {Array.from({ length: count }).map((_, i) => (
-            <div key={i} className="first__card-input">
-              <div className="first__card-input-top">
-                <div className="first__card-input-top-number">
+            <div key={i} className="ufirst__card-input">
+              <div className="ufirst__card-input-top">
+                <div className="ufirst__card-input-top-number">
                   <span>{i + 1}</span>
                 </div>
                 {count > 4 && (
                   <button
                     type="button"
-                    className="first__card-button"
+                    className="ufirst__card-button"
                     onClick={() => handleDeleteClick(i)}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
@@ -300,8 +215,8 @@ const Create_quiz = () => {
                   </button>
                 )}
               </div>
-              <div className="first__card-input-bot">
-                <div className="first__word-input">
+              <div className="ufirst__card-input-bot">
+                <div className="ufirst__word-input">
                   <input
                     type="text"
                     id={`quizzTitle${i + 1}`}
@@ -311,7 +226,7 @@ const Create_quiz = () => {
                   />
                   <label htmlFor={`quizzTitle${i + 1}`}>Word</label>
                 </div>
-                <div className="first__meaning-input">
+                <div className="ufirst__meaning-input">
                   <input
                     type="text"
                     id={`quizzMeaning${i + 1}`}
@@ -324,11 +239,7 @@ const Create_quiz = () => {
               </div>
             </div>
           ))}
-          <button
-            type="button"
-            className="first__plus"
-            onClick={handlePopupClick}
-          >
+          <button type="button" className="ufirst__plus" onClick={handlePopupClick}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
               <path
                 style={{ fill: "rgb(193, 193, 193)" }}
@@ -336,40 +247,15 @@ const Create_quiz = () => {
               />
             </svg>
           </button>
-          <div className="first__submit-container">
-            <button className="first__submit" type="submit" onClick={handleSubmit}>
+          <div className="ufirst__submit-container">
+            <button className="ufirst__submit" type="submit" onClick={handleSubmit}>
               Save
             </button>
           </div>
         </form>
       </div>
 
-      <footer className="footer">
-        <div className="footer__img-container">
-          <img src="img/cake-logo-big.png" alt="" className="footer__logo" />
-          <h1 className="footer__brand">CAKE</h1>
-        </div>
-        <div className="footer__text-container">
-          <h3 className="footer__h3-author">Author</h3>
-          {["minh", "minh", "minh", "nam"].map((author, i) => (
-            <h4 key={i} className={`footer__h4-author-${i + 1}`}>
-              {author}
-            </h4>
-          ))}
-          <h3 className="footer__h3-about">About CAKE</h3>
-          <h4 className="footer__h4-about-1">How CAKE works</h4>
-          <h4 className="footer__h4-about-2">Q&A</h4>
-          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
-          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="footer__text-container-1">
-          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">
-            A project for Hanoi University of Science and Technology's Web
-            Subject Course
-          </h4>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

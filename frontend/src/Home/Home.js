@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Login from "../Login/Login";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 //import { Link } from 'react-router-dom';
@@ -16,10 +14,10 @@ import pawWatermark from "../img/paw-water-mark.png";
 import hatWatermark from "../img/hat-water-mark.png";
 import cakeLogoBig from "../img/cake-logo-big.png";
 import "./style.css";
+import Footer from "../components/footer/Footer";
 //import  './main.scss'
 gsap.registerPlugin(ScrollTrigger);
 function Home() {
-  const [showLogin, setShowLogin] = useState(false);
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -38,6 +36,7 @@ function Home() {
         toggleActions: "play none none none",
       },
     });
+
     tl.to(".myElement", { x: 100 });
 
     // Animate the header
@@ -72,26 +71,26 @@ function Home() {
         duration: 1,
       },
       "-=.75"
-    );
+    )
 
-    const lenis = new window.Lenis({
-      lerp: 0.1,
-      smooth: true,
-      inertia: 0.75,
-    });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
+
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (token && userId) {
+      navigate(0);
+    }
+
+  }, [token, userId, navigate]);
 
   return (
     <>
@@ -100,25 +99,10 @@ function Home() {
           <img src={logo} alt="Cake Logo" className="navigation__logo-img" />
           <div className="navigation__brand">Cake</div>
         </div>
-        <div className="navigation__search-box">
-          <svg className="navigation__search-box-icon">
-            <use href="../img/symbol-defs.svg#icon-search"></use>
-          </svg>
-          <input
-            className="navigation__search-box-bar"
-            type="text"
-            placeholder="Search for folders, tutor,.."
-          />
-        </div>
         <ul className="navigation__link">
           <li className="navigation__link-btn">
             <a className="navigation__link-btn-a" href="#">
               Help Center
-            </a>
-          </li>
-          <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Language: VN
             </a>
           </li>
           <li className="navigation__link-btn">
@@ -130,6 +114,17 @@ function Home() {
             <Link to="/signup" className="navigation__link-btn-a sign-up">
               Sign up
             </Link>
+          </li>
+          <li className="navigation__link-btn-menu">
+            <svg className='navigation__link-menu' width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+              <g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="#7a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+
+            </svg>
           </li>
         </ul>
       </div>
@@ -143,7 +138,7 @@ function Home() {
             Enjoy quick progress in a supportive environment. Start your
             simplified journey to fluency today
           </h4>
-          <a href="#" className="header__button button--brown button">
+          <a href="/login" className="header__button button--brown button">
             Let's go
           </a>
           <img src={watermark} className="header__img" alt="Watermark" />
@@ -183,36 +178,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer__img-container">
-          <img
-            src={cakeLogoBig}
-            alt="Large Cake Logo"
-            className="footer__logo"
-          />
-          <h1 className="footer__brand">CAKE</h1>
-        </div>
-        <div className="footer__text-container">
-          <h3 className="footer__h3-author">Author</h3>
-          <h4 className="footer__h4-author-1">minh</h4>
-          <h4 className="footer__h4-author-2">minh</h4>
-          <h4 className="footer__h4-author-3">minh</h4>
-          <h4 className="footer__h4-author-4">nam</h4>
-          <h3 className="footer__h3-about">About CAKE</h3>
-          <h4 className="footer__h4-about-1">How CAKE works</h4>
-          <h4 className="footer__h4-about-2">Q&A</h4>
-          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
-          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="footer__text-container-1">
-          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">
-            A project for Hanoi University of Science and Technology's Web
-            Subject Course
-          </h4>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

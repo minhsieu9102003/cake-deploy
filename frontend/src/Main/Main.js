@@ -1,22 +1,62 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
+import axios from "axios";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 import "./style.css"; // Assuming you'll also style it using Main.css
 
 const Main = () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState({
+    folders: [],
+    courses: [],
+    users: [],
+  });
+  const [folders, setFolders] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    if (token && userId) {
-      alert(`Welcome, User ID: ${userId}\nYour token: ${token}`);
-    } else {
+    if (!token || !userId) {
       alert("No token found. Redirecting to login.");
       navigate("/login");
+      return;
     }
+
+    const fetchFolders = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/folders/list/${userId}?limit=8`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setFolders(response.data);
+      } catch (error) {
+        console.error("Error fetching folders:", error);
+      }
+    };
+
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/courses/list/${userId}?limit=8`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchFolders();
+    fetchCourses();
   }, [token, userId, navigate]);
 
   useEffect(() => {
@@ -39,26 +79,13 @@ const Main = () => {
     });
     tl.to(".myElement", { x: 100 });
 
-    const lenis = new window.Lenis({
-      lerp: 0.1,
-      smooth: true,
-      inertia: 0.75,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
     return () => {
-      lenis.destroy();
       gsap.killTweensOf("*");
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  const navigationDropdown = useRef(null);
+  const mnavigationDropdown = useRef(null);
   const [status, setStatus] = useState(false);
   const tl = useRef(
     gsap.timeline({
@@ -72,7 +99,7 @@ const Main = () => {
 
   useEffect(() => {
     // Set up the GSAP animation timeline
-    tl.current.to(".navigation__dropdown-list", {
+    tl.current.to(".mnavigation__dropdown-list", {
       transform: "scaleY(1)",
     });
   }, []);
@@ -90,6 +117,8 @@ const Main = () => {
   const [selectedValue, setSelectedValue] = useState("latest");
   const [isDropdownOpenBrown, setDropdownOpenBrown] = useState(false);
   const [selectedValueBrown, setSelectedValueBrown] = useState("latest");
+  const [popupStatus, setPopupStatus] = useState(false);
+  const [newFolderTitle, setNewFolderTitle] = useState("");
 
   const toggleDropdown1 = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -102,114 +131,197 @@ const Main = () => {
   const selectOption = (value) => {
     setSelectedValue(value);
     setDropdownOpen(false);
+    if (value === "latest") {
+      fetchLatestFolders();
+    } else if (value === "oldest") {
+      fetchOldestFolders();
+    }
   };
 
   const selectOptionBrown = (value) => {
     setSelectedValueBrown(value);
     setDropdownOpenBrown(false);
+    if (value === "latest") {
+      fetchLatestCourses();
+    } else if (value === "oldest") {
+      fetchOldestCourses();
+    }
+  };
+
+  const fetchLatestFolders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/folders/latest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFolders(response.data);
+    } catch (error) {
+      console.error("Error fetching latest folders:", error);
+    }
+  };
+
+  const fetchOldestFolders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/folders/oldest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFolders(response.data);
+    } catch (error) {
+      console.error("Error fetching oldest folders:", error);
+    }
+  };
+
+  const fetchLatestCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses/latest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Error fetching latest courses:", error);
+    }
+  };
+
+  const fetchOldestCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses/oldest", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Error fetching oldest courses:", error);
+    }
   };
 
   const handleAvatarClick = () => {
-    navigate(`/folder`, { state: { token, userId } });
+    navigate(`/profile`, { state: { token, userId } });
+  };
+
+  const handleSearchChange = async (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/other/search/${query}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    } else {
+      setSearchResults({ folders: [], courses: [], users: [] });
+    }
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/folders",
+        { title: newFolderTitle, userId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFolders([...folders, response.data]);
+      setPopupStatus(false);
+      setNewFolderTitle("");
+    } catch (error) {
+      console.error("Error creating folder:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setNewFolderTitle(event.target.value);
   };
 
   return (
-    <div className="all">
-      <div className="navigation">
-        <div className="navigation__logo">
-          <img src="img/cake-logo-small.png" alt="" className="navigation__logo-img" />
-          <div className="navigation__brand">Cake</div>
-        </div>
-
-        <div className="navigation__search-box">
-          <svg className="navigation__search-box-icon">
-            <use xlinkHref="img/symbol-defs.svg#icon-search"></use>
-          </svg>
-          <input className="navigation__search-box-bar" type="text" placeholder="Search for folders, tutor,.." />
-        </div>
-
-        <ul className="navigation__link">
-          <div className="navigation__dropdown">
-            <button onClick={toggleDropdown} ref={navigationDropdown}>
-              <span>Your library</span>
-              <svg width="28" className="form__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
-              </svg>
-            </button>
-            <ul className="navigation__dropdown-list">
-              <div className="navigation__dropdown-button-container">
-                <button className="navigation__dropdown-button navigation__dropdown-button-1">Flash-slices</button>
-                <button className="navigation__dropdown-button navigation__dropdown-button-2">Quick-bites</button>
-              </div>
-              <div className="navigation__dropdown-item-container">
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <div key={index} className="navigation__dropdown-item">
-                    <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
-                  </div>
-                ))}
-              </div>
-              <a className="navigation__dropdown-all" href="#">All</a>
-            </ul>
-          </div>
-
-          <li className="navigation__link-btn"><a className="navigation__link-btn-a" href="#">Help Center</a></li>
-          <li className="navigation__link-btn"><a className="navigation__link-btn-a" href="#">Language: VN</a></li>
-          <img className="navigation__avatar" src="img/avatar2.png" alt="User Avatar" onClick={handleAvatarClick} />
-        </ul>
-      </div>
-      <section className="mainn">
-        <div className="yellow">
-          <img src="img/bg1.PNG" alt="" className="yellow__bg" />
-          <h1 className="yellow__header">Quick-bites</h1>
-          <div className="form__month">
-            <button className="form__month--button" onClick={toggleDropdown1} role="combobox" aria-labelledby="select button"
-              aria-haspopup="listbox" aria-expanded={isDropdownOpen} aria-controls="select-dropdown">
-              <span className="form__month--selected-value">latest</span>
-              {/* SVG code for the button */}
-              <svg width="28" className="form__month--arrow" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
-              </svg>
-            </button>
-            {isDropdownOpen && (
-              <ul className="form__month--dropdown" onClick={toggleDropdown1} role="listbox" id="select-dropdown">
-                <li role="option" onClick={() => selectOption("latest")}>
-                  <input type="radio" id="jan" name="social-account" />
-                  <label htmlFor="jan">latest</label>
-                </li>
-                <li role="option" onClick={() => selectOption("most used")}>
-                  <input type="radio" id="feb" name="social-account" />
-                  <label htmlFor="feb">most used</label>
-                </li>
-                <li role="option" onClick={() => selectOption("oldest")}>
-                  <input type="radio" id="mar" name="social-account" />
-                  <label htmlFor="mar">oldest</label>
-                </li>
-              </ul>
-            )}
-          </div>
-          <button className="yellow__add">
-            {/* SVG for the add button */}
-            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                fill="#734A4A" />
+    <div className="mall">
+      <form
+        className="main__popup"
+        style={{ display: popupStatus ? "flex" : "none" }}
+        onSubmit={handleFormSubmit}
+      >
+        <div className="main__popup-inner">
+          <button
+            className="main__cross"
+            type="button"
+            onClick={() => setPopupStatus(false)}
+          >
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+            >
+              <path d="m4.12 6.137 1.521-1.52 7 7-1.52 1.52z" />
+              <path d="m4.12 11.61 7.001-7 1.52 1.52-7 7z" />
             </svg>
           </button>
-          <div className="yellow__card-container">
-            {/* Card containers with repeated card structures */}
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="card">
-                <div className="card__side">
-                  <div className="card__side card__side--front">
+          <h1>Creating new folder</h1>
+          <input
+            type="text"
+            placeholder="Folder title"
+            value={newFolderTitle}
+            onChange={handleInputChange}
+            required
+          />
+          <div className="main__popup-submit-container">
+            <button className="main__popup-submit" type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <Header />
+
+      <section className="mmainn">
+        <div className="myellow">
+          <div className="mmain__top">
+            <h1 className="myellow__header">Folders</h1>
+            <button
+              className="myellow__add"
+              onClick={() => setPopupStatus(true)}
+            >
+              <svg
+                width="37"
+                height="37"
+                viewBox="0 0 37 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
+                  fill="#734A4A"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div className="myellow__card-container">
+            {folders.map((folder) => (
+              <div key={folder._id} className="mcard">
+                <div className="mcard__side" onClick={() => navigate(`/folder/${folder._id}`)}>
+                  <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
-                  <div className="card__side card__side--back card__side--back-1">
-                    <h4>Animals</h4>
-                    <h5>50 quizzes</h5>
+                  <div className="mcard__side mcard__side--back mcard__side--back-1">
+                    <h4>{folder.title}</h4>
+                    <h6>{folder.description}</h6>
+                    <h5>{folder.courses.length} courses</h5>
                     <div>
-                      <img src="img/avatar1.png" alt="" />
-                      <h6>anhlenguyen</h6>
+                      <img src="img/avatar.jpeg" alt="" />
+                      <h6>{folder.creatorName}</h6>
                     </div>
                   </div>
                 </div>
@@ -217,57 +329,43 @@ const Main = () => {
             ))}
           </div>
         </div>
-        <div className="brown">
-          <img src="img/bg2.PNG" alt="" className="brown__bg" />
-          <h1 className="brown__header">Flash-slices</h1>
-          <div className="form__month-brown">
-            <button className="form__month--button-brown" onClick={toggleDropdownBrown} role="combobox" aria-labelledby="select button"
-              aria-haspopup="listbox" aria-expanded={isDropdownOpenBrown} aria-controls="select-dropdown">
-              <span className="form__month--selected-value-brown">latest</span>
-              {/* SVG code for the button */}
-              <svg width="28" className="form__month--arrow-brown" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.2862 21.923C16.3437 25.1569 11.6563 25.1569 9.71382 21.923L1.22939 7.79826C-0.772414 4.46568 1.62799 0.223642 5.51557 0.223642L22.4844 0.223642C26.372 0.223642 28.7724 4.46568 26.7706 7.79826L18.2862 21.923Z" fill="#734A4A" />
+        <div className="mbrown">
+          <div className="mbrown__top">
+            <h1 className="mbrown__header">Courses</h1>
+            <button
+              className="mbrown__add"
+              onClick={() => navigate(`/create_course`)}
+            >
+              <svg
+                width="37"
+                height="37"
+                viewBox="0 0 37 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
+                  fill="#734A4A"
+                />
               </svg>
             </button>
-            {isDropdownOpenBrown && (
-              <ul className="form__month--dropdown-brown" onClick={toggleDropdownBrown} role="listbox" id="select-dropdown">
-                <li role="option" onClick={() => selectOptionBrown("latest")}>
-                  <input type="radio" id="jan" name="social-account" />
-                  <label htmlFor="jan">latest</label>
-                </li>
-                <li role="option" onClick={() => selectOptionBrown("most used")}>
-                  <input type="radio" id="feb" name="social-account" />
-                  <label htmlFor="feb">most used</label>
-                </li>
-                <li role="option" onClick={() => selectOptionBrown("oldest")}>
-                  <input type="radio" id="mar" name="social-account" />
-                  <label htmlFor="mar">oldest</label>
-                </li>
-              </ul>
-            )}
           </div>
-          <button className="brown__add">
-            {/* SVG for the add button */}
-            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                fill="#734A4A" />
-            </svg>
-          </button>
-          <div className="brown__card-container">
-            {/* Card containers with repeated card structures */}
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="card">
-                <div className="card__side">
-                  <div className="card__side card__side--front">
+
+          <div className="mbrown__card-container">
+            {courses.map((course) => (
+              <div key={course._id} className="mcard">
+                <div className="mcard__side" onClick={() => navigate(`/course/${course._id}`)}>
+                  <div className="mcard__side mcard__side--front">
                     <img src="img/card1.png" alt="" />
                   </div>
-                  <div className="card__side card__side--back card__side--back-1">
-                    <h4>Animals</h4>
-                    <h5>50 quizzes</h5>
+                  <div className="mcard__side mcard__side--back mcard__side--back-1">
+                    <h4>{course.title}</h4>
+                    <h6>{course.description}</h6>
+                    <h5>{course.cards.length} cards</h5>
                     <div>
-                      <img src="img/avatar1.png" alt="" />
-                      <h6>anhlenguyen</h6>
+                      <img src="img/avatar.jpeg" alt="" />
                     </div>
                   </div>
                 </div>
@@ -276,28 +374,7 @@ const Main = () => {
           </div>
         </div>
       </section>
-      <footer className="footer">
-        <div className="footer__img-container">
-          <img src="img/cake-logo-big.png" alt="Large Cake Logo" className="footer__logo" />
-          <h1 className="footer__brand">CAKE</h1>
-        </div>
-        <div className="footer__text-container">
-          <h3 className="footer__h3-author">Author</h3>
-          <h4 className="footer__h4-author-1">minh</h4>
-          <h4 className="footer__h4-author-2">minh</h4>
-          <h4 className="footer__h4-author-3">minh</h4>
-          <h4 className="footer__h4-author-4">nam</h4>
-          <h3 className="footer__h3-about">About CAKE</h3>
-          <h4 className="footer__h4-about-1">How CAKE works</h4>
-          <h4 className="footer__h4-about-2">Q&A</h4>
-          <h3 className="footer__h3-term-of-use">Terms of Use</h3>
-          <h4 className="footer__h4-term-of-use">Terms & Privacy</h4>
-        </div>
-        <div className="footer__text-container-1">
-          <h3 className="footer__h3-acknowledge">University Acknowledgement</h3>
-          <h4 className="footer__h4-acknowledge">A project for Hanoi University of Science and Technology's Web Subject Course</h4>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

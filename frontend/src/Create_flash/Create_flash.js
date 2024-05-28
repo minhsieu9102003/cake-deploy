@@ -82,7 +82,7 @@ const Create_flash = () => {
   return (
     <div>
       <div className="navigation">
-        <div className="navigation__logo">
+        <div className="navigation__logo" onClick={() => navigate("/")}>
           <img
             src="img/cake-logo-small.png"
             alt=""
@@ -141,7 +141,7 @@ const Create_flash = () => {
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="navigation__dropdown-item">
                     <h6>Animals</h6>
-                    <img src="img/avatar1.png" alt="" />
+                    <img src="img/avatar.jpeg" alt="" />
                   </div>
                 ))}
               </div>
@@ -161,7 +161,7 @@ const Create_flash = () => {
               Language: VN
             </a>
           </li>
-          <img className="navigation__avatar" src="img/avatar2.png" alt="" />
+          <img className="navigation__avatar" src="img/avatar.jpeg" alt="" />
         </ul>
       </div>
 
