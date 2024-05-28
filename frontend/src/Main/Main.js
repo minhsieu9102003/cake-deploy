@@ -287,12 +287,23 @@ const Main = () => {
         <div className="myellow">
           <div className="mmain__top">
             <h1 className="myellow__header">Folders</h1>
-            <button className="myellow__add" onClick={() => setPopupStatus(true)}>
-              {/* SVG for the add button */}
-              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
+            <button
+              className="myellow__add"
+              onClick={() => setPopupStatus(true)}
+            >
+              <svg
+                width="37"
+                height="37"
+                viewBox="0 0 37 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                  fill="#734A4A" />
+                  fill="#734A4A"
+                />
               </svg>
             </button>
           </div>
@@ -321,12 +332,23 @@ const Main = () => {
         <div className="mbrown">
           <div className="mbrown__top">
             <h1 className="mbrown__header">Courses</h1>
-            <button className="mbrown__add" onClick={() => navigate(`/create_course`)}>
-              {/* SVG for the add button */}
-              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
+            <button
+              className="mbrown__add"
+              onClick={() => navigate(`/create_course`)}
+            >
+              <svg
+                width="37"
+                height="37"
+                viewBox="0 0 37 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M17.25 35.5V36.5H19.25V35.5V19.25H35.5H36.5V17.25H35.5H19.25V1V0H17.25V1V17.25H1H0V19.25H1H17.25V35.5Z"
-                  fill="#734A4A" />
+                  fill="#734A4A"
+                />
               </svg>
             </button>
           </div>
