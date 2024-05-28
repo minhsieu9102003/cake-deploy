@@ -398,12 +398,17 @@
     width: 4rem;
     height: 4rem;
     fill: #7a4a4a;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    right: 0;
-    top: 5rem;
+    transform: rotate(-90deg);
     cursor: pointer;
+}
+
+.kfirst__back-container {
+    position: absolute;
+    right: 0;
+    width: 4rem;
+    height: 4rem;
+    top: 5rem;
+    z-index: 100000;
 }
 
 .form__month,

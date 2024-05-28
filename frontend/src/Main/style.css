@@ -462,6 +462,7 @@
   -webkit-transform: translate3d(0, 0, 0);
   z-index: 1;
   cursor: pointer;
+  display: none;
 }
 
 .mcard__side--front img {
@@ -471,7 +472,7 @@
 }
 
 .mcard__side--back {
-  transform: rotateY(180deg);
+  /* transform: rotateY(180deg); */
   border-radius: 4px;
   overflow: hidden;
   position: absolute;
@@ -486,6 +487,7 @@
   flex-direction: column;
   padding: 2rem 2rem;
   cursor: pointer;
+  border: 1px solid
 }
 
 .mcard__side--back h4 {

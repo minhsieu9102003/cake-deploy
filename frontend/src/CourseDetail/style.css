@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -839,8 +841,15 @@
 .card-value {
     margin-top: 10px;
     color: #666;
+    font-family: "Dosis", sans-serif;
+    font-weight: 800;
 }
 
+.course-detail-top-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
 .course-detail__name {
     font-family: 'Mogra';
@@ -856,17 +865,28 @@
 }
 
 .xstudy__pen {
-    height: 1.6rem;
-    width: 1.6rem;
+    height: 2.8rem;
+    width: 2.8rem;
     fill: white;
     cursor: pointer;
-  }
-  
-  .xstudy__arrow {
+    background-color: #7a4a4a;
+    border-radius: 50%;
+    padding: .2rem;
+}
+
+.xstudy__arrow {
     width: 3rem;
     height: 3rem;
     transform: rotate(-90deg);
     margin-left: auto;
-    fill: white;
+    fill: #7a4a4a;
     cursor: pointer;
-  }
+
+}
+
+.course-detail__desc {
+    color: #7a4a4a;
+    margin-left: 1.5rem;
+    font-family: 'Mogra';
+    margin-bottom: 2rem;
+}

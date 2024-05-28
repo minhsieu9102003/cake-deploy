@@ -81,13 +81,25 @@
 .pfnavigation__dropdown-content {
   display: flex;
   background: white;
+  flex-direction: column;
   border: 1px solid #ccc;
   padding: 10px;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  border-radius: 10px;
+}
+
+.pfnavigation__dropdown-content * {
+  font-family: 'Mogra';
+}
+
+.pfnavigation__dropdown-content a {
+  font-weight: 100 !important;
+  text-decoration: none;
 }
 
 .pfnavigation__dropdown-column {
@@ -261,9 +273,9 @@
   caret-color: #7a4a4a;
   border: none;
   outline-width: 0;
-  font-size: 1rem;
+  font-size: 1rem !important;
   color: #7a4a4a;
-  font-family: "Mogra", system-ui;
+  font-family: "Mogra", system-ui !important;
   font-weight: 400;
   font-style: normal;
   height: 100%;

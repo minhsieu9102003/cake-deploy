@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
 import { useNavigate } from "react-router-dom";
 import "./style.css"; // Adjust the path as necessary
-import logo from "./img/cake-logo-small.png";
-import avatar1 from "./img/avatar1.png";
-import avatar2 from "./img/avatar2.png";
 import orangeImage from "./img/orange.png";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -97,15 +93,7 @@ function FlashCard() {
         <div className="fstudy__top">
           <h1 className="fstudy__header">Animals</h1>
           <img src={orangeImage} alt="" className="fstudy__cake" />
-          <Link to={`/update_course/${courseId}`}>
-            <svg
-              className="fstudy__pen"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M20.7,5.537a1.024,1.024,0,0,1,0,1.448L8.527,19.158,3,21l1.842-5.527L17.015,3.3a1.024,1.024,0,0,1,1.448,0Z" />
-            </svg>
-          </Link>
+
           <Link to={`/course/${courseId}`}>
             <svg
               className="fstudy__arrow"

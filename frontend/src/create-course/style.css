@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -11,6 +13,12 @@
     background-color: white;
     justify-content: space-between;
     align-items: center;
+}
+
+input {
+    font-family: "Dosis", sans-serif !important;
+    font-weight: 800;
+    font-size: 1.5rem !important;
 }
 
 .unavigation__logo {
@@ -485,7 +493,7 @@ input:focus {
 
 .ufirst__word-input input,
 .ufirst__meaning-input input {
-    width: 90%;
+    width: 100%;
     padding: .5rem 0;
     font-size: 1.3rem;
     font-family: 'Mogra';

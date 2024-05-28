@@ -230,10 +230,10 @@ function Profile() {
       const updatedFolders = folders.map((folder) =>
         folder._id === selectedFolder
           ? {
-              ...folder,
-              title: newFolderTitle,
-              description: newFolderDescription,
-            }
+            ...folder,
+            title: newFolderTitle,
+            description: newFolderDescription,
+          }
           : folder
       );
       setFolders(updatedFolders);
@@ -330,7 +330,7 @@ function Profile() {
 
       <div className="kfirst">
         <div className="kfirst__heading">
-          <Link to="/">
+          <Link to="/" className='kfirst__back-container'>
             <svg
               className="kfirst__back"
               xmlns="http://www.w3.org/2000/svg"
@@ -357,7 +357,7 @@ function Profile() {
         </div>
         <div className="lprofile">
           <div className="lprofile__first">
-            <img className="lprofile__img" src="/img/avatar2.png" />
+            <img className="lprofile__img" src="/img/avatar.jpeg" />
             <h1 className="lprofile__username">{user?.username}</h1>
             <button className="lprofile__logout" onClick={handleLogout}>
               <span> Log out</span>
@@ -394,25 +394,22 @@ function Profile() {
         <div className="lprofile__swap">
           <button
             onClick={handleSwapFolders}
-            className={`lprofile__swap-folder ${
-              activeButton === "folders" ? "active" : ""
-            }`}
+            className={`lprofile__swap-folder ${activeButton === "folders" ? "active" : ""
+              }`}
           >
             Folder
           </button>
           <button
             onClick={handleSwapCourses}
-            className={`lprofile__swap-course ${
-              activeButton === "courses" ? "active" : ""
-            }`}
+            className={`lprofile__swap-course ${activeButton === "courses" ? "active" : ""
+              }`}
           >
             Course
           </button>
         </div>
         <div
-          className={`my__folders ${
-            activeButton === "folders" ? "" : "hidden"
-          }`}
+          className={`my__folders ${activeButton === "folders" ? "" : "hidden"
+            }`}
         >
           <h1>My folders</h1>
           <svg
@@ -443,9 +440,8 @@ function Profile() {
           </svg>
         </div>
         <div
-          className={`kfirst__filter1 ${
-            activeButton === "folders" ? "" : "hidden"
-          }`}
+          className={`kfirst__filter1 ${activeButton === "folders" ? "" : "hidden"
+            }`}
         ></div>
       </div>
 

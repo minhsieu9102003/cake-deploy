@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 html,
 body,
 #root {
@@ -481,6 +483,7 @@ body,
   width: 100%;
   row-gap: 2rem;
 
+
 }
 
 .hquiz__answer {
@@ -490,12 +493,13 @@ body,
   border-radius: 20px;
   width: 20rem;
   color: #7a4a4a;
-  font-family: "Nerko One", cursive;
+  font-family: "Dosis", sans-serif;
   font-size: 1.5rem;
   text-align: center;
   cursor: pointer;
   background-color: transparent;
   transition: all .1s ease-in-out;
+  font-weight: 800 !important;
 }
 
 .hquiz__answer:hover {
@@ -570,6 +574,11 @@ body,
   color: #7a4a4a;
   font-family: "Mogra", system-ui;
   margin: 3rem 0;
+}
+
+.hquizzes__answer {
+  font-family: "Dosis", sans-serif !important;
+  font-weight: 800;
 }
 
 .hquizzes__list {

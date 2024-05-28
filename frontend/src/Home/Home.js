@@ -106,11 +106,6 @@ function Home() {
             </a>
           </li>
           <li className="navigation__link-btn">
-            <a className="navigation__link-btn-a" href="#">
-              Language: VN
-            </a>
-          </li>
-          <li className="navigation__link-btn">
             <Link to="/login" className="navigation__link-btn-a">
               Sign in
             </Link>

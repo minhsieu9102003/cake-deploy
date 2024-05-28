@@ -184,7 +184,7 @@ const Quiz = () => {
 
         <div className="hauthor">
           <div className="hauthor__avt">
-            <img src="/img/avatar1.png" alt="" />
+            <img src="/img/avatar.jpeg" alt="" />
             <div className="havt__name">anhlenguyen</div>
           </div>
           <div className="hauthor__time">created in March 13rd 2024</div>
