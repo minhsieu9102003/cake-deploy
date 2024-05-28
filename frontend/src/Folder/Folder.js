@@ -214,7 +214,7 @@ function Folder(User) {
           </svg>
         </div>
         <div className="cfirst__filter">
-          <h2>{description} A great folder</h2>
+          <h2>{description}</h2>
         </div>
       </div>
 
