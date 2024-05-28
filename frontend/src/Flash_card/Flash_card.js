@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function FlashCard() {
   const [cards, setCards] = useState([]);
+  const [title, setTitle] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [completedCards, setCompletedCards] = useState([]);
   const { courseId } = useParams(); // Get courseId from URL parameters
@@ -54,7 +55,7 @@ function FlashCard() {
     const fetchCards = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/cards/course/${courseId}`,
+          `http://localhost:8000/courses/${courseId}`,
           {
             method: "GET",
             headers: {
@@ -66,8 +67,9 @@ function FlashCard() {
         console.log("Response:", response);
         if (response.ok) {
           const data = await response.json();
-          setCards(data);
-          localStorage.setItem(`cards_${courseId}`, JSON.stringify(data));
+          setCards(data.cards);
+          setTitle(data.title)
+          localStorage.setItem(`cards_${courseId}`, JSON.stringify(data.cards));
         } else {
           console.error("Failed to fetch cards");
         }
@@ -93,7 +95,7 @@ function FlashCard() {
 
       <section className="fmain">
         <div className="fstudy__top">
-          <h1 className="fstudy__header">Animals</h1>
+          <h1 className="fstudy__header">{title}</h1>
           <img src={orangeImage} alt="" className="fstudy__cake" />
 
           <Link to={`/course/${courseId}`}>

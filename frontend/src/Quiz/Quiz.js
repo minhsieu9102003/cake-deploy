@@ -16,6 +16,7 @@ const Quiz = () => {
   const [questionData, setQuestionData] = useState(null);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [course, setCourse] = useState("");
   const { courseId } = useParams();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -37,11 +38,12 @@ const Quiz = () => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const response = await axios.get(
-        `http://localhost:8000/cards/course/${courseId}`,
+        `http://localhost:8000/courses/${courseId}`,
         config
       );
 
-      setCards(response.data);
+      setCards(response.data.cards);
+      setCourse(response.data);
     } catch (error) {
       console.error("Error fetching cards:", error);
     }
@@ -105,7 +107,7 @@ const Quiz = () => {
 
       <section className="hmain">
         <div className="hstudy__top">
-          <h1 className="hstudy__header">Animals</h1>
+          <h1 className="hstudy__header">{course?.title}</h1>
 
           <Link to={`/update_course/${courseId}`}>
             <svg className="hstudy__pen">
@@ -185,9 +187,9 @@ const Quiz = () => {
         <div className="hauthor">
           <div className="hauthor__avt">
             <img src="/img/avatar2.png" alt="" />
-            <div className="havt__name">anhlenguyen</div>
+            {/* <div className="havt__name">anhlenguyen</div> */}
           </div>
-          <div className="hauthor__time">created in March 13rd 2024</div>
+          <div className="hauthor__time">Created At: {course?.createdAt}</div>
         </div>
 
         <h1 className="hquizzes__header">Quizzes List</h1>
