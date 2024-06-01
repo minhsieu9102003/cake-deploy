@@ -33,7 +33,11 @@ const login = async (req, res, next) => {
     const userId = req.user._id; // Assuming req.user is populated with the user object
 
     // Return both token and userId
-    return res.status(200).json({ token, userId });
+    return res.status(200).json({
+      token,
+      userId,
+      role: req.user.role,
+    });
   } catch (error) {
     return res.status(500).json({ message: error });
   }

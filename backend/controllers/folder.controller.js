@@ -72,7 +72,7 @@ const update = async (req, res) => {
 
     if (!foundFolder) return res.status(404).json({ message: "Folder not found" });
 
-    if (req.payload.id === foundFolder.userId) {
+    if (req.payload.id === foundFolder.userId.toString()) {
 
       await Folder.findByIdAndUpdate(id, req.body);
 
@@ -91,8 +91,9 @@ const deleteFolder = async (req, res) => {
 
     if (!foundFolder) return res.status(404).json({ message: "Folder not found" });
 
-    if (req.payload.id === foundFolder.userId || req.payload.role === "admin") {
+    if (req.payload.id === foundFolder.userId.toString() || req.payload.role === "admin") {
 
+      console.log("ok");
       await Folder.findByIdAndDelete(id);
 
       return res.status(200).json({ message: "Delete successfully!" });
@@ -106,9 +107,17 @@ const deleteFolder = async (req, res) => {
 const addCourse = async (req, res, next) => {
   const { folderId, courseId } = req.params;
   try {
-    const folder = await Folder.findByIdAndUpdate(folderId, { $push: { courses: courseId } }, { new: true });
+    const foundFolder = await Folder.findById(folderId);
 
-    return res.status(200).json(folder);
+    if (!foundFolder) return res.status(404).json({ message: 'Folder not found!' });
+
+    if (req.payload.id === foundFolder.userId.toString()) {
+
+      const folder = await Folder.findByIdAndUpdate(folderId, { $push: { courses: courseId } }, { new: true });
+
+      return res.status(200).json(folder);
+
+    } else return res.status(403).json({ message: "You are not allowed to add course to other's folder!" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
@@ -118,9 +127,17 @@ const addCourse = async (req, res, next) => {
 const deleteCourse = async (req, res, next) => {
   const { folderId, courseId } = req.params;
   try {
-    const folder = await Folder.findByIdAndUpdate(folderId, { $pull: { courses: courseId } });
+    const foundFolder = await Folder.findById(folderId);
 
-    return res.status(200).json({ message: "Delete course successfully!", folder });
+    if (!foundFolder) return res.status(404).json({ message: 'Folder not found!' });
+
+    if (req.payload.id === foundFolder.userId.toString()) {
+
+      const folder = await Folder.findByIdAndUpdate(folderId, { $pull: { courses: courseId } });
+
+      return res.status(200).json({ message: "Delete course successfully!", folder });
+
+    } else return res.status(403).json({ message: "You are not allowed to delete course in other's folder!" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

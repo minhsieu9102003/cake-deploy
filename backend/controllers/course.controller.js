@@ -40,7 +40,7 @@ const getOne = async (req, res) => {
 const create = async (req, res) => {
   const { title, description, listCards, folderId } = req.body;
   try {
-    
+
     const newCourse = await Course.create({
       title,
       description,
@@ -86,7 +86,7 @@ const update = async (req, res) => {
 
     if (!foundCourse) return res.status(404).json({ message: 'course not found!' });
 
-    if (req.payload.id === foundCourse.userId) {
+    if (req.payload.id === foundCourse.userId.toString()) {
 
       await Card.deleteMany({ courseId: id });
 
@@ -126,7 +126,7 @@ const deleteCourse = async (req, res) => {
 
     if (!foundCourse) return res.status(404).json({ message: "Course not found" });
 
-    if (req.payload.id === foundCourse.userId || req.payload.role === "admin") {
+    if (req.payload.id === foundCourse.userId.toString() || req.payload.role === "admin") {
 
       const cards = foundCourse.cards;
 
