@@ -3,11 +3,12 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
 import Footer from "../components/footer/Footer";
-import Header from "../components/header/Header";
+import { useNavigate } from "react-router-dom";
 import {showMessage} from "../components/show_message/ShowMessage";
 import "./style.css";
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("users");
   const [users, setUsers] = useState([]);
   const [folders, setFolders] = useState([]);
@@ -126,7 +127,24 @@ const Admin = () => {
 
   return (
     <div className="admin">
-      <Header />
+      <div className="pfnavigation">
+        <div className="pfnavigation__logo" onClick={() => navigate("/")}>
+          <img
+            src="/img/cake-logo-small.png"
+            alt=""
+            className="pfnavigation__logo-img"
+          />
+          <div className="pfnavigation__brand">Cake</div>
+        </div>
+        <ul className="pfnavigation__link">
+          <li className="pfnavigation__link-btn">
+            <a className="pfnavigation__link-btn-a" href="#">
+              Help Center
+            </a>
+          </li>
+          <img className="pfnavigation__avatar" src="/img/avatar2.png" alt=""/>
+        </ul>
+      </div>
 
       <div className="admin__container">
         <div className="tabs">

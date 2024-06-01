@@ -6,6 +6,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import "./style.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { showMessage } from "../components/show_message/ShowMessage";
 
 const Create_quiz = () => {
   const navigate = useNavigate();
@@ -82,27 +83,32 @@ const Create_quiz = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-
-      const response = await axios.post('http://localhost:8000/courses/', {
-        title,
-        description,
-        listCards: listCard,
-        folderId: folderId.folderId,
-      }, config);
-
-      if (response.status === 201 || response.status === 200) {
-        //alert('Login successful!');
-        navigate(`/course/${response.data._id}`);
+      if (title?.trim() === "" || description?.trim() === "" || listCard.length !== count || listCard.some(card => card.key?.trim() === "") || listCard.some(card => card.value?.trim() === "")) {
+        showMessage("Error", "Created Fail", "danger")
+        return;
       } else {
-        alert("Failed to create. Please try again.");
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+  
+        const response = await axios.post('http://localhost:8000/courses/', {
+          title,
+          description,
+          listCards: listCard,
+          folderId: folderId.folderId,
+        }, config);
+  
+        if (response.status === 201 || response.status === 200) {
+          showMessage("Success","Create Course Successfully", "success")
+          navigate(`/course/${response.data._id}`);
+        } else {
+          showMessage("Error", "Created Fail", "danger")
+        }
       }
     } catch (error) {
-      console.error("Error during Create:", error.response?.data || error.message);
-      alert(`Create failed: ${error.response?.data?.message || error.message}`);
+      console.log(error);
+      showMessage("Error", "Created Fail", "danger")
     }
   };
 
@@ -148,10 +154,10 @@ const Create_quiz = () => {
           <Link to="/profile">
           <button
             type="button"
-          // onClick={() => handleDeleteClick(i)}
           >
             <svg
               className="ufirst__back"
+              onClick={() => navigate(-1)}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 128 128"
             >

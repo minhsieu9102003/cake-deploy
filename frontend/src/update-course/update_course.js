@@ -6,10 +6,10 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import "./style.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { showMessage } from "../components/show_message/ShowMessage";
 
 const Update_quiz = () => {
   const navigate = useNavigate();
-  const [dropdownStatus, setDropdownStatus] = useState(false);
   const [count, setCount] = useState(4);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -42,8 +42,6 @@ const Update_quiz = () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
-  const navigationDropdown = useRef(null);
-  const [status, setStatus] = useState(false);
   const tl = useRef(
     gsap.timeline({
       paused: true,
@@ -60,19 +58,6 @@ const Update_quiz = () => {
       clipPath: "polygon(0 0, 100% 0,100% 100%, 0 100% )",
     });
   }, []);
-
-  const toggleDropdown = () => {
-    if (!status) {
-      tl.current.play();
-    } else {
-      tl.current.reverse();
-    }
-    setStatus(!status);
-  };
-
-  const handleDropdownClick = () => {
-    setDropdownStatus(!dropdownStatus);
-  };
 
   const handlePopupClick = () => {
     setCount(count + 1);
@@ -123,6 +108,10 @@ const Update_quiz = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (title?.trim() === "" || description?.trim() === "" || listCard.length !== count || listCard.some(card => card.key?.trim() === "") || listCard.some(card => card.value?.trim() === "")) {
+      showMessage("Error", "Updated Fail", "danger")
+      return;
+    }
     try {
       const token = localStorage.getItem('token');
       const config = {
@@ -136,13 +125,13 @@ const Update_quiz = () => {
       }, config);
 
       if (response.status === 201 || response.status === 200) {
+        showMessage("Success", "Updated Successfull", "success")
         navigate(`/course/${courseId}`);
       } else {
-        alert('Failed to create. Please try again.');
+        showMessage("Error", "Updated Fail", "danger")
       }
     } catch (error) {
-      console.error('Error during Create:', error.response?.data || error.message);
-      alert(`Create failed: ${error.response?.data?.message || error.message}`);
+      showMessage("Error", "Updated Fail", "danger")
     }
   };
 
@@ -192,6 +181,7 @@ const Update_quiz = () => {
           >
             <svg
               className="first__back"
+              onClick={() => navigate(-1)}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 128 128"
             >

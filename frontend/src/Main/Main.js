@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import { showMessage } from "../components/show_message/ShowMessage";
 import "./style.css"; // Assuming you'll also style it using Main.css
 
 const Main = () => {
@@ -231,11 +232,16 @@ const Main = () => {
           },
         }
       );
-      setFolders([...folders, response.data]);
-      setPopupStatus(false);
-      setNewFolderTitle("");
+      if (response.status === 200 || response.status === 201) {
+        setFolders([...folders, response.data]);
+        showMessage("Success","Created Successfully", "success");
+        setPopupStatus(false);
+        setNewFolderTitle("");
+      } else {
+        showMessage("Error", "Created Fail", "danger");
+      }
     } catch (error) {
-      console.error("Error creating folder:", error);
+      showMessage("Error", "Created Fail", "danger");
     }
   };
 

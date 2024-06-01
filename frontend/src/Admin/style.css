@@ -1,3 +1,72 @@
+.pfnavigation {
+  width: 98vw;
+  display: flex;
+  padding: 1rem 1rem;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pfnavigation__logo {
+  margin-left: -3rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pfnavigation__logo-img {
+  scale: .7;
+  margin-top: -10px;
+  cursor: pointer;
+}
+
+.pfnavigation__brand {
+  font-family: "Mochiy Pop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #7a4a4a;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-right: 2rem;
+  margin-left: -2.3rem;
+}
+
+.pfnavigation__link {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.pfnavigation__link-btn {
+  margin-left: 2rem;
+  padding: .5rem 1rem;
+  height: 100%;
+}
+
+.pfnavigation__link-btn.sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pfnavigation__link-btn-a:link,
+.pfnavigation__link-btn-a:visited {
+  text-decoration: none;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  transition: all .2s;
+}
+
+.pfnavigation__avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .admin__container {
   padding: 20px;
 }

@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import {showMessage} from "../components/show_message/ShowMessage";
 import axios from "axios";
 
 import "./style.css";
@@ -24,6 +25,7 @@ function Profile() {
   const [newFolderTitle, setNewFolderTitle] = useState("");
   const [newFolderDescription, setNewFolderDescription] = useState("");
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [refetch , setRefetch] = useState(false);
 
   const [activeButton, setActiveButton] = useState("folders");
   const handleSwapFolders = () => {
@@ -138,7 +140,7 @@ function Profile() {
       alert("No token found. Redirecting to login.");
       navigate("/login");
     }
-  }, [token, userId, navigate]);
+  }, [token, userId, refetch]);
 
   const handleInputChange = (event) => {
     setNewFolderTitle(event.target.value);
@@ -160,36 +162,51 @@ function Profile() {
           },
         }
       );
-      setFolders([...folders, response.data]);
-      setPopupStatus(false);
-      setNewFolderTitle("");
+      if (response.status === 200 || response.status === 201) {
+        showMessage("Success","Created Successfully", "success");
+        setPopupStatus(false);
+        setNewFolderTitle("");
+        setRefetch(!refetch)
+      } else {
+        showMessage("Error", "Created Fail", "danger");
+      }
     } catch (error) {
-      console.error("Error creating folder:", error);
+      showMessage("Error", "Created Fail", "danger");
     }
   };
   const handleDelete1 = async (courseId) => {
     try {
-      await axios.delete(`http://localhost:8000/courses/${courseId}`, {
+      const response = await axios.delete(`http://localhost:8000/courses/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCourses(courses.filter((course) => course._id !== courseId));
+      if (response.status === 200 || response.status === 201) {
+        showMessage("Success","Delete Successfully", "success");
+        setRefetch(!refetch)
+      } else {
+        showMessage("Error", "Deleted Fail", "danger");
+      }
     } catch (error) {
-      console.error("Error deleting folder:", error);
+      showMessage("Error", "Deleted Fail", "danger");
     }
   };
 
   const handleDelete = async (folderId) => {
     try {
-      await axios.delete(`http://localhost:8000/folders/${folderId}`, {
+      const response = await axios.delete(`http://localhost:8000/folders/${folderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setFolders(folders.filter((folder) => folder._id !== folderId));
+      if (response.status === 200 || response.status === 201) {
+        showMessage("Success","Delete Successfully", "success");
+        setRefetch(!refetch)
+      } else {
+        showMessage("Error", "Deleted Fail", "danger");
+      }
     } catch (error) {
-      console.error("Error deleting folder:", error);
+      showMessage("Error", "Deleted Fail", "danger");
     }
   };
 
@@ -218,7 +235,7 @@ function Profile() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(
+      const response = await axios.put(
         `http://localhost:8000/folders/${selectedFolder}`,
         { title: newFolderTitle, description: newFolderDescription },
         {
@@ -227,21 +244,18 @@ function Profile() {
           },
         }
       );
-      const updatedFolders = folders.map((folder) =>
-        folder._id === selectedFolder
-          ? {
-            ...folder,
-            title: newFolderTitle,
-            description: newFolderDescription,
-          }
-          : folder
-      );
-      setFolders(updatedFolders);
-      setSelectedFolder(null);
-      setNewFolderTitle("");
-      setNewFolderDescription("");
+      if (response.status === 200 || response.status === 201) {
+        showMessage("Success","Update Successfully", "success");
+        setSelectedFolder(null);
+        setNewFolderTitle("");
+        setNewFolderDescription("");
+        setRefetch(!refetch)
+        setPopupUpdate(false);
+      } else {
+        showMessage("Error", "Updated Fail", "danger");
+      }
     } catch (error) {
-      console.error("Error updating folder:", error);
+      showMessage("Error", "Updated Fail", "danger");
     }
   };
 
@@ -283,10 +297,9 @@ function Profile() {
         </div>
       </form>
 
-      <form
+      <div
         className="main__popup"
         style={{ display: popupUpdate ? "flex" : "none" }}
-        onSubmit={handleUpdate}
       >
         <div className="main__popup-inner">
           <button
@@ -319,12 +332,12 @@ function Profile() {
             required
           />
           <div className="main__popup-submit-container">
-            <button className="main__popup-submit" type="submit">
+            <button className="main__popup-submit" onClick={handleUpdate}>
               Save
             </button>
           </div>
         </div>
-      </form>
+      </div>
 
       <Header />
 
@@ -333,6 +346,7 @@ function Profile() {
           <Link to="/" className='kfirst__back-container'>
             <svg
               className="kfirst__back"
+              onClick={() => navigate(-1)}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 128 128"
             >

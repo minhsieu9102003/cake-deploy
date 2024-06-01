@@ -8,12 +8,9 @@ import "./style.css";
 import { useParams } from 'react-router-dom';
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import { showMessage } from "../components/show_message/ShowMessage";
 
-function Folder(User) {
-  const [dropdownStatus, setDropdownStatus] = useState(false);
-  const [customSelectActive, setCustomSelectActive] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("latest");
-  const [selectedValueBrown, setSelectedValueBrown] = useState("latest");
+function Folder() {
 
   useEffect(() => {
     gsap.to(".myElement", {
@@ -42,8 +39,6 @@ function Folder(User) {
     };
   }, []);
 
-  const cnavigationDropdown = useRef(null);
-  const [status, setStatus] = useState(false);
   const tl = useRef(
     gsap.timeline({
       paused: true,
@@ -61,28 +56,6 @@ function Folder(User) {
     });
   }, []);
 
-  const toggleDropdown = () => {
-    if (!status) {
-      tl.current.play();
-    } else {
-      tl.current.reverse();
-    }
-    setStatus(!status);
-  };
-  const handleDropdownClick = () => {
-    setDropdownStatus(!dropdownStatus);
-  };
-
-
-  const handleSelectClick = () => {
-    setCustomSelectActive(!customSelectActive);
-  };
-
-  const handleOptionClick = (event) => {
-    setSelectedValue(event.currentTarget.querySelector("label").textContent);
-    setCustomSelectActive(false);
-  };
-
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
@@ -91,6 +64,10 @@ function Folder(User) {
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [refetch, setRefetch] = useState(false);
+  const [popupEdit, setPopupEdit] = useState(false);
+  const [newFolderTitle, setNewFolderTitle] = useState("");
+  const [newFolderDescription, setNewFolderDescription] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -119,29 +96,99 @@ function Folder(User) {
     };
 
     fetchCourses();
-  }, [folderId, navigate]);
+  }, [folderId, refetch]);
 
   const handleDelete = async (courseId) => {
     try {
-      await axios.delete(`http://localhost:8000/courses/${courseId}`, {
+      const response = await axios.delete(`http://localhost:8000/courses/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCourses(courses.filter(course => course._id !== courseId));
+      if (response.status !== 200) {
+        showMessage("Error", "Delete Failed", "danger");
+      } else {
+        showMessage("Success","Delete Folder Successfully", "success")
+        setRefetch(!refetch);
+      }
     } catch (error) {
-      console.error("Error deleting folder:", error);
+      showMessage("Error", "Delete Failed", "danger");
     }
   };
 
-  const [selectedFolder, setSelectedFolder] = useState(null);
-
-  const handleFolderClick = (folder) => {
-    setSelectedFolder(folder);
+  const handleEdit = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/folders/${folderId}`,
+        { title: newFolderTitle, description: newFolderDescription },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status !== 200) {
+        showMessage("Error", "Update Failed", "danger");
+      } else {
+        setNewFolderTitle("");
+        setNewFolderDescription("");
+        showMessage("Success","Update Folder Successfully", "success")
+        setRefetch(!refetch);
+      }
+      setPopupEdit(false)
+    } catch (error) {
+      showMessage("Error", "Update Failed", "danger");
+    }
   };
 
   return (
     <div>
+      <div
+        className="main__popup"
+        style={{ display: popupEdit ? "flex" : "none" }}
+      >
+        <div className="main__popup-inner">
+          <button
+            className="main__cross"
+            type="button"
+            onClick={() => setPopupEdit(false)}
+          >
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+            >
+              <path d="m4.12 6.137 1.521-1.52 7 7-1.52 1.52z" />
+              <path d="m4.12 11.61 7.001-7 1.52 1.52-7 7z" />
+            </svg>
+          </button>
+          <h1>Update Folder</h1>
+          <input
+            type="text"
+            placeholder="Folder title"
+            value={newFolderTitle}
+            onChange={(event) => {
+              setNewFolderTitle(event.target.value);
+            }}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Folder Description"
+            value={newFolderDescription}
+            onChange={(event) => {
+              setNewFolderDescription(event.target.value);
+            }}
+            required
+          />
+          <div className="main__popup-submit-container">
+            <button className="main__popup-submit" onClick={handleEdit}>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+
       <Header />
 
       <div className="cfirst">
@@ -162,6 +209,37 @@ function Folder(User) {
                 fill="#1A2559"
                 d="M95.792 36.816a4.919 4.919 0 0 0-4.92-4.921 4.89 4.89 0 0 0-3.482 1.444l-8.555 8.555v-5.501L65.479 23.04H31.833v18.216c-4.948 1.755-8.498 6.462-8.5 12.013l.002 30.015c0 7.045 5.71 12.755 12.755 12.757h37.988c7.045-.002 12.755-5.712 12.758-12.757V61.376a10.538 10.538 0 0 0-4.756-8.808l12.272-12.273a4.917 4.917 0 0 0 1.44-3.479zm-3.56-1.36a1.92 1.92 0 0 1 .039 2.668l-2.709-2.707c.37-.349.83-.523 1.309-.525a1.92 1.92 0 0 1 1.361.564zm-25.897-7.318 7.4 7.4h-7.4v-7.4zm-31.5-2.1h28.499v12.5h12.498l.002 6.355-5.937 5.937h-17.22a302.26 302.26 0 0 1-2.826-5.13c-.708-1.299-1.373-2.633-2.725-3.672-1.36-1.037-3.195-1.521-5.759-1.517H36.09c-.424 0-.842.024-1.255.063V26.038zm39.243 67.001H36.09a9.746 9.746 0 0 1-7.67-3.75h53.328a9.746 9.746 0 0 1-7.67 3.75zm9.755-31.663v21.907a9.802 9.802 0 0 1-.481 3.008H26.834l-.018.002a9.72 9.72 0 0 1-.482-3.01V53.269c.01-5.387 4.369-9.748 9.756-9.756h5.277c2.242.004 3.279.401 3.942.904.676.498 1.187 1.361 1.896 2.703a342.837 342.837 0 0 0 3.29 5.948l.429.763h25.364a7.553 7.553 0 0 1 7.545 7.545zM76.289 50.83h-2.146l13.295-13.297 2.717 2.718-10.989 10.988a10.542 10.542 0 0 0-2.877-.409z"
               />
+            </svg>
+            <svg
+              width="64px"
+              height="64px"
+              viewBox="0 0 24 24"
+              onClick={() => {
+                setPopupEdit(true);
+                setNewFolderTitle(title);
+                setNewFolderDescription(description);
+              }}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <path
+                  d="M11 4H7.2C6.0799 4 5.51984 4 5.09202 4.21799C4.71569 4.40974 4.40973 4.7157 4.21799 5.09202C4 5.51985 4 6.0799 4 7.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H16.8C17.9201 20 18.4802 20 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V12.5M15.5 5.5L18.3284 8.32843M10.7627 10.2373L17.411 3.58902C18.192 2.80797 19.4584 2.80797 20.2394 3.58902C21.0205 4.37007 21.0205 5.6364 20.2394 6.41745L13.3774 13.2794C12.6158 14.0411 12.235 14.4219 11.8012 14.7247C11.4162 14.9936 11.0009 15.2162 10.564 15.3882C10.0717 15.582 9.54378 15.6885 8.48793 15.9016L8 16L8.04745 15.6678C8.21536 14.4925 8.29932 13.9048 8.49029 13.3561C8.65975 12.8692 8.89125 12.4063 9.17906 11.9786C9.50341 11.4966 9.92319 11.0768 10.7627 10.2373Z"
+                  stroke="#7a4a4a"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />{" "}
+              </g>
             </svg>
             <svg
               className="cfirst__plus"
@@ -193,6 +271,7 @@ function Folder(User) {
           <svg
             className="cfirst__back"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => navigate(-1)}
             viewBox="0 0 128 128"
           >
             <style>
