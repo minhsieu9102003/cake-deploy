@@ -41,6 +41,7 @@ function Header() {
   };
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState({ folders: [], courses: [], users: [] });
 
@@ -111,8 +112,21 @@ function Header() {
                 </ul>
               </div>
             )}
+            {searchResults.users.length > 0 && (
+              <div>
+                <h3>Users ({searchResults.users.length})</h3>
+                <ul>
+                  {searchResults.users.map((user) => (
+                    <li key={user._id} onClick={() => navigate(`/profile/${user._id}`)}>
+                      {user.username}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {searchResults.folders.length === 0 && 
-             searchResults.courses.length === 0 && (
+             searchResults.courses.length === 0 &&
+             searchResults.users.length === 0 && (
               <div>No results found.</div>
             )}
           </div>
@@ -156,7 +170,7 @@ function Header() {
             Help Center
           </a>
         </li>
-        <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" onClick={() => navigate('/profile')}/>
+        <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" onClick={() => navigate(`/profile/${userId}`)}/>
       </ul>
     </div>
   );

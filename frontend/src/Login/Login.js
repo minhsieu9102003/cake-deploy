@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {jwtDecode} from 'jwt-decode';
 import "./stylee.css";
 
 function Login() {
@@ -24,9 +25,13 @@ function Login() {
         throw new Error('Invalid login response: missing token or userId');
       }
 
+      const decodedToken = jwtDecode(token);
+      const { role } = decodedToken;
+
       // Store the token and userId in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
+      localStorage.setItem('role', role);
 
       // Parse and store the token payload
       const parsedToken = parseJwt(token);
@@ -35,10 +40,14 @@ function Login() {
       // Check if the token and userId are stored correctly
       const storedToken = localStorage.getItem('token');
       const storedUserId = localStorage.getItem('userId');
+      const storedRole = localStorage.getItem('role');
 
-      if (storedToken && storedUserId) {
-        //alert('Login successful!');
-        navigate('/');
+      if (storedToken && storedUserId && storedRole) {
+        if(role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
         alert('Failed to store user credentials. Please try again.');
       }

@@ -41,28 +41,54 @@ const Admin = () => {
     };
   }, []);
 
-  const fetchUsers = () => {
-    axios.get("http://localhost:8000/users/", {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      setUsers(response.data);
-    });
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const role = localStorage.getItem("role");
+
+    if (!token || !userId) {
+      showMessage("Error","No token or userId found. Redirecting to login.","danger");
+      navigate("/login");
+      return;
+    } else {
+      if (role !== "admin") {
+        showMessage("Warning","You do not have permission to access the admin page, please log in with your admin account","warning");
+        navigate("/");
+      }
+    }
+  });
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/users/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if(response.status === 200){
+        setUsers(response.data);
+      }
+    } catch {}
   };
 
-  const fetchFolders = () => {
-    axios.get("http://localhost:8000/folders/", {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      setFolders(response.data);
-    });
+  const fetchFolders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/folders/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if(response.status === 200){
+        setFolders(response.data);
+      }
+    } catch {}
   };
 
-  const fetchCourses = () => {
-    axios.get("http://localhost:8000/courses/", {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      setCourses(response.data);
-    });
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if(response.status === 200){
+        setCourses(response.data);
+      }
+    } catch {}
   };
 
   useEffect(() => {

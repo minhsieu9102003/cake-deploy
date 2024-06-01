@@ -26,7 +26,7 @@ function App() {
         <Route path="/" element={ token && userId ? <Main /> : <Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/quiz/:courseId" element={<Quiz />} />
         <Route path="/flash_card/:courseId" element={<FlashCard />} />
         <Route path="/folder/:folderId" element={<Folder />} />
