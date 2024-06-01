@@ -106,13 +106,13 @@ function Folder() {
         },
       });
       if (response.status !== 200) {
-        showMessage("Error", "Delete Failed", "danger");
+        showMessage("Error", "Deleted Failed", "danger");
       } else {
         showMessage("Success","Delete Folder Successfully", "success")
         setRefetch(!refetch);
       }
     } catch (error) {
-      showMessage("Error", "Delete Failed", "danger");
+      showMessage("Error", "Deleted Failed", "danger");
     }
   };
 
@@ -128,16 +128,16 @@ function Folder() {
         }
       );
       if (response.status !== 200) {
-        showMessage("Error", "Update Failed", "danger");
+        showMessage("Error", "Updated Failed", "danger");
       } else {
         setNewFolderTitle("");
         setNewFolderDescription("");
-        showMessage("Success","Update Folder Successfully", "success")
+        showMessage("Success","Updated Folder Successfully", "success")
         setRefetch(!refetch);
       }
       setPopupEdit(false)
     } catch (error) {
-      showMessage("Error", "Update Failed", "danger");
+      showMessage("Error", "Updated Failed", "danger");
     }
   };
 

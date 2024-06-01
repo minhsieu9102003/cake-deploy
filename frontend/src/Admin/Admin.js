@@ -83,13 +83,13 @@ const Admin = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (response.status !== 200) {
-        showMessage("Error", "Delete Failed", "danger");
+        showMessage("Error", "Deleted Failed", "danger");
       } else {
         fetchUsers();
         showMessage("Success","Deleted Successfully", "success");
       }
     } catch {
-      showMessage("Error", "Delete Failed","danger")
+      showMessage("Error", "Deleted Failed","danger")
     }
   };
 
@@ -99,13 +99,13 @@ const Admin = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (response.status !== 200) {
-        showMessage("Error", "Delete Failed", "danger");
+        showMessage("Error", "Deleted Failed", "danger");
       } else {
         fetchFolders();
         showMessage("Success","Deleted Successfully", "success");
       }
     } catch {
-      showMessage("Error", "Delete Failed","danger")
+      showMessage("Error", "Deleted Failed","danger")
     }
   };
 
@@ -115,13 +115,13 @@ const Admin = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (response.status !== 200) {
-        showMessage("Error", "Delete Failed", "danger");
+        showMessage("Error", "Deleted Failed", "danger");
       } else {
         fetchCourses();
         showMessage("Success","Deleted Successfully", "success");
       }
     } catch {
-      showMessage("Error", "Delete Failed","danger")
+      showMessage("Error", "Deleted Failed","danger")
     }
   };
 
