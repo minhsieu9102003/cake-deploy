@@ -4,7 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
 import Footer from "../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
-import {showMessage} from "../components/show_message/ShowMessage";
+import { showMessage } from "../components/show_message/ShowMessage";
+import ConfirmModal from "../components/confirm/ConfirmModal";
 import "./style.css";
 
 const Admin = () => {
@@ -13,7 +14,99 @@ const Admin = () => {
   const [users, setUsers] = useState([]);
   const [folders, setFolders] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState({});
   const token = localStorage.getItem("token");
+
+  const openModal = (content) => {
+    setModalContent(content);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const confirmAction = () => {
+    const { action, id, title } = modalContent;
+    action(id, title);
+    closeModal();
+  };
+
+  const handleDeleteUser = async (userId, username) => {
+    openModal({
+      message: `Are you sure you want to delete user ${username}?`,
+      action: deleteUser,
+      id: userId,
+      title: username,
+    });
+  };
+
+  const deleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status !== 200) {
+        showMessage("Error", "Deleted Failed", "danger");
+      } else {
+        fetchUsers();
+        showMessage("Success", "Deleted Successfully", "success");
+      }
+    } catch {
+      showMessage("Error", "Deleted Failed", "danger");
+    }
+  };
+
+  const handleDeleteFolder = async (folderId, title) => {
+    openModal({
+      message: `Are you sure you want to delete folder ${title}?`,
+      action: deleteFolder,
+      id: folderId,
+      title,
+    });
+  };
+
+  const deleteFolder = async (folderId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/folders/${folderId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status !== 200) {
+        showMessage("Error", "Deleted Failed", "danger");
+      } else {
+        fetchFolders();
+        showMessage("Success", "Deleted Successfully", "success");
+      }
+    } catch {
+      showMessage("Error", "Deleted Failed", "danger");
+    }
+  };
+
+  const handleDeleteCourse = async (courseId, title) => {
+    openModal({
+      message: `Are you sure you want to delete course ${title}?`,
+      action: deleteCourse,
+      id: courseId,
+      title,
+    });
+  };
+
+  const deleteCourse = async (courseId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/courses/${courseId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status !== 200) {
+        showMessage("Error", "Deleted Failed", "danger");
+      } else {
+        fetchCourses();
+        showMessage("Success", "Deleted Successfully", "success");
+      }
+    } catch {
+      showMessage("Error", "Deleted Failed", "danger");
+    }
+  };
 
   useEffect(() => {
     gsap.to(".myElement", {
@@ -47,12 +140,12 @@ const Admin = () => {
     const role = localStorage.getItem("role");
 
     if (!token || !userId) {
-      showMessage("Error","No token or userId found. Redirecting to login.","danger");
+      showMessage("Error", "No token or userId found. Redirecting to login.", "danger");
       navigate("/login");
       return;
     } else {
       if (role !== "admin") {
-        showMessage("Warning","You do not have permission to access the admin page, please log in with your admin account","warning");
+        showMessage("Warning", "You do not have permission to access the admin page, please log in with your admin account", "warning");
         navigate("/");
       }
     }
@@ -62,33 +155,33 @@ const Admin = () => {
     try {
       const response = await axios.get("http://localhost:8000/users/", {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      if(response.status === 200){
+      });
+      if (response.status === 200) {
         setUsers(response.data);
       }
-    } catch {}
+    } catch { }
   };
 
   const fetchFolders = async () => {
     try {
       const response = await axios.get("http://localhost:8000/folders/", {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      if(response.status === 200){
+      });
+      if (response.status === 200) {
         setFolders(response.data);
       }
-    } catch {}
+    } catch { }
   };
 
   const fetchCourses = async () => {
     try {
       const response = await axios.get("http://localhost:8000/courses/", {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      if(response.status === 200){
+      });
+      if (response.status === 200) {
         setCourses(response.data);
       }
-    } catch {}
+    } catch { }
   };
 
   useEffect(() => {
@@ -102,54 +195,6 @@ const Admin = () => {
   useEffect(() => {
     fetchCourses();
   }, [token]);
-
-  const handleDeleteUser = async (userId) => {
-    try {
-      const response = await axios.delete(`http://localhost:8000/users/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      if (response.status !== 200) {
-        showMessage("Error", "Deleted Failed", "danger");
-      } else {
-        fetchUsers();
-        showMessage("Success","Deleted Successfully", "success");
-      }
-    } catch {
-      showMessage("Error", "Deleted Failed","danger")
-    }
-  };
-
-  const handleDeleteFolder = async (folderId) => {
-    try {
-      const response = await axios.delete(`http://localhost:8000/folders/${folderId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      if (response.status !== 200) {
-        showMessage("Error", "Deleted Failed", "danger");
-      } else {
-        fetchFolders();
-        showMessage("Success","Deleted Successfully", "success");
-      }
-    } catch {
-      showMessage("Error", "Deleted Failed","danger")
-    }
-  };
-
-  const handleDeleteCourse = async (courseId) => {
-    try {
-      const response = await axios.delete(`http://localhost:8000/courses/${courseId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      if (response.status !== 200) {
-        showMessage("Error", "Deleted Failed", "danger");
-      } else {
-        fetchCourses();
-        showMessage("Success","Deleted Successfully", "success");
-      }
-    } catch {
-      showMessage("Error", "Deleted Failed","danger")
-    }
-  };
 
   return (
     <div className="admin">
@@ -168,7 +213,7 @@ const Admin = () => {
               Help Center
             </a>
           </li>
-          <img className="pfnavigation__avatar" src="/img/avatar2.png" alt=""/>
+          <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
         </ul>
       </div>
 
@@ -204,7 +249,7 @@ const Admin = () => {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>
-                      <button onClick={() => handleDeleteUser(user._id)} className="delete-btn">
+                      <button onClick={() => handleDeleteUser(user._id, user.username)} className="delete-btn">
                         Delete
                       </button>
                     </td>
@@ -236,7 +281,7 @@ const Admin = () => {
                     <td>{folder?.userId?.username}</td>
                     <td>{folder?.courses?.length}</td>
                     <td>
-                      <button onClick={() => handleDeleteFolder(folder?._id)} className="delete-btn">
+                      <button onClick={() => handleDeleteFolder(folder?._id, folder?.title)} className="delete-btn">
                         Delete
                       </button>
                     </td>
@@ -278,7 +323,7 @@ const Admin = () => {
                       ))}
                     </td>
                     <td>
-                      <button onClick={() => handleDeleteCourse(course._id)} className="delete-btn">
+                      <button onClick={() => handleDeleteCourse(course._id, course?.title)} className="delete-btn">
                         Delete
                       </button>
                     </td>
@@ -291,6 +336,12 @@ const Admin = () => {
       </div>
 
       <Footer />
+      <ConfirmModal
+        show={showModal}
+        onClose={closeModal}
+        onConfirm={confirmAction}
+        message={modalContent.message}
+      />
     </div>
   );
 };
