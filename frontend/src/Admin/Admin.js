@@ -224,7 +224,7 @@ const Admin = () => {
   return (
     <div className="admin">
       <div className="pfnavigation">
-        <div className="pfnavigation__logo" onClick={() => navigate("/")}>
+        <div className="pfnavigation__logo" >
           <img
             src="/img/cake-logo-small.png"
             alt=""
