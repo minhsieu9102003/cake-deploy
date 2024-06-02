@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+* {
+  font-family: 'Mogra';
+}
+
 .pfnavigation {
   width: 98vw;
   display: flex;
@@ -83,10 +89,13 @@
   background: #f1f1f1;
   border: none;
   outline: none;
+  font-size: 1.5rem;
+  transition: all .1s ease-in-out;
+  border-radius: 10px;
 }
 
 .tabs button.active {
-  background: #007bff;
+  background: #7a4a4a;
   color: #fff;
 }
 
@@ -94,15 +103,25 @@
   margin-top: 20px;
 }
 
+.tab-content h1 {
+  margin: 4rem 0;
+}
+
 .admin__table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.admin__table th, .admin__table td {
+.admin__table th,
+.admin__table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+}
+
+.admin__table td:nth-child(5) div {
+  font-family: 'Dosis';
+  font-weight: 800;
 }
 
 .admin__table th {
@@ -116,5 +135,17 @@
   background-color: #d9534f;
   border: none;
   outline: none;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  border-radius: 5px;
 }
 
+.delete-btn svg {
+  transform: translateY(-.1rem);
+}
+
+.delete-btn span {
+  font-size: .9rem;
+  color: #fff;
+}
