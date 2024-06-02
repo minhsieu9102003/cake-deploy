@@ -428,6 +428,11 @@
   margin-block: 2rem;
 }
 
+.mcard:hover .mcard__side {
+  /* transform: rotateY(180deg); */
+  transform: scale(1.05)
+}
+
 .mcard {
   display: inline-block !important;
   margin: 0 2rem !important;
@@ -439,6 +444,7 @@
   border-radius: 100px !important;
   background-color: transparent !important;
   cursor: pointer !important;
+  overflow: hidden;
 }
 
 .mcard__side {
@@ -447,6 +453,7 @@
   width: 100% !important;
   border-radius: 100px !important;
   background-color: transparent !important;
+  transition: all .2s ease-in-out;
 }
 
 .mcard__side--front {
@@ -492,6 +499,9 @@
   border: 1px solid;
   gap: .5rem
 }
+
+
+
 .mcard__side--back h6 {
   /* transform: rotateY(180deg); */
   font-family: 'Dosis';
