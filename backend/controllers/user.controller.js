@@ -28,36 +28,36 @@ const create = async (req, res) => {
     const User = await newUser.save();
     return res.status(201).json(User);
   } catch (error) {
-    return res.status(500).json({message: error});
+    return res.status(500).json({ message: error });
   }
 };
 
 const update = async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   try {
     const updateUser = await User.findByIdAndUpdate(id, req.body);
 
-    if(!updateUser) return res.status(404).json({message: "User not found"});
+    if (!updateUser) return res.status(404).json({ message: "User not found" });
 
-    return res.status(200).json({message: "Update successfully!"});
+    return res.status(200).json({ message: "Update successfully!" });
   } catch (error) {
-    return res.status(500).json({message: error});
+    return res.status(500).json({ message: error });
   }
 };
 
-const  deleteUser = async (req, res) => {
-  const {id} = req.params;
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
 
   try {
-    if(req.payload.role === "admin") {
-    const User = await User.findByIdAndDelete(id);
+    if (req.payload.role === "admin") {
+      const user = await User.findByIdAndDelete(id);
 
-    if(!User) return res.status(404).json({message: "User not found"});
+      if (!user) return res.status(404).json({ message: "User not found" });
 
-    return res.status(200).json({message: "Delete successfully!"});
-    } else return res.status(403).json({message: "Only admin can delete user!"})
+      return res.status(200).json({ message: "Delete successfully!" });
+    } else return res.status(403).json({ message: "Only admin can delete user!" })
   } catch (error) {
-    return res.status(500).json({message: error});
+    return res.status(500).json({ message: error });
   }
 };
 
