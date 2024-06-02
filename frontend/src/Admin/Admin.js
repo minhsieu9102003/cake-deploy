@@ -108,6 +108,31 @@ const Admin = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/auth/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        showMessage("Success", "Logout Successfully", "success");
+        navigate("/login");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("role");
+      } else {
+        showMessage("Error", "Logout Fail", "danger");
+      }
+    } catch (error) {
+      showMessage("Error", "Logout Fail", "danger");
+    }
+  };
+
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -213,7 +238,12 @@ const Admin = () => {
               Help Center
             </a>
           </li>
-          <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
+          <div className="avatar-dropdown">
+            <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
+            <div className="avatar-dropdown-content">
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
         </ul>
       </div>
 

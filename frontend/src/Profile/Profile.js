@@ -197,14 +197,16 @@ function Profile() {
         }
       );
       if (response.status === 200) {
+        showMessage("Success", "Logout Successfully", "success");
         navigate("/login");
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        localStorage.removeItem("role");
       } else {
-        alert("Logout Failed!!!");
+        showMessage("Error", "Logout Fail", "danger");
       }
     } catch (error) {
-      console.error("Error deleting folder:", error);
+      showMessage("Error", "Logout Fail", "danger");
     }
   };
 
