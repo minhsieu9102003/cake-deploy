@@ -108,31 +108,6 @@ const Admin = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/auth/logout`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
-        showMessage("Success", "Logout Successfully", "success");
-        navigate("/login");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("role");
-      } else {
-        showMessage("Error", "Logout Fail", "danger");
-      }
-    } catch (error) {
-      showMessage("Error", "Logout Fail", "danger");
-    }
-  };
-
   useEffect(() => {
     gsap.to(".myElement", {
       scrollTrigger: {
@@ -224,7 +199,7 @@ const Admin = () => {
   return (
     <div className="admin">
       <div className="pfnavigation">
-        <div className="pfnavigation__logo" >
+        <div className="pfnavigation__logo" onClick={() => navigate("/")}>
           <img
             src="/img/cake-logo-small.png"
             alt=""
@@ -238,12 +213,7 @@ const Admin = () => {
               Help Center
             </a>
           </li>
-          <div className="avatar-dropdown">
-            <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
-            <div className="avatar-dropdown-content">
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-          </div>
+          <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
         </ul>
       </div>
 
