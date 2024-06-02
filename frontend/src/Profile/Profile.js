@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import {showMessage} from "../components/show_message/ShowMessage";
+import { showMessage } from "../components/show_message/ShowMessage";
 import axios from "axios";
 
 import "./style.css";
@@ -24,7 +24,7 @@ function Profile() {
   const [newFolderTitle, setNewFolderTitle] = useState("");
   const [newFolderDescription, setNewFolderDescription] = useState("");
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const [refetch , setRefetch] = useState(false);
+  const [refetch, setRefetch] = useState(false);
 
   const [activeButton, setActiveButton] = useState("folders");
   const handleSwapFolders = () => {
@@ -138,7 +138,7 @@ function Profile() {
         }
       );
       if (response.status === 200 || response.status === 201) {
-        showMessage("Success","Created Successfully", "success");
+        showMessage("Success", "Created Successfully", "success");
         setPopupStatus(false);
         setNewFolderTitle("");
         setRefetch(!refetch)
@@ -157,7 +157,7 @@ function Profile() {
         },
       });
       if (response.status === 200 || response.status === 201) {
-        showMessage("Success","Delete Successfully", "success");
+        showMessage("Success", "Delete Successfully", "success");
         setRefetch(!refetch)
       } else {
         showMessage("Error", "Deleted Fail", "danger");
@@ -175,7 +175,7 @@ function Profile() {
         },
       });
       if (response.status === 200 || response.status === 201) {
-        showMessage("Success","Delete Successfully", "success");
+        showMessage("Success", "Delete Successfully", "success");
         setRefetch(!refetch)
       } else {
         showMessage("Error", "Deleted Fail", "danger");
@@ -220,7 +220,7 @@ function Profile() {
         }
       );
       if (response.status === 200 || response.status === 201) {
-        showMessage("Success","Update Successfully", "success");
+        showMessage("Success", "Update Successfully", "success");
         setSelectedFolder(null);
         setNewFolderTitle("");
         setNewFolderDescription("");
@@ -606,24 +606,7 @@ function Profile() {
         {courses.map((course, i) => (
           <div className="main__folder1" key={i}>
             <Link to={`/course/${course._id}`}>
-              <svg
-                className="main__folder-svg1"
-                width="10rem"
-                height="10rem"
-                viewBox="0 0 1024 1024"
-                class="icon"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z"
-                  fill="#FFA000"
-                />
-                <path
-                  d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z"
-                  fill="#FFCA28"
-                />
-              </svg>
+              <svg className='main__folder-svg1 course-svg' xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 36 36"><path fill="#E1E8ED" d="m30.415 9.586l-9-9a2.001 2.001 0 0 0-2.829 2.829l-3.859 3.859l9 9l3.859-3.859a2 2 0 0 0 2.829-2.829" /><path fill="#CCD6DD" d="M20 0H5a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h22a4 4 0 0 0 4-4V11h-9c-1 0-2-1-2-2z" /><path fill="#99AAB5" d="M20 0h-2v9a4 4 0 0 0 4 4h9v-2h-9c-1 0-2-1-2-2zm-5 8a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h8a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h8a1 1 0 0 1 1 1m12 4a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1" /><path fill="#66757F" d="M31 19s-5.906-.002-5.935 0c-.291 0-.91.174-1.255.606l-2.328 2.929c-.644.809-.644 2.119 0 2.93l2.328 2.929c.345.432.964.606 1.255.606c.019.002 3.547 0 5.935 0z" /><path fill="#744EAA" d="M33 19s-8.056-.002-8.084 0c-.291 0-.91.139-1.255.485l-2.328 2.342a1.665 1.665 0 0 0 0 2.344l2.328 2.342c.345.346.964.487 1.255.487c.028.002 8.084 0 8.084 0c1.104 0 2-.897 2-2.001V21a2 2 0 0 0-2-2" /></svg>
               <span className="main__folder-title1">{course.title}</span>
             </Link>
             {isUser && (

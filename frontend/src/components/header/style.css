@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -276,8 +278,8 @@
   outline-width: 0;
   font-size: 1rem !important;
   color: #7a4a4a;
-  font-family: "Mogra", system-ui !important;
-  font-weight: 400;
+  font-family: "Dosis", system-ui !important;
+  font-weight: 800;
   font-style: normal;
   height: 100%;
   width: 90%;
@@ -319,7 +321,7 @@
   margin-top: 30px;
   left: 0rem;
   /* Đẩy xuống dưới ô tìm kiếm */
-  font-family: 'Mogra';
+
 }
 
 .search-popup h3 {
@@ -329,6 +331,8 @@
   border-bottom: 1px solid #ddd;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  font-family: 'Dosis' !important;
+  font-weight: 800;
 }
 
 .search-popup ul {
@@ -341,6 +345,8 @@
   padding: 10px;
   border-bottom: 1px solid #ddd;
   cursor: pointer;
+  font-family: 'Dosis' !important;
+  font-weight: 500;
 }
 
 .search-popup ul li:hover {

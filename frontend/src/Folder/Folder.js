@@ -110,7 +110,7 @@ function Folder() {
       if (response.status !== 200) {
         showMessage("Error", "Deleted Failed", "danger");
       } else {
-        showMessage("Success","Delete Folder Successfully", "success")
+        showMessage("Success", "Delete Folder Successfully", "success")
         setRefetch(!refetch);
       }
     } catch (error) {
@@ -134,7 +134,7 @@ function Folder() {
       } else {
         setNewFolderTitle("");
         setNewFolderDescription("");
-        showMessage("Success","Updated Folder Successfully", "success")
+        showMessage("Success", "Updated Folder Successfully", "success")
         setRefetch(!refetch);
       }
       setPopupEdit(false)
@@ -306,48 +306,7 @@ function Folder() {
         {courses.map((course, i) => (
           <div className="cmain__folder" key={i}>
             <Link to={`/course/${course._id}/`}>
-              <svg
-                className="cmain__folder-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 48 48"
-              >
-                <defs>
-                  <style>
-                    {`
-                    .cls-2 {
-                      fill: #dad7e5;
-                    }
-                    .cls-6 {
-                      fill: #919191;
-                    }
-                  `}
-                  </style>
-                </defs>
-                <g id="File_and_folder" data-name="File and folder">
-                  <path style={{ fill: "#c6c3d8" }} d="M42 1v20h-6V7H12V1h30z" />
-                  <path className="cls-2" d="M42 1v18h-9A18 18 0 0 1 15 1h27z" />
-                  <path
-                    d="M47 23v22a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V17a2 2 0 0 1 2-2h12.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-                    style={{ fill: "#fc6" }}
-                  />
-                  <path
-                    d="M47 23v22H34A30.09 30.09 0 0 1 4 15h11.93a2 2 0 0 1 1.66.89L21 21h24a2 2 0 0 1 2 2z"
-                    style={{ fill: "#ffde76" }}
-                  />
-                  <path
-                    className="cls-2"
-                    d="M36 7v14H21l-3.41-5.11a2 2 0 0 0-1.66-.89H6V7z"
-                  />
-                  <path
-                    d="M36 7v12H23l-3.41-5.11a2 2 0 0 0-1.66-.89H15a6 6 0 0 1-6-6h27z"
-                    style={{ fill: "#edebf2" }}
-                  />
-                  <path
-                    className="cls-6"
-                    d="M31 13h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zM31 17h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2z"
-                  />
-                </g>
-              </svg>
+              <svg className='cmain__folder-svg' xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 36 36"><path fill="#E1E8ED" d="m30.415 9.586l-9-9a2.001 2.001 0 0 0-2.829 2.829l-3.859 3.859l9 9l3.859-3.859a2 2 0 0 0 2.829-2.829" /><path fill="#CCD6DD" d="M20 0H5a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h22a4 4 0 0 0 4-4V11h-9c-1 0-2-1-2-2z" /><path fill="#99AAB5" d="M20 0h-2v9a4 4 0 0 0 4 4h9v-2h-9c-1 0-2-1-2-2zm-5 8a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h8a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h8a1 1 0 0 1 1 1m12 4a1 1 0 0 1-1 1H6a1 1 0 0 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1" /><path fill="#66757F" d="M31 19s-5.906-.002-5.935 0c-.291 0-.91.174-1.255.606l-2.328 2.929c-.644.809-.644 2.119 0 2.93l2.328 2.929c.345.432.964.606 1.255.606c.019.002 3.547 0 5.935 0z" /><path fill="#744EAA" d="M33 19s-8.056-.002-8.084 0c-.291 0-.91.139-1.255.485l-2.328 2.342a1.665 1.665 0 0 0 0 2.344l2.328 2.342c.345.346.964.487 1.255.487c.028.002 8.084 0 8.084 0c1.104 0 2-.897 2-2.001V21a2 2 0 0 0-2-2" /></svg>
               <span className="cmain__folder-title">{course.title}</span>
             </Link>
             {isUser && (

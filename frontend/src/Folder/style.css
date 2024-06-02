@@ -557,10 +557,11 @@
 .cfirst__filter {
     display: flex;
     gap: 1rem;
-   
+
 }
-.cfirst__filter h2{
-    font-family: 'Dosis'!important;
+
+.cfirst__filter h2 {
+    font-family: 'Dosis' !important;
 }
 
 .cfirst__filter h2 {
@@ -665,6 +666,7 @@
 .cmain__folder-svg {
     height: 10rem;
     width: 10rem;
+    transform: scale(.9);
 }
 
 .cmain__folder-title {
