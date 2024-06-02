@@ -19,7 +19,7 @@ const Quiz = () => {
   const [course, setCourse] = useState("");
   const { courseId } = useParams();
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
+  const avatar = localStorage.getItem("avatar");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -186,7 +186,12 @@ const Quiz = () => {
 
         <div className="hauthor">
           <div className="hauthor__avt">
-            <img src="/img/avatar2.png" alt="" />
+            {avatar !== 'http://localhost:8000/other/image/null' ? (
+              <img src={avatar} alt="" />
+              ) : (
+              <img src="/img/avatar.jpeg" alt="" />
+            )}
+            
             {/* <div className="havt__name">anhlenguyen</div> */}
           </div>
           <div className="hauthor__time">Created At: {course?.createdAt}</div>

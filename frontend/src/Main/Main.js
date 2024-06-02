@@ -326,8 +326,12 @@ const Main = () => {
                     <h5>{folder.courses.length} courses</h5>
                     <h6>{folder.description}</h6>
                     <div>
-                      <img src="img/avatar2.png" alt="" />
-                      <h6>{folder.creatorName}</h6>
+                      {folder.userId?.avatar ? (
+                        <img src={`http://localhost:8000/other/image/${folder.userId?.avatar}`} alt="" />
+                      ) : (
+                        <img src="img/avatar.jpeg" alt="" />
+                      )}
+                      <h6>{folder.userId?.username}</h6>
                     </div>
                   </div>
                 </div>
@@ -371,7 +375,12 @@ const Main = () => {
                     <h5>{course.cards.length} cards</h5>
                     <h6>{course.description}</h6>
                     <div>
-                      <img src="img/avatar2.png" alt="" />
+                      {course.userId?.avatar ? (
+                        <img src={`http://localhost:8000/other/image/${course.userId?.avatar}`} alt="" />
+                      ) : (
+                        <img src="img/avatar.jpeg" alt="" />
+                      )}
+                      <h6>{course.userId?.username}</h6>
                     </div>
                   </div>
                 </div>

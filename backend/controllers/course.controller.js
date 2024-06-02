@@ -172,7 +172,10 @@ const getList = async (req, res) => {
     const courses = await Course.aggregate([
       { $sample: { size: parseInt(limit, 10) || 10 } }
     ]);
-    return res.status(200).json(courses);
+    const populatedCourses = await Promise.all(
+      courses.map(course => Course.populate(course, { path: "userId" }))
+    );
+    return res.status(200).json(populatedCourses);
   } catch (error) {
     return res.status(500).json({ message: error });
   }

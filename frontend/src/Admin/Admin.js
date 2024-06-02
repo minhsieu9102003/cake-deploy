@@ -17,6 +17,9 @@ const Admin = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const role = localStorage.getItem("role");
+  const avatar = localStorage.getItem("avatar");
 
   const openModal = (content) => {
     setModalContent(content);
@@ -135,10 +138,6 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    const role = localStorage.getItem("role");
-
     if (!token || !userId) {
       showMessage("Error", "No token or userId found. Redirecting to login.", "danger");
       navigate("/login");
@@ -239,7 +238,11 @@ const Admin = () => {
             </a>
           </li>
           <div className="avatar-dropdown">
-            <img className="pfnavigation__avatar" src="/img/avatar2.png" alt="" />
+            {avatar !== 'http://localhost:8000/other/image/null' ? (
+              <img className="pfnavigation__avatar" src={avatar} alt="" />
+            ) : (
+              <img className="pfnavigation__avatar" src={"/img/avatar.jpeg"} alt="" />
+            )}
             <div className="avatar-dropdown-content">
               <button onClick={handleLogout}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z" /></svg>

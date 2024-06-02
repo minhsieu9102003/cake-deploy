@@ -12,6 +12,8 @@ function SignUp() {
     const [year, setYear] = useState(2024);
     const [acceptPolicy, setAcceptPolicy] = useState(false);
     const [daysInMonth, setDaysInMonth] = useState([]);
+    const [avatar, setAvatar] = useState(null);
+    const [avatarPreview, setAvatarPreview] = useState(null);
     const navigate = useNavigate();
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -35,14 +37,19 @@ function SignUp() {
             return;
         }
 
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('avatar', avatar);
+
         try {
-            const response = await axios.post('http://localhost:8000/auth/register', {
-                email,
-                username,
-                password
+            const response = await axios.post('http://localhost:8000/auth/register', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
             console.log('Signup successful:', response.data);
-            // alert("Signup successful!");
             navigate('/login');
         } catch (error) {
             console.error('Error during signup:', error.response.data);
@@ -50,6 +57,11 @@ function SignUp() {
         }
     };
 
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        setAvatar(file);
+        setAvatarPreview(URL.createObjectURL(file));
+    };
 
     return (
         <div className="container">
@@ -66,6 +78,10 @@ function SignUp() {
 
                 <span className="form__password">Password</span>
                 <input className="form__password-input" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+
+                <span className="form__avatar">Avatar</span>
+                <input className="form__avatar-input" type="file" onChange={handleAvatarChange} />
+                {avatarPreview && <img src={avatarPreview} alt="Avatar Preview" className='form__avatar-preview' />}
 
                 <select className='form__select' value={month} onChange={e => setMonth(e.target.value)}>
                     {months.map((m, index) => <option key={index} value={m}>{m}</option>)}

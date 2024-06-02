@@ -4,6 +4,7 @@ import generateToken from "../helpers/generateToken.js";
 // register
 const register = async (req, res) => {
   const { username, email, password } = req.body;
+  const avatar = req.file ? req.file.filename : null;
 
   try {
     // check whether the current user have existed
@@ -13,7 +14,8 @@ const register = async (req, res) => {
     const newUser = await new User({
       username,
       email,
-      password
+      password,
+      avatar
     });
 
     const user = await newUser.save();
@@ -37,6 +39,7 @@ const login = async (req, res, next) => {
       token,
       userId,
       role: req.user.role,
+      avatar: req.user.avatar,
     });
   } catch (error) {
     return res.status(500).json({ message: error });
