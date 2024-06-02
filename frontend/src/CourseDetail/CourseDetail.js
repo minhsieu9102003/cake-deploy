@@ -95,11 +95,10 @@ function CourseDetail() {
             },
           }
         );
-        console.log("Response:", response);
         if (response.ok) {
           const data = await response.json();
           setCourse(data);
-          setIsUser(userId === response.data.userId)
+          setIsUser(userId === data.userId)
           localStorage.setItem(`cards_${courseId}`, JSON.stringify(data));
         } else {
           console.error("Failed to fetch cards");
@@ -120,27 +119,25 @@ function CourseDetail() {
           <div className='course-detail-top-container'>
             <h1 className="course-detail__name">Course: {course?.title}</h1>
             {isUser && (
-              <>
-                <Link to={`/update_course/${courseId}`}>
-                  <svg
-                    className="xstudy__pen"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.7,5.537a1.024,1.024,0,0,1,0,1.448L8.527,19.158,3,21l1.842-5.527L17.015,3.3a1.024,1.024,0,0,1,1.448,0Z" />
-                  </svg>
-                </Link>
+              <Link to={`/update_course/${courseId}`}>
                 <svg
-                  className="xstudy__arrow"
-                  onClick={() => navigate(-1)}
+                  className="xstudy__pen"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 128 128"
-
+                  viewBox="0 0 24 24"
                 >
-                  <path d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z" />
+                  <path d="M20.7,5.537a1.024,1.024,0,0,1,0,1.448L8.527,19.158,3,21l1.842-5.527L17.015,3.3a1.024,1.024,0,0,1,1.448,0Z" />
                 </svg>
-              </>
+              </Link>
             )}
+            <svg
+              className="xstudy__arrow"
+              onClick={() => navigate(-1)}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 128 128"
+
+            >
+              <path d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z" />
+            </svg>
           </div>
           <div className="buttons-container">
             <button className="flash-button">
