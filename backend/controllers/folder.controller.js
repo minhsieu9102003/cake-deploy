@@ -1,5 +1,6 @@
 import Folder from "../models/folder.model.js";
 import User from "../models/user.model.js";
+import Course from "../models/course.model.js";
 import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
@@ -113,9 +114,12 @@ const addCourse = async (req, res, next) => {
 
     if (req.payload.id === foundFolder.userId.toString()) {
 
-      const folder = await Folder.findByIdAndUpdate(folderId, { $push: { courses: courseId } }, { new: true });
-
-      return res.status(200).json(folder);
+      if (foundFolder.courses.includes(courseId)) {
+        return res.status(400).json({ message: "Course has been added to this folder!" });
+      } else {
+        const folder = await Folder.findByIdAndUpdate(folderId, { $push: { courses: courseId } }, { new: true });
+        return res.status(200).json(folder);
+      }
 
     } else return res.status(403).json({ message: "You are not allowed to add course to other's folder!" });
   } catch (error) {
@@ -133,7 +137,7 @@ const deleteCourse = async (req, res, next) => {
 
     if (req.payload.id === foundFolder.userId.toString()) {
 
-      const folder = await Folder.findByIdAndUpdate(folderId, { $pull: { courses: courseId } });
+      const folder = await Folder.findByIdAndUpdate(folderId, { $pull: { courses: courseId } }, { new: true });
 
       return res.status(200).json({ message: "Delete course successfully!", folder });
 
