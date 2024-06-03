@@ -151,7 +151,13 @@ function Folder() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setAvailableCourses(response.data);
+      const userCourses = response.data
+
+      const available = userCourses.filter(course => 
+        !courses.some(folderCourse => folderCourse._id === course._id)
+      );
+
+      setAvailableCourses(available);
       setPopupAddCourse(true);
     } catch (error) {
       showMessage("Error", "Failed to fetch courses", "danger");
@@ -172,6 +178,7 @@ function Folder() {
         await handleAddCourse(courseId);
       }
       setPopupAddCourse(false);
+      setRefetch(!refetch);
       setSelectedCourses([]);
     } catch (error) {
       showMessage("Error", "Failed to add courses", "danger");
@@ -194,7 +201,6 @@ function Folder() {
         showMessage("Error", "Adding Course Failed", "danger");
       } else {
         showMessage("Success", "Course Added Successfully", "success");
-        setRefetch(!refetch);
       }
     } catch (error) {
       showMessage("Error", "Adding Course Failed", "danger");
@@ -227,6 +233,9 @@ function Folder() {
           </div>
           <button className="main__popup-submit" onClick={handleAddCoursesToFolder}>
             Add Selected Courses
+          </button>
+          <button className="main__popup-submit" onClick={() => navigate(`/folder/${folderId}/create_course`)}>
+            Create New Courses
           </button>
         </div>
       </div>
