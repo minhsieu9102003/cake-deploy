@@ -103,7 +103,7 @@ function Folder() {
 
   const handleDelete = async (courseId) => {
     try {
-      const response = await axios.delete(`http://localhost:8000/courses/${courseId}`, {
+      const response = await axios.delete(`http://localhost:8000/folders/delete-course/${folderId}/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

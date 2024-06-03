@@ -12,7 +12,7 @@ folderRouter.delete("/:id", authMiddleware.verifyToken, folderController.deleteF
 folderRouter.get("/latest", authMiddleware.verifyToken, folderController.getLatestToOldest);
 folderRouter.get("/oldest", authMiddleware.verifyToken, folderController.getOldestToNewest);
 folderRouter.put("/add-course/:folderId/:courseId", authMiddleware.verifyToken, folderController.addCourse);
-folderRouter.put("/delete-course/:folderId/:courseId", authMiddleware.verifyToken, folderController.deleteCourse);
+folderRouter.delete("/delete-course/:folderId/:courseId", authMiddleware.verifyToken, folderController.deleteCourse);
 
 // get courses in a folder
 folderRouter.get("/courses/:folderId", authMiddleware.verifyToken, folderController.getCoursesInFolder);
