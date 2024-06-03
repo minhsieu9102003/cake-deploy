@@ -406,9 +406,14 @@ input {
     fill: #7a4a4a;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
+    transform: translateY(-50%);
     right: 0;
     cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+
+.ufirst__back:hover {
+    transform: translateY(-50%) translateX(-1rem);
 }
 
 .ufirst__description {
@@ -480,6 +485,24 @@ input:focus {
     border: none;
     box-shadow: none;
     cursor: pointer;
+    transition: all .15s ease-in-out;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+}
+
+.ufirst__card-button:hover {
+    background-color: #7a4a4a;
+}
+
+.ufirst__card-button svg {
+    width: 100%;
+    object-fit: cover;
+}
+
+.ufirst__card-button:hover path {
+    stroke: white;
+    transition: all .15s ease-in-out;
 }
 
 .ufirst__card-input-bot {
@@ -518,12 +541,17 @@ input:focus {
     justify-content: center;
     align-items: center;
     margin: auto;
+    transition: all .15s ease-in-out;
+}
+
+.ufirst__plus:hover {
+    background-color: rgb(231, 231, 231);
+
 }
 
 .ufirst__plus svg {
     width: 3rem;
     height: 3rem;
-
 }
 
 .ufirst__submit {

@@ -114,7 +114,7 @@ const Quiz = () => {
               <use xlinkHref="/img/symbol-defs.svg#icon-edit-3"></use>
             </svg>
           </Link>
-          <Link to={`/course/${courseId}`}>
+          <Link to={`/course/${courseId}`} className='hstudy__back'>
             <svg className="hstudy__arrow">
               <use xlinkHref="/img/symbol-defs.svg#icon-forward"></use>
             </svg>
@@ -167,9 +167,8 @@ const Quiz = () => {
               questionData.answers.map((answer, index) => (
                 <button
                   key={index}
-                  className={`hquiz__answer ${
-                    selectedAnswer === answer ? "selected" : ""
-                  }`}
+                  className={`hquiz__answer ${selectedAnswer === answer ? "selected" : ""
+                    }`}
                   onClick={() => handleAnswerClick(answer)}
                 >
                   {answer}
@@ -188,10 +187,10 @@ const Quiz = () => {
           <div className="hauthor__avt">
             {avatar !== 'http://localhost:8000/other/image/null' ? (
               <img src={avatar} alt="" />
-              ) : (
+            ) : (
               <img src="/img/avatar.jpeg" alt="" />
             )}
-            
+
             {/* <div className="havt__name">anhlenguyen</div> */}
           </div>
           <div className="hauthor__time">Created At: {course?.createdAt}</div>

@@ -96,16 +96,9 @@ function FlashCard() {
       <section className="fmain">
         <div className="fstudy__top">
           <h1 className="fstudy__header">{title}</h1>
-          <img src={orangeImage} alt="" className="fstudy__cake" />
 
-          <Link to={`/course/${courseId}`}>
-            <svg
-              className="fstudy__arrow"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 128"
-            >
-              <path d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z" />
-            </svg>
+          <Link to={`/course/${courseId}`} className='flash__back'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" /></svg>
           </Link>
         </div>
 

@@ -22,6 +22,29 @@
   cursor: pointer;
 }
 
+.flash__back {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in-out;
+  margin-left: auto;
+}
+
+.flash__back:hover {
+  transform: translateX(-1rem);
+}
+
+.flash__back svg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.flash__back path {
+  fill: white
+}
+
 .fnavigation__logo-img {
   scale: .7;
   margin-top: -10px;

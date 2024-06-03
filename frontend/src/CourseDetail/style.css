@@ -864,25 +864,60 @@
     justify-content: space-between;
 }
 
-.xstudy__pen {
-    height: 2.8rem;
-    width: 2.8rem;
-    fill: white;
-    cursor: pointer;
+.pencil-container {
+    width: 3.3rem;
+    height: 3.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #7a4a4a;
     border-radius: 50%;
     padding: .2rem;
+    border: 4px solid #7a4a4a;
+    transition: all .15s ease-in-out;
 }
 
+.pencil-container:hover {
+    background-color: transparent;
+}
+
+.pencil-container:hover path {
+    stroke: #7a4a4a;
+}
+
+
+.pencil-container path {
+    stroke: white;
+    transition: all .15s ease-in-out;
+}
+
+
+
 .xstudy__arrow {
-    width: 3rem;
-    height: 3rem;
-    transform: rotate(-90deg);
+    width: 3.3rem;
+    height: 3.3rem;
     margin-left: auto;
     fill: #7a4a4a;
     cursor: pointer;
-
+    transition: all .15s ease-in-out;
+    background-color: #7a4a4a;
+    border: 4px solid #7a4a4a;
+    border-radius: 50%;
 }
+
+.xstudy__arrow:hover {
+    background-color: transparent;
+}
+
+.xstudy__arrow:hover path {
+    fill: #7a4a4a;
+}
+
+.xstudy__arrow path {
+    fill: white;
+    transition: all .15s ease-in-out;
+}
+
 
 .course-detail__desc {
     color: #7a4a4a;

@@ -322,29 +322,8 @@ function Profile() {
       <div className="kfirst">
         <div className="kfirst__heading">
           <Link to="/" className='kfirst__back-container'>
-            <svg
-              className="kfirst__back"
-              onClick={() => navigate(-1)}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 128"
-            >
-              <style>
-                {`
-                                .st0 {
-                                    display: none;
-                                }
-                                .st1 {
-                                    display: inline;
-                                }
-                            `}
-              </style>
-              <g id="_x34__1_">
-                <path
-                  d="M64.1 0C28.8 0 .2 28.7.2 64s28.6 64 63.9 64S128 99.3 128 64c-.1-35.3-28.7-64-63.9-64zm0 122.7C31.7 122.7 5.5 96.4 5.5 64c0-32.4 26.2-58.7 58.6-58.7 32.3 0 58.6 26.3 58.6 58.7-.1 32.4-26.3 58.7-58.6 58.7zm-.3-93.9L33.1 59.5l3.8 3.8 24.5-24.5V104h5.3V39.4l24 24 3.8-3.8-30.7-30.8z"
-                  id="icon_35_"
-                />
-              </g>
-            </svg>
+            <svg className='kfirst__back' onClick={() => navigate(-1)} xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z" /></svg>
+
           </Link>
         </div>
         <div className="lprofile">
@@ -357,7 +336,7 @@ function Profile() {
             <h1 className="lprofile__username">{user?.username}</h1>
             {isUser && (
               <button className="lprofile__logout" onClick={handleLogout}>
-                <span> Log out</span>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="64px"
@@ -385,6 +364,7 @@ function Profile() {
                     <line x1="21" y1="12" x2="9" y2="12" />{" "}
                   </g>
                 </svg>
+                <span> Log out</span>
               </button>
             )}
           </div>
@@ -581,32 +561,8 @@ function Profile() {
       >
         <h1>My courses</h1>
         {isUser && (
-          <svg
-            className="kfirst__plus"
-            width="800px"
-            height="800px"
-            viewBox="0 0 32 32"
-            onClick={() => navigate("/create_course")}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>plus-circle</title>
-            <desc>Created with Sketch Beta.</desc>
-            <g
-              id="Page-1"
-              stroke="none"
-              strokeWidth="1"
-              fill="none"
-              fillRule="evenodd"
-            >
-              <g
-                id="Icon-Set"
-                transform="translate(-464.000000, -1087.000000)"
-                fill="#7a4a4a"
-              >
-                <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" />
-              </g>
-            </g>
-          </svg>
+          <svg className="kfirst__plus" onClick={() => navigate("/create_course")} xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14" /></svg>
+
         )}
       </div>
 

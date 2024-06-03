@@ -388,6 +388,15 @@ body,
   align-items: center;
 }
 
+.hstudy__back {
+  margin-left: auto;
+  transition: all .15s ease-in-out;
+}
+
+.hstudy__back:hover {
+  transform: translateX(-1rem);
+}
+
 .hstudy__header {
   color: #7a4a4a;
   font-size: 4.5rem;
@@ -548,11 +557,11 @@ body,
 }
 
 .hauthor__avt {
-  padding: .5rem 1rem;
+  padding: .5rem .5rem;
   border: 1px solid #7a4a4a;
   display: flex;
   width: min-content;
-  border-radius: 30px;
+  border-radius: 50%;
   align-items: center;
   gap: 1rem;
 }
