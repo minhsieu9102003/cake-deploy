@@ -18,6 +18,7 @@ function Profile() {
   const [popupUpdate, setPopupUpdate] = useState(false);
   const token = localStorage.getItem("token");
   const userIdmain = localStorage.getItem("userId");
+  const avatar = localStorage.getItem("avatar");
   const { userId } = useParams();
   const isUser = userIdmain === userId
   const navigate = useNavigate();
@@ -197,14 +198,16 @@ function Profile() {
         }
       );
       if (response.status === 200) {
+        showMessage("Success", "Logout Successfully", "success");
         navigate("/login");
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        localStorage.removeItem("role");
       } else {
-        alert("Logout Failed!!!");
+        showMessage("Error", "Logout Fail", "danger");
       }
     } catch (error) {
-      console.error("Error deleting folder:", error);
+      showMessage("Error", "Logout Fail", "danger");
     }
   };
 
@@ -346,7 +349,11 @@ function Profile() {
         </div>
         <div className="lprofile">
           <div className="lprofile__first">
-            <img className="lprofile__img" src="/img/avatar2.png" />
+            {avatar !== 'http://localhost:8000/other/image/null' ? (
+              <img className="lprofile__img" src={avatar} />
+            ) : (
+              <img className="lprofile__img" src="/img/avatar.jpeg" />
+            )}
             <h1 className="lprofile__username">{user?.username}</h1>
             {isUser && (
               <button className="lprofile__logout" onClick={handleLogout}>

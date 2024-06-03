@@ -151,7 +151,10 @@ const getList = async (req, res) => {
     const folders = await Folder.aggregate([
       { $sample: { size: parseInt(limit, 10) || 10 } }
     ]);
-    return res.status(200).json(folders);
+    const populatedFolders = await Promise.all(
+      folders.map(folder => Folder.populate(folder, { path: "userId" }))
+    );
+    return res.status(200).json(populatedFolders);
   } catch (error) {
     return res.status(500).json({ message: error });
   }

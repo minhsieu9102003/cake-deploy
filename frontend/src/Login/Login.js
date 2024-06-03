@@ -19,7 +19,7 @@ function Login() {
 
       console.log('Login response:', response);
 
-      const { token, userId } = response.data;
+      const { token, userId, avatar } = response.data;
 
       if (!token || !userId) {
         throw new Error('Invalid login response: missing token or userId');
@@ -32,6 +32,7 @@ function Login() {
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
       localStorage.setItem('role', role);
+      localStorage.setItem('avatar', `http://localhost:8000/other/image/${avatar}`);
 
       // Parse and store the token payload
       const parsedToken = parseJwt(token);

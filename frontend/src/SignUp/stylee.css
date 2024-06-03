@@ -167,6 +167,13 @@ body {
   font-family: "Mogra", system-ui;
 }
 
+.form__avatar {
+  grid-column: 1/2;
+  font-size: 1rem;
+  color: #7a4a4a;
+  font-family: "Mogra", system-ui;
+}
+
 .form__user {
   grid-column: 1/2;
   font-size: 1rem;
@@ -176,6 +183,7 @@ body {
 
 .form__email-input,
 .form__user-input,
+.form__avatar-input,
 .form__password-input {
   grid-column: 1/-1;
   padding: 1rem 1rem;
@@ -185,6 +193,16 @@ body {
   border: 1px solid #7a4a4a;
   border-radius: 5px;
   box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+}
+
+.form__avatar-preview {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-left: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .form__month {

@@ -174,7 +174,6 @@
   transition: all .1s ease-in-out;
 }
 
-/* Add this to your style.css */
 .avatar-dropdown {
   position: relative;
   display: inline-block;
