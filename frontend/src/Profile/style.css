@@ -581,6 +581,31 @@
 
 }
 
+.profile__plus-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #7a4a4a;
+    background-color: transparent;
+    transition: all .15s ease-in-out;
+}
+
+.profile__plus-btn:hover path {
+    stroke: white;
+    transition: all .15s ease-in-out;
+}
+
+.profile__plus-btn:hover {
+    background-color: #7a4a4a;
+}
+
+.profile__plus-btn svg {
+    width: 3.5rem;
+    height: 3.5rem
+}
+
 .kfirst__plus {
     margin-right: 2rem;
 }
@@ -1018,4 +1043,30 @@
     height: 2.2rem;
     width: 2.2rem;
     transition: all .1s ease-in-out;
+}
+
+.main__folder1-button-delete:hover {
+    background-color: #7a4a4a;
+    transition: all .1s ease-in-out;
+}
+
+.main__folder1-button-edit:hover {
+    background-color: #7a4a4a;
+    transition: all .1s ease-in-out;
+}
+
+.main__folder1-button-delete:hover path {
+    stroke: #ffffff
+}
+
+.main__folder1-button-edit:hover path {
+    stroke: #ffffff
+}
+
+.main__folder1-button-delete:hover {
+    stroke: #7a4a4a
+}
+
+.main__folder1-button-edit:hover {
+    stroke: #7a4a4a
 }
