@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import Course from "../models/course.model.js";
+import Folder from "../models/folder.model.js";
 
 const getAll = async (req, res) => {
   try {
@@ -50,9 +52,15 @@ const deleteUser = async (req, res) => {
 
   try {
     if (req.payload.role === "admin") {
-      const user = await User.findByIdAndDelete(id);
+      const foundUser = await User.findByIdAndDelete(id);
 
-      if (!user) return res.status(404).json({ message: "User not found" });
+      if (!foundUser) return res.status(404).json({ message: "User not found" });
+
+      // delete all courses of user
+      await Course.deleteMany({ _id: { $in: foundUser.courses } });
+
+      // delete all folders of user
+      await Folder.deleteMany({ _id: { $in: foundUser.folders } });
 
       return res.status(200).json({ message: "Delete successfully!" });
     } else return res.status(403).json({ message: "Only admin can delete user!" })
